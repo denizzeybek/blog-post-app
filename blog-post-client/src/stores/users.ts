@@ -1,6 +1,6 @@
-import { EStoreNames } from '@/stores/storeNames.enum';
-import axios from 'axios';
-import { defineStore } from 'pinia';
+import { EStoreNames } from "@/stores/storeNames.enum";
+import axios from "axios";
+import { defineStore } from "pinia";
 
 interface State {
   user?: any;
@@ -20,7 +20,7 @@ export const useUsersStore = defineStore(EStoreNames.COMMON_USERS, {
     async fetchUser(token: string) {
       return new Promise((resolve, reject) => {
         axios
-          .get('/auth/me', {
+          .get("/auth/me", {
             headers: {
               Authorization: `Bearer ${token}`, // Overrides the default token
             },

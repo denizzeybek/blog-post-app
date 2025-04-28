@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useField } from 'vee-validate';
+import { useField } from "vee-validate";
 
 type CheckValueType = string | number | boolean;
 
@@ -72,10 +72,14 @@ const props = withDefaults(defineProps<IProps>(), {
   syncVModel: false,
 });
 
-const { errorMessage, checked, handleChange } = useField(() => props.name, undefined, {
-  type: 'checkbox',
-  checkedValue: props.checkedValue,
-  uncheckedValue: props.uncheckedValue,
-  syncVModel: props.syncVModel,
-});
+const { errorMessage, checked, handleChange } = useField(
+  () => props.name,
+  undefined,
+  {
+    type: "checkbox",
+    checkedValue: props.checkedValue,
+    uncheckedValue: props.uncheckedValue,
+    syncVModel: props.syncVModel,
+  },
+);
 </script>

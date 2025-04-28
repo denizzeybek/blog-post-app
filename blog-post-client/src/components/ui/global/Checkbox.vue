@@ -26,7 +26,8 @@
       <span
         class="flex items-center justify-center w-5 h-5 transition-colors duration-100 border rounded min-w-5 min-h-5 active:ring-2 active:ring-f-stroke"
         :class="{
-          'border-f-stroke hover:border-f-primary bg-f-white hover:bg-f-primary/5': !checked,
+          'border-f-stroke hover:border-f-primary bg-f-white hover:bg-f-primary/5':
+            !checked,
           'border-f-primary bg-f-primary hover:bg-f-primary-hovered hover:border-f-primary-hovered':
             checked,
         }"
@@ -44,7 +45,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useField } from 'vee-validate';
+import { useField } from "vee-validate";
 
 type CheckValueType = string | number | boolean;
 
@@ -67,10 +68,14 @@ const props = withDefaults(defineProps<IProps>(), {
   syncVModel: false,
 });
 
-const { errorMessage, checked, handleChange } = useField(() => props.name, undefined, {
-  type: 'checkbox',
-  checkedValue: props.checkedValue,
-  uncheckedValue: props.uncheckedValue,
-  syncVModel: props.syncVModel,
-});
+const { errorMessage, checked, handleChange } = useField(
+  () => props.name,
+  undefined,
+  {
+    type: "checkbox",
+    checkedValue: props.checkedValue,
+    uncheckedValue: props.uncheckedValue,
+    syncVModel: props.syncVModel,
+  },
+);
 </script>

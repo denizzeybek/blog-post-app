@@ -12,7 +12,7 @@
     <div
       class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6"
     >
-      <ProductItemContent :product="module" />
+      <BlogItemContent :blog="module" />
       <Button
         :icon="buttonProps?.icon"
         :label="buttonProps?.label"
@@ -26,13 +26,13 @@
 </template>
 
 <script setup lang="ts">
-import type { IProductModule } from '@/interfaces/product/product.interface';
-import { computed } from 'vue';
-import { EModuleItemButtonType } from '@/views/products/_etc/enums/EModuleItemButtonType';
-import ProductItemContent from '../_components/ProductItemContent.vue';
+import type { IBlogModule } from "@/interfaces/blog/blog.interface";
+import { computed } from "vue";
+import { EModuleItemButtonType } from "@/views/blogs/_etc/enums/EModuleItemButtonType";
+import BlogItemContent from "../_components/BlogItemContent.vue";
 
 interface IProps {
-  module: IProductModule;
+  module: IBlogModule;
   type: EModuleItemButtonType;
 }
 
@@ -44,18 +44,18 @@ interface IClickMethod {
 }
 
 interface IEmits {
-  (event: 'handleModuleButtonClick', params: IClickMethod): void;
+  (event: "handleModuleButtonClick", params: IClickMethod): void;
 }
 const emit = defineEmits<IEmits>();
 
 const buttonProps = computed(() => {
   if (props.type === EModuleItemButtonType.ADD) {
     return {
-      icon: 'pi pi-plus',
-      label: 'Ekle',
-      severity: 'contrast',
+      icon: "pi pi-plus",
+      label: "Ekle",
+      severity: "contrast",
       method: () => {
-        emit('handleModuleButtonClick', {
+        emit("handleModuleButtonClick", {
           type: EModuleItemButtonType.ADD,
           id: props.module._id,
         });
@@ -63,11 +63,11 @@ const buttonProps = computed(() => {
     };
   } else if (props.type === EModuleItemButtonType.REMOVE) {
     return {
-      icon: 'pi pi-minus',
-      label: 'Sil',
-      severity: 'danger',
+      icon: "pi pi-minus",
+      label: "Sil",
+      severity: "danger",
       method: () => {
-        emit('handleModuleButtonClick', {
+        emit("handleModuleButtonClick", {
           type: EModuleItemButtonType.REMOVE,
           id: props.module._id,
         });

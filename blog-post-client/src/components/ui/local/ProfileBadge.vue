@@ -5,9 +5,7 @@
       shape="circle"
     />
     <div class="text-start">
-      <span v-if="onlyTitle"  class="text-md text-f-black">{{
-        title
-      }}</span>
+      <span v-if="onlyTitle" class="text-md text-f-black">{{ title }}</span>
       <!-- <RouterLink v-else :to="{ name: ERouteNames.ProfileBasic }" class="text-md text-f-black">{{
         title
       }}</RouterLink> -->
@@ -17,8 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import Avatar from 'primevue/avatar';
-import { ERouteNames } from '@/router/routeNames.enum';
+import Avatar from "primevue/avatar";
+import { ERouteNames } from "@/router/routeNames.enum";
 
 interface IProps {
   image?: string;

@@ -22,10 +22,10 @@
 </template>
 
 <script setup lang="ts">
-import type { PasswordProps } from 'primevue/password';
-import { ref, computed, watch } from 'vue';
-import { useField } from 'vee-validate';
-import Password from 'primevue/password';
+import type { PasswordProps } from "primevue/password";
+import { ref, computed, watch } from "vue";
+import { useField } from "vee-validate";
+import Password from "primevue/password";
 
 interface IProps {
   id: string;
@@ -51,7 +51,7 @@ const props = withDefaults(defineProps<IProps>(), {
 });
 
 const isFocused = ref(false);
-const passwordVal = ref()
+const passwordVal = ref();
 
 const {
   errorMessage: vError,

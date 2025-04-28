@@ -1,20 +1,20 @@
-import type { RouteRecordRaw } from 'vue-router';
-import { ERouteNames } from '@/router/routeNames.enum';
-import DefaultLayout from '@/layouts/default/DefaultLayout.vue';
+import type { RouteRecordRaw } from "vue-router";
+import { ERouteNames } from "@/router/routeNames.enum";
+import DefaultLayout from "@/layouts/default/DefaultLayout.vue";
 
-import Dashboard from '@/views/dashboard/_views/Dashboard.vue';
-import ProductsList from '@/views/products/_views/ProductsList.vue';
-import ProductDetails from '@/views/products/_views/ProductDetails.vue';
+import Dashboard from "@/views/dashboard/_views/Dashboard.vue";
+import BlogsList from "@/views/blogs/_views/BlogsList.vue";
+import BlogDetails from "@/views/blogs/_views/BlogDetails.vue";
 
-import About from '@/views/about/_views/About.vue';
-import Contact from '@/views/contact/_views/Contact.vue';
+import About from "@/views/about/_views/About.vue";
+import Contact from "@/views/contact/_views/Contact.vue";
 
-import Login from '@/views/auth/Login.vue';
-import CategoriesList from '@/views/categories/_views/CategoriesList.vue';
+import Login from "@/views/auth/Login.vue";
+import CategoriesList from "@/views/categories/_views/CategoriesList.vue";
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '',
+    path: "",
     component: DefaultLayout,
     meta: {
       requiresAuth: true,
@@ -22,8 +22,8 @@ const routes: RouteRecordRaw[] = [
     children: [
       // required UnAuth
       {
-        path: '/',
-        alias: '',
+        path: "/",
+        alias: "",
         name: ERouteNames.Dashboard,
         component: Dashboard,
         meta: {
@@ -33,7 +33,7 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: '/login',
+        path: "/login",
         name: ERouteNames.Login,
         component: Login,
         meta: {
@@ -43,7 +43,7 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: '/about',
+        path: "/about",
         name: ERouteNames.About,
         component: About,
         meta: {
@@ -53,7 +53,7 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: '/contact',
+        path: "/contact",
         name: ERouteNames.Contact,
         component: Contact,
         meta: {
@@ -64,27 +64,37 @@ const routes: RouteRecordRaw[] = [
       },
       // required AUTH
       {
-        path: '/products',
-        name: ERouteNames.ProductsList,
-        component: ProductsList,
+        path: "/blogs",
+        name: ERouteNames.BlogList,
+        component: BlogsList,
         meta: {
           requiresUnAuth: true,
-          title: ERouteNames.ProductsList,
-          name: ERouteNames.ProductsList,
+          title: ERouteNames.BlogList,
+          name: ERouteNames.BlogList,
         },
       },
       {
-        path: '/product-details/:id',
-        name: ERouteNames.ProductDetails,
-        component: ProductDetails,
+        path: "/blog/:categoryId/:blogId",
+        name: ERouteNames.BlogDetails,
+        component: BlogDetails,
         meta: {
           requiresUnAuth: true,
-          title: ERouteNames.ProductDetails,
-          name: ERouteNames.ProductDetails,
+          title: ERouteNames.BlogDetails,
+          name: ERouteNames.BlogDetails,
         },
       },
       {
-        path: '/categories',
+        path: "/blog/:id",
+        name: ERouteNames.BlogDetails,
+        component: BlogDetails,
+        meta: {
+          requiresUnAuth: true,
+          title: ERouteNames.BlogDetails,
+          name: ERouteNames.BlogDetails,
+        },
+      },
+      {
+        path: "/categories",
         name: ERouteNames.CategoriesList,
         component: CategoriesList,
         meta: {

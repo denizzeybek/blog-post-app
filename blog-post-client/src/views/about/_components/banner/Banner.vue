@@ -11,7 +11,7 @@
 
       <div class="bg-neutral-300 px-12 py-10 flex justify-center w-full gap-4">
         <div class="lg:w-1/2 !text-left">
-          <BannerText :title="content.title" :text="content.text" center/>
+          <BannerText :title="content.title" :text="content.text" center />
         </div>
       </div>
     </div>
@@ -19,13 +19,13 @@
 </template>
 
 <script setup lang="ts">
-import BannerCarousel from './BannerCarousel.vue';
-import BannerImage from './BannerImage.vue';
-import BannerContent from './BannerContent.vue';
-import BannerText from './BannerText.vue';
+import BannerCarousel from "./BannerCarousel.vue";
+import BannerImage from "./BannerImage.vue";
+import BannerContent from "./BannerContent.vue";
+import BannerText from "./BannerText.vue";
 
 const content = {
-  title: 'Tutku ve Tecrübe',
+  title: "Tutku ve Tecrübe",
   text: " Özel üretim mobilya konusunda faaliyet gösteren Ümit Mobilya, sunduğu özel tasarım ürünleri ile yüksek beğeni kazanmaktadır. Müşterilerimizin özel yere göre tasarlanmış, mimari bir mobilyanın ayrıcalıklı zevkini tatması için çalışmalar yapmaktadır. Türkiye'de çok az olarak gördüğümüz bu özel yere göre mobilya kulvarını genişletmek ve pazar payını artırmak için faaliyetler ve bilgilendirme çalışmaları vardır.",
 };
 </script>

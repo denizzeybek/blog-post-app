@@ -9,7 +9,11 @@
     <div :class="center ? 'lg:text-center' : 'text-left'" class="text-lg">
       {{ text }}
     </div>
-    <div v-if="subText" :class="center ? 'lg:text-center' : 'text-left'" class="text-lg">
+    <div
+      v-if="subText"
+      :class="center ? 'lg:text-center' : 'text-left'"
+      class="text-lg"
+    >
       {{ subText }}
     </div>
   </div>

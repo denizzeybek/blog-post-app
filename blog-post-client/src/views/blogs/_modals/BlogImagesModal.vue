@@ -24,21 +24,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useForm } from 'vee-validate';
-import { object } from 'yup';
-import { useFToast } from '@/composables/useFToast';
-import { useProductsStore } from '@/stores/products';
+import { ref } from "vue";
+import { useForm } from "vee-validate";
+import { object } from "yup";
+import { useFToast } from "@/composables/useFToast";
+import { useBlogsStore } from "@/stores/blogs";
 
 interface IEmits {
-  (event: 'fetchProducts'): void;
+  (event: "fetchBlogs"): void;
 }
 const emit = defineEmits<IEmits>();
 
-const productsStore = useProductsStore();
+const blogsStore = useBlogsStore();
 const { showSuccessMessage, showErrorMessage } = useFToast();
 
-const open = defineModel<boolean>('open');
+const open = defineModel<boolean>("open");
 const selectedFile = ref<FileList | null>(null);
 
 const validationSchema = object({});
@@ -65,14 +65,14 @@ const fileSelected = (event: Event) => {
 const submitHandler = handleSubmit(async (values) => {
   try {
     const payload = {
-      id: productsStore.currentProduct._id,
+      id: blogsStore.currentBlog._id,
       images: selectedFile.value,
     };
 
-    await productsStore.createImages(payload);
-    showSuccessMessage('Ürün Resmi Eklendi!');
+    await blogsStore.createImages(payload);
+    showSuccessMessage("Makale Resmi Eklendi!");
 
-    emit('fetchProducts');
+    emit("fetchBlogs");
     handleClose();
   } catch (error: any) {
     showErrorMessage(error as any);

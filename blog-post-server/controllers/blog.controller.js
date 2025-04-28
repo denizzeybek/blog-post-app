@@ -16,26 +16,9 @@ const getBlogs = async (payload) => {
     };
 
     // Fetch blogs with necessary population
-    const blogs = await Blog.find(query)
-      .populate({
-        path: 'modules.blogId',
-        populate: { path: 'category' },
-      })
-      .populate('category');
+    const blogs = await Blog.find(query).populate('category');
 
-    // Process blogs and modules
-    const result = await Promise.all(
-      blogs.map(async (blog) => {
-        return {
-          _id: blog._id,
-          name: blog.name,
-          documentUrl: blog.documentUrl,
-          category: blog.category,
-        };
-      }),
-    );
-
-    return result;
+    return blogs;
   } catch (error) {
     console.error('Error in getBlogs:', error);
     throw new Error('Failed to fetch blogs');
@@ -85,17 +68,12 @@ exports.filterBlogs = async (req, res) => {
 // Yeni ürün ekleme
 exports.createBlog = async (req, res) => {
   try {
-
-    const {
-      name,
-      documentUrl,
-      category,
-    } = req.body;
+    const { name, documentUrl, category } = req.body;
 
     // Validate category existence
     const categoryExists = await mongoose.model('Category').findById(category);
     if (!categoryExists) {
-      return res.status(404).json({ message: 'Category not found' });
+      return res.status(404).json({ message: 'Category not found1' });
     }
 
     const blog = new Blog({
@@ -113,11 +91,7 @@ exports.createBlog = async (req, res) => {
 // Ürün güncelleme
 exports.updateBlog = async (req, res) => {
   const { id } = req.params; // Get blog ID from the route parameter
-  const {
-    name,
-    documentUrl,
-    category,
-  } = req.body;
+  const { name, documentUrl, category } = req.body;
 
   try {
     // Find the blog by ID

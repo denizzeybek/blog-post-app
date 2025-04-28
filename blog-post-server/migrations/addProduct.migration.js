@@ -3,7 +3,8 @@ const Product = require('../models/product.model'); // Modelinizi import edin
 
 // Bağlantıyı yapılandırın
 const mongoURI = process.env.MONGO_URI; // MongoDB URI
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose
+  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
@@ -18,7 +19,7 @@ const productsData = [
     category: 'Category A',
     quantity: 50,
     modules: [
-      { productId: '648b3f8e4d0b34a4a9bdbb35', quantity: 2 }, // Örnek ürün ID'lerini değiştirin
+      { blogId: '648b3f8e4d0b34a4a9bdbb35', quantity: 2 }, // Örnek ürün ID'lerini değiştirin
     ],
   },
   {

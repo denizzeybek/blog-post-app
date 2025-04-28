@@ -1,7 +1,9 @@
 <template>
   <div class="relative flex min-h-screen h-screen">
     <AuthAside :ad="ads[adName]" />
-    <main class="flex w-full overflow-auto flex-col items-center min-h-screen bg-f-tertiary-purple">
+    <main
+      class="flex w-full overflow-auto flex-col items-center min-h-screen bg-f-tertiary-purple"
+    >
       <div class="px-4 flex justify-between items-center w-full lg:pt-3 mb-10">
         <FSelect
           name="language"
@@ -16,35 +18,35 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue';
-import AuthAside, { type IAd } from './_components/Authside.vue';
+import { computed, ref, watch } from "vue";
+import AuthAside, { type IAd } from "./_components/Authside.vue";
 
-type TAdName = 'login' | 'register' | 'download' | 'forgot-password';
+type TAdName = "login" | "register" | "download" | "forgot-password";
 
 interface IProps {
   adName: TAdName;
 }
 withDefaults(defineProps<IProps>(), {
-  adName: 'login',
+  adName: "login",
 });
 
 const languagesList = [
-  { name: 'Turkish', value: 'tr' },
-  { name: 'English', value: 'en' },
+  { name: "Turkish", value: "tr" },
+  { name: "English", value: "en" },
 ];
 
 const ads = computed(() => {
   return {
     login: {
-      title: 'Get powerful productivity insights in minutes',
+      title: "Get powerful productivity insights in minutes",
       features: [
-        'Get a clear picture of how your teams work.',
-        'Measure and improve productivity.',
-        'Uncover inefficient processes and bottlenecks.',
-        'Prevent quiet quitting, burnout, and high turnover.',
-        'See who needs coaching or breaks.',
-        'Spot and save money on unused software.',
-        'Protect and grow your company’s profits.',
+        "Get a clear picture of how your teams work.",
+        "Measure and improve productivity.",
+        "Uncover inefficient processes and bottlenecks.",
+        "Prevent quiet quitting, burnout, and high turnover.",
+        "See who needs coaching or breaks.",
+        "Spot and save money on unused software.",
+        "Protect and grow your company’s profits.",
       ],
       // image: {
       //   name: 'business-invoice-ad.png',
@@ -52,39 +54,39 @@ const ads = computed(() => {
       // },
     },
     register: {
-      title: 'Create a free account now',
+      title: "Create a free account now",
       features: [
         'Track and measure your team"s productivity.',
-        'Measure and improve productivity.',
-        'Uncover inefficient processes and bottlenecks.',
-        'Prevent quiet quitting, burnout, and high turnover.',
-        'See who needs coaching or breaks.',
-        'Spot and save money on unused software.',
-        'Protect and grow your company’s profits.',
+        "Measure and improve productivity.",
+        "Uncover inefficient processes and bottlenecks.",
+        "Prevent quiet quitting, burnout, and high turnover.",
+        "See who needs coaching or breaks.",
+        "Spot and save money on unused software.",
+        "Protect and grow your company’s profits.",
       ],
     },
     download: {
-      title: 'Install Flexytime on your computer',
+      title: "Install Flexytime on your computer",
       features: [
         'Track and measure your team"s productivity.',
-        'Measure and improve productivity.',
-        'Uncover inefficient processes and bottlenecks.',
-        'Prevent quiet quitting, burnout, and high turnover.',
-        'See who needs coaching or breaks.',
-        'Spot and save money on unused software.',
-        'Protect and grow your company’s profits.',
+        "Measure and improve productivity.",
+        "Uncover inefficient processes and bottlenecks.",
+        "Prevent quiet quitting, burnout, and high turnover.",
+        "See who needs coaching or breaks.",
+        "Spot and save money on unused software.",
+        "Protect and grow your company’s profits.",
       ],
     },
-    'forgot-password': {
-      title: 'Reset Password',
+    "forgot-password": {
+      title: "Reset Password",
       features: [
         'Track and measure your team"s productivity.',
-        'Measure and improve productivity.',
-        'Uncover inefficient processes and bottlenecks.',
-        'Prevent quiet quitting, burnout, and high turnover.',
-        'See who needs coaching or breaks.',
-        'Spot and save money on unused software.',
-        'Protect and grow your company’s profits.',
+        "Measure and improve productivity.",
+        "Uncover inefficient processes and bottlenecks.",
+        "Prevent quiet quitting, burnout, and high turnover.",
+        "See who needs coaching or breaks.",
+        "Spot and save money on unused software.",
+        "Protect and grow your company’s profits.",
       ],
     },
   };

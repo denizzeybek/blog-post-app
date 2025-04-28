@@ -10,10 +10,7 @@
           :to="{ name: ERouteNames.Dashboard }"
           class="!w-60 lg:mr-10"
         >
-          <img
-            class="!w-60 lg:mr-10"
-            src="@/assets/images/umit-mobilya-logo.png"
-          />
+          <FText as="h1" innerText="NAZLI KACAR" />
         </RouterLink>
       </template>
       <template #item="{ item }">
@@ -64,17 +61,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import MegaMenu from 'primevue/megamenu';
-import { ERouteNames } from '@/router/routeNames.enum';
-import { useUsersStore } from '@/stores/users';
-import { useAuthStore } from '@/stores/auth';
+import { computed } from "vue";
+import MegaMenu from "primevue/megamenu";
+import { ERouteNames } from "@/router/routeNames.enum";
+import { useUsersStore } from "@/stores/users";
+import { useAuthStore } from "@/stores/auth";
 
 const authStore = useAuthStore();
 const usersStore = useUsersStore();
 
 interface IEmits {
-  (event: 'drawerChange', val: boolean): void;
+  (event: "drawerChange", val: boolean): void;
 }
 
 defineEmits<IEmits>();
@@ -163,34 +160,33 @@ const items = computed(() => {
     //   ],
     // },
     {
-      label: 'Ürünler',
-      route: { name: ERouteNames.ProductsList },
+      label: "Makaleler",
+      route: { name: ERouteNames.BlogList },
     },
     {
-      label: 'Hakkımızda',
+      label: "Hakkımızda",
       route: { name: ERouteNames.About },
     },
     {
-      label: 'İletişim',
+      label: "İletişim",
       route: { name: ERouteNames.Contact },
     },
     ...(!usersStore.isAuthenticated
       ? [
-          
           {
-            label: 'Giriş Yap',
+            label: "Giriş Yap",
             route: { name: ERouteNames.Login },
           },
         ]
       : []),
     ...(usersStore.isAuthenticated
       ? [
-      {
-            label: 'Kategoriler',
+          {
+            label: "Kategoriler",
             route: { name: ERouteNames.CategoriesList },
           },
           {
-            label: 'Çıkış Yap',
+            label: "Çıkış Yap",
             route: { name: ERouteNames.Login },
             method: () => {
               authStore.logout();

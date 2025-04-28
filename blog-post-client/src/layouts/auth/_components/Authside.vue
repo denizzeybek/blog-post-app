@@ -23,10 +23,10 @@
 </template>
 
 <script lang="ts" setup>
-import { EIconNames } from '@/common/enums/icons.enum';
-import { colors } from '@/constants/colors';
-import { ERouteNames } from '@/router/routeNames.enum';
-import { computed } from 'vue';
+import { EIconNames } from "@/common/enums/icons.enum";
+import { colors } from "@/constants/colors";
+import { ERouteNames } from "@/router/routeNames.enum";
+import { computed } from "vue";
 
 export interface IAd {
   title: string;

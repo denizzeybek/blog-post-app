@@ -53,9 +53,9 @@
 </template>
 
 <script lang="ts" setup>
-import type { IOption } from '@/common/interfaces/option.interface';
-import Select, { type SelectProps } from 'primevue/select';
-import { useField } from 'vee-validate';
+import type { IOption } from "@/common/interfaces/option.interface";
+import Select, { type SelectProps } from "primevue/select";
+import { useField } from "vee-validate";
 
 export interface IProps {
   name: string;
@@ -74,14 +74,14 @@ export interface IProps {
 
 const props = withDefaults(defineProps<IProps>(), {
   disabled: false,
-  placeholder: 'Select an option',
-  customWidth: 'w-full',
+  placeholder: "Select an option",
+  customWidth: "w-full",
 });
 
 interface IEmits {
-  (event: 'selected', value: any): void;
-  (event: 'addList'): void;
-  (event: 'update:modelValue', value: string | number): void;
+  (event: "selected", value: any): void;
+  (event: "addList"): void;
+  (event: "update:modelValue", value: string | number): void;
 }
 const emit = defineEmits<IEmits>();
 
@@ -101,6 +101,6 @@ const validationListeners = {
 
 const onSelect = (e: any) => {
   const selectedValue = e?.value || e; // Extract the value if `e` is an object with a `value` property
-  emit('selected', selectedValue);
+  emit("selected", selectedValue);
 };
 </script>

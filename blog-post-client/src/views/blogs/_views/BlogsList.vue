@@ -11,12 +11,12 @@
       <FInput
         name="filterName"
         v-model="typedName"
-        placeholder="Ürün ismi girin"
+        placeholder="Makale ismi girin"
       />
       <Button
         v-if="usersStore.isAuthenticated"
-        label="Ürün Ekle"
-        @click="showProductModal = true"
+        label="Makale Ekle"
+        @click="showBlogModal = true"
       />
     </div>
     <div
@@ -24,72 +24,60 @@
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full"
     >
       <Card
-        v-for="(product, idx) in productList"
-        :key="product._id"
+        v-for="(blog, idx) in productList"
+        :key="blog._id"
         @click="
           router.push({
-            name: ERouteNames.ProductDetails,
-            params: { id: product._id! },
+            name: ERouteNames.BlogDetails,
+            params: { id: blog._id! },
           })
         "
         class="cursor-pointer"
       >
         <template #header>
-          <!-- <Skeleton
-            v-if="imageLoadingStates[product._id]"
-            width="328px"
-            height="180px"
-          /> -->
-          <img
-            :src="product.imageUrl"
-            class="w-full max-h-[180px]"
-            alt="product image"
-            />
-            <!-- @load="handleImageLoad(product._id)"
-            @error="handleImageError(product._id)" -->
         </template>
         <template #content>
-          <ProductItemContent :product="product" />
+          <BlogItemContent :blog="blog" />
         </template>
       </Card>
     </div>
     <div v-else class="flex justify-center items-center h-96">
       <Card class="flex items-center justify-center">
         <template #content>
-          <span class="text-2xl">No products found</span>
+          <span class="text-2xl">No blogs found</span>
         </template>
       </Card>
     </div>
   </div>
-  <ProductModal
-    v-if="showProductModal"
-    v-model:open="showProductModal"
-    @fetchProducts="filterProducts"
+  <BlogModal
+    v-if="showBlogModal"
+    v-model:open="showBlogModal"
+    @fetchBlogs="filterBlogs"
   />
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, ref, watch } from 'vue';
-import { useProductsStore } from '@/stores/products';
-import { ERouteNames } from '@/router/routeNames.enum';
-import { useRouter } from 'vue-router';
-import { useUsersStore } from '@/stores/users';
-import ProductModal from '@/views/products/_modals/ProductModal.vue';
-import ProductItemContent from '../_components/ProductItemContent.vue';
-import { useCategoriesStore } from '@/stores/categories';
-import { useFToast } from '@/composables/useFToast';
-import type { IProductFilterDTO } from '@/interfaces/product/product.interface';
+import { onMounted, computed, ref, watch } from "vue";
+import { useBlogsStore } from "@/stores/blogs";
+import { ERouteNames } from "@/router/routeNames.enum";
+import { useRouter } from "vue-router";
+import { useUsersStore } from "@/stores/users";
+import BlogModal from "@/views/blogs/_modals/BlogModal.vue";
+import BlogItemContent from "../_components/BlogItemContent.vue";
+import { useCategoriesStore } from "@/stores/categories";
+import { useFToast } from "@/composables/useFToast";
+import type { IBlogFilterDTO } from "@/interfaces/blog/blog.interface";
 
 const usersStore = useUsersStore();
 const categoriesStore = useCategoriesStore();
-const productsStore = useProductsStore();
+const blogsStore = useBlogsStore();
 const router = useRouter();
 const { showErrorMessage } = useFToast();
 
 const isLoading = ref(false);
-const showProductModal = ref(false);
+const showBlogModal = ref(false);
 const selectedFilter = ref({
-  name: 'Tüm Categoriler',
+  name: "Tüm Categoriler",
   value: null,
 });
 const typedName = ref();
@@ -107,7 +95,7 @@ const handleImageError = (id: string) => {
 };
 
 const productList = computed(() => {
-  return productsStore.list;
+  return blogsStore.list;
 });
 
 const categoryTypeOptions = computed(() => {
@@ -116,24 +104,24 @@ const categoryTypeOptions = computed(() => {
     value: category._id,
   }));
 
-  return [{ name: 'Tüm Categoriler', value: null }, ...categoriesList];
+  return [{ name: "Tüm Categoriler", value: null }, ...categoriesList];
 });
 
-const filterProducts = async () => {
+const filterBlogs = async () => {
   try {
     // isLoading.value = true;
-    const payload = {} as IProductFilterDTO;
+    const payload = {} as IBlogFilterDTO;
     if (typedName.value) {
       payload.name = typedName.value;
     }
     if (selectedFilter.value.value) {
       payload.category = selectedFilter.value.value;
     }
-    await productsStore.filter(payload);
+    await blogsStore.filter(payload);
 
-    // Ürünler yüklendikten sonra tüm ürünler için yükleme durumunu true olarak ayarla
-    // productsStore.list?.forEach((product) => {
-    //   imageLoadingStates.value[product._id!] = true;
+    // Makale yüklendikten sonra tüm ürünler için yükleme durumunu true olarak ayarla
+    // blogsStore.list?.forEach((blog) => {
+    //   imageLoadingStates.value[blog._id!] = true;
     // });
 
     isLoading.value = false;
@@ -142,12 +130,12 @@ const filterProducts = async () => {
   }
 };
 
-watch([selectedFilter, typedName], filterProducts, { immediate: true });
+watch([selectedFilter, typedName], filterBlogs, { immediate: true });
 
 onMounted(async () => {
   await categoriesStore.fetch();
-  productsStore.list?.forEach((product) => {
-    imageLoadingStates.value[product._id!] = true;
+  blogsStore.list?.forEach((blog) => {
+    imageLoadingStates.value[blog._id!] = true;
   });
 });
 </script>

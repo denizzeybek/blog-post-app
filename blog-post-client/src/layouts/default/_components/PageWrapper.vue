@@ -1,8 +1,6 @@
 <template>
   <div class="flex flex-col flex-1">
-    <main
-      class="flex flex-col flex-1 rounded-lg p-2 lg:px-9 lg:py-6 bg-gray-100"
-    >
+    <main class="flex flex-col flex-1 rounded-lg p-2 lg:px-9 lg:py-6">
       <div id="alert" class="alert"></div>
       <section class="flex flex-col flex-1 h-full rounded-lg">
         <slot></slot>
@@ -11,5 +9,4 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>

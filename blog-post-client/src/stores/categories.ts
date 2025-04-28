@@ -1,10 +1,10 @@
-import { EStoreNames } from '@/stores/storeNames.enum';
-import axios from 'axios';
-import { defineStore } from 'pinia';
+import { EStoreNames } from "@/stores/storeNames.enum";
+import axios from "axios";
+import { defineStore } from "pinia";
 import type {
   ICategory,
   ICategoryDTO,
-} from '@/interfaces/category/category.interface';
+} from "@/interfaces/category/category.interface";
 
 interface State {
   list: ICategory[];
@@ -18,7 +18,7 @@ export const useCategoriesStore = defineStore(EStoreNames.CATEGORIES, {
     async fetch() {
       return new Promise((resolve, reject) => {
         axios
-          .get('/categories')
+          .get("/categories")
           .then((response) => {
             this.list = response as unknown as ICategory[];
             resolve(response);
@@ -31,7 +31,7 @@ export const useCategoriesStore = defineStore(EStoreNames.CATEGORIES, {
     async create(payload: ICategoryDTO) {
       return new Promise((resolve, reject) => {
         axios
-          .post('/categories', payload)
+          .post("/categories", payload)
           .then((response) => {
             resolve(response);
           })

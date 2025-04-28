@@ -1,6 +1,6 @@
 import type { ICategory } from '../category/category.interface';
 
-export interface IProductModule {
+export interface IBlogModule {
   _id: string;
   name: string;
   price: number;
@@ -13,7 +13,7 @@ export interface IProductModule {
   category: ICategory;
 }
 
-export interface IProduct {
+export interface IBlog {
   _id: string;
   name: string;
   price: number;
@@ -27,23 +27,23 @@ export interface IProduct {
   description: string;
   category: ICategory;
   quantity: number;
-  modules: IProductModule[];
+  modules: IBlogModule[];
 }
 
-export interface IProductUpdateModuleDTO {
-  productId: string;
+export interface IBlogUpdateModuleDTO {
+  blogId: string;
   module: {
-    productId: string;
+    blogId: string;
     quantity?: number;
   };
 }
 
-export interface IProductRemoveModuleDTO {
-  productId: string;
+export interface IBlogRemoveModuleDTO {
+  blogId: string;
   moduleId: string;
 }
 
-export interface IProductDTO {
+export interface IBlogDTO {
   name: string;
   price: number;
   sizes: string;
@@ -51,24 +51,24 @@ export interface IProductDTO {
   category: ICategory;
   image: any;
   modules?: {
-    productId: string;
+    blogId: string;
     quantity: number;
   }[];
 }
 
-export interface IProductModuleUpdateDTO {
+export interface IBlogModuleUpdateDTO {
   modules: {
-    productId: string;
+    blogId: string;
     quantity: number;
   }[];
 }
 
-export interface IProductFilterDTO {
+export interface IBlogFilterDTO {
   category?: string;
   name?: string;
 }
 
-export interface IProductDeleteImageDTO {
+export interface IBlogDeleteImageDTO {
   id: string;
   imageName: string;
 }

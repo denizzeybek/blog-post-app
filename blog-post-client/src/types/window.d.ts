@@ -1,7 +1,7 @@
 declare global {
   interface Window {
-    handleSuccess?: () => void
-    handleClose?: () => void
+    handleSuccess?: () => void;
+    handleClose?: () => void;
   }
 }
-export {}
+export {};

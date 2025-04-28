@@ -1,5 +1,5 @@
 const Category = require('../models/category.model');
-const Product = require('../models/product.model');
+const Blog = require('../models/blog.model');
 
 // Tüm kategorileri listeleme
 exports.getCategories = async (req, res) => {
@@ -32,7 +32,6 @@ exports.filterCategories = async (req, res) => {
 // Yeni kategori ekleme
 exports.createCategory = async (req, res) => {
   const { name } = req.body;
-  console.log('name ', name)
   try {
     const newCategory = new Category({ name });
     await newCategory.save();
@@ -60,8 +59,8 @@ exports.updateCategory = async (req, res) => {
       return res.status(404).json({ message: 'Category not found.' });
     }
 
-    // Update related products' category name
-    await Product.updateMany(
+    // Update related blogs' category name
+    await Blog.updateMany(
       { category: id },
       { $set: { 'category.name': updatedCategory.name } }
     );

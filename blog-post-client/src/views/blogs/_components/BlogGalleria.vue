@@ -26,35 +26,35 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useProductsStore } from '@/stores/products';
+import { ref, computed } from "vue";
+import { useBlogsStore } from "@/stores/blogs";
 
-const productsStore = useProductsStore();
+const blogsStore = useBlogsStore();
 
 const productImages = computed(() => {
   return (
     [
-      ...[productsStore.currentProduct?.imageUrl],
-      ...productsStore.currentProduct?.imageUrlList,
+      ...[blogsStore.currentBlog?.imageUrl],
+      ...blogsStore.currentBlog?.imageUrlList,
     ] || []
   );
 });
 
 const responsiveOptions = ref([
   {
-    breakpoint: '1400px',
+    breakpoint: "1400px",
     numVisible: 2,
   },
   {
-    breakpoint: '1199px',
+    breakpoint: "1199px",
     numVisible: 3,
   },
   {
-    breakpoint: '767px',
+    breakpoint: "767px",
     numVisible: 2,
   },
   {
-    breakpoint: '575px',
+    breakpoint: "575px",
     numVisible: 1,
   },
 ]);

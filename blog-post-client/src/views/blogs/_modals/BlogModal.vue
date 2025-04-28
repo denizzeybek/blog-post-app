@@ -2,41 +2,17 @@
   <Dialog
     v-model:visible="open"
     modal
-    :header="isEditing ? 'Ürünü Güncelle' : 'Ürün Ekle'"
+    :header="isEditing ? 'Makale Güncelle' : 'Makale Ekle'"
     class="!bg-f-secondary-purple lg:!w-[700px] !w-full"
     :style="{ width: '50rem' }"
   >
     <form class="flex flex-col gap-6" @submit="submitHandler">
-      <div v-if="!isEditing" class="flex justify-center gap-4 flex-1">
-        <input type="file" accept="image/*" @change="fileSelected" />
-      </div>
       <div class="flex gap-4 flex-1">
         <FInput
           class="grow"
-          label="Ürün adı"
+          label="Makale adı"
           name="name"
-          placeholder="Ürün ismi girin"
-        />
-        <FInput
-          class="grow"
-          label="Fiyat"
-          name="price"
-          placeholder="Fiyat girin"
-        />
-      </div>
-
-      <div class="flex gap-4 flex-1">
-        <FInput
-          class="grow"
-          label="Ebatlar"
-          name="sizes"
-          placeholder="Ebat girin (150x200x180)"
-        />
-        <FInput
-          class="grow"
-          label="Açıklama"
-          name="description"
-          placeholder="Açıklama girin"
+          placeholder="Makale ismi girin"
         />
       </div>
       <div class="flex gap-4 flex-1">
@@ -46,6 +22,14 @@
           name="category"
           placeholder="Kategori Seçin"
           :options="categoryTypeOptions"
+        />
+      </div>
+      <div class="flex gap-4 flex-1">
+        <FInput
+          class="grow"
+          label="Makale"
+          name="documentUrl"
+          placeholder="Açıklama girin"
         />
       </div>
       <div class="flex w-50 justify-center">
@@ -65,9 +49,9 @@ import { computed, onMounted, ref } from 'vue';
 import { useForm } from 'vee-validate';
 import { string, object, number } from 'yup';
 import { useFToast } from '@/composables/useFToast';
-import { useProductsStore } from '@/stores/products';
+import { useBlogsStore } from '@/stores/blogs';
 import { useCategoriesStore } from '@/stores/categories';
-import type { IProductDTO } from '@/interfaces/product/product.interface';
+import type { IBlogDTO } from '@/interfaces/blog/blog.interface';
 
 interface IProps {
   data?: any;
@@ -75,11 +59,11 @@ interface IProps {
 const props = defineProps<IProps>();
 
 interface IEmits {
-  (event: 'fetchProducts'): void;
+  (event: 'fetchBlogs'): void;
 }
 const emit = defineEmits<IEmits>();
 
-const productsStore = useProductsStore();
+const blogsStore = useBlogsStore();
 const categoriesStore = useCategoriesStore();
 const { showSuccessMessage, showErrorMessage } = useFToast();
 
@@ -96,10 +80,8 @@ const categoryTypeOptions = computed(() => {
 });
 
 const validationSchema = object({
-  name: string().required().label('Ürün adı'),
-  price: number().required().label('Fiyat'),
-  sizes: string().required().label('Ebatlar'),
-  description: string().required().label('Açıklama'),
+  name: string().required().label('Makale adı'),
+  documentUrl: string().required().label('Açıklama'),
   category: object()
     .shape({
       name: string().label('Kategori'),
@@ -118,34 +100,22 @@ const handleClose = () => {
   open.value = false;
 };
 
-// Dosya seçimi event handler'ı
-const fileSelected = (event: Event) => {
-  const input = event.target as HTMLInputElement;
-  if (input.files && input.files[0]) {
-    selectedFile.value = input.files[0];
-  }
-};
-
 const submitHandler = handleSubmit(async (values) => {
   try {
     const payload = {
       name: values.name,
-      price: values.price,
-      sizes: values.sizes,
-      description: values.description,
+      documentUrl: values.documentUrl,
       category: values.category.value,
-      image: selectedFile.value,
-    } as IProductDTO;
+    } as IBlogDTO;
     if (isEditing.value) {
-      delete payload.image;
-      await productsStore.update(productsStore.currentProduct._id ,payload);
-      showSuccessMessage('Ürün Güncellendi!');
+      await blogsStore.update(blogsStore.currentBlog._id, payload);
+      showSuccessMessage('Makale Güncellendi!');
     } else {
-      await productsStore.create(payload);
-      showSuccessMessage('Ürün eklendi!');
+      await blogsStore.create(payload);
+      showSuccessMessage('Makale eklendi!');
     }
 
-    emit('fetchProducts');
+    emit('fetchBlogs');
     handleClose();
   } catch (error: any) {
     showErrorMessage(error as any);
@@ -153,14 +123,12 @@ const submitHandler = handleSubmit(async (values) => {
 });
 
 const getInitialFormData = computed(() => {
-  const product = props.data;
+  const blog = props.data;
   return {
-    ...(product && {
-      name: product.name,
-      price: product.price,
-      sizes: product.sizes,
-      description: product.description,
-      category: { name: product.category?.name, value: product.category?._id },
+    ...(blog && {
+      name: blog.name,
+      documentUrl: blog.documentUrl,
+      category: { name: blog.category?.name, value: blog.category?._id },
     }),
   };
 });

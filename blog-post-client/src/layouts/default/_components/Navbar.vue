@@ -4,7 +4,8 @@
       <div>
         <div class="flex items-center justify-between px-6 py-5 shrink-0">
           <span class="inline-flex items-center gap-2">
-            <img class="transform scale-90" src="@/components/images/login-logo.png" />
+            <FText :innerText="NAZLI KACAR" />
+            <!-- <img class="transform scale-90" src="@/components/images/login-logo.png" /> -->
           </span>
         </div>
         <ul class="space-y-2 font-medium max-w-[328px]">
@@ -36,23 +37,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import ProfileBadge from '@/components/ui/local/ProfileBadge.vue';
-import { useRoute } from 'vue-router';
-import NavItem from './NavItem.vue';
-import { ERouteNames } from '@/router/routeNames.enum';
-import type { IModel } from './NavChildItem.vue';
+import { ref } from "vue";
+import ProfileBadge from "@/components/ui/local/ProfileBadge.vue";
+import { useRoute } from "vue-router";
+import NavItem from "./NavItem.vue";
+import { ERouteNames } from "@/router/routeNames.enum";
+import type { IModel } from "./NavChildItem.vue";
 
 const route = useRoute();
 
 const expandedKeys = ref({});
 const navItems = ref<IModel[]>([
   {
-    label: 'Companies',
-    icon: 'pi pi-building',
-    routeName: ERouteNames.ProductsList,
+    label: "Companies",
+    icon: "pi pi-building",
+    routeName: ERouteNames.BlogList,
   },
-  
 ]);
 </script>
 

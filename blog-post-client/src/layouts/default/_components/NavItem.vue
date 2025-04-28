@@ -5,13 +5,12 @@
 </template>
 
 <script lang="ts" setup>
-import NavChildItem from './NavChildItem.vue';
-import type { IModel } from './NavChildItem.vue';
+import NavChildItem from "./NavChildItem.vue";
+import type { IModel } from "./NavChildItem.vue";
 
 export interface IProps {
   navItems: IModel[];
 }
 
 defineProps<IProps>();
-
 </script>

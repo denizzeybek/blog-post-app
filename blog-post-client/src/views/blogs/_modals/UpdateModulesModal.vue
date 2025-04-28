@@ -18,12 +18,12 @@
           <FInput
             name="filterName"
             v-model="typedName"
-            placeholder="Ürün ismi girin"
+            placeholder="Makale ismi girin"
           />
         </div>
-        <template v-for="(product, idx) in productsList" :key="idx">
+        <template v-for="(blog, idx) in blogsList" :key="idx">
           <ModuleItem
-            :module="product"
+            :module="blog"
             :type="EModuleItemButtonType.ADD"
             @handleModuleButtonClick="onModuleButtonClick($event)"
           />
@@ -46,19 +46,19 @@
 import { computed, onMounted, ref } from 'vue';
 import { useFToast } from '@/composables/useFToast';
 import ModuleItem from './ModuleItem.vue';
-import { EModuleItemButtonType } from '@/views/products/_etc/enums/EModuleItemButtonType';
+import { EModuleItemButtonType } from '@/views/blogs/_etc/enums/EModuleItemButtonType';
 import type {
-  IProductFilterDTO,
-  IProductRemoveModuleDTO,
-  IProductUpdateModuleDTO,
-} from '@/interfaces/product/product.interface';
-import { useProductsStore } from '@/stores/products';
+  IBlogFilterDTO,
+  IBlogRemoveModuleDTO,
+  IBlogUpdateModuleDTO,
+} from '@/interfaces/blog/blog.interface';
+import { useBlogsStore } from '@/stores/blogs';
 import { useRoute } from 'vue-router';
 import { useCategoriesStore } from '@/stores/categories';
 import { watch } from '@vue/reactivity';
 
 const route = useRoute();
-const productsStore = useProductsStore();
+const blogsStore = useBlogsStore();
 const categoriesStore = useCategoriesStore();
 
 const open = defineModel<boolean>('open');
@@ -70,8 +70,8 @@ const selectedFilter = ref({
   value: null,
 });
 
-const productsList = computed(() => productsStore.list);
-const modules = computed(() => productsStore.currentProduct?.modules);
+const blogsList = computed(() => blogsStore.list);
+const modules = computed(() => blogsStore.currentBlog?.modules);
 
 const categoryTypeOptions = computed(() => {
   const categoriesList = categoriesStore.list?.map((category) => ({
@@ -87,44 +87,44 @@ const onModuleButtonClick = async (event) => {
     const { type, id } = event;
     if (type === EModuleItemButtonType.ADD) {
       const payload = {
-        productId: route.params.id,
+        blogId: route.params.id,
         module: {
-          productId: id,
+          blogId: id,
           quantity: 1,
         },
-      } as IProductUpdateModuleDTO;
-      await productsStore.addModule(payload);
+      } as IBlogUpdateModuleDTO;
+      await blogsStore.addModule(payload);
       showSuccessMessage('Modül Eklendi');
     } else {
       const payload = {
-        productId: route.params.id,
+        blogId: route.params.id,
         moduleId: id,
-      } as IProductRemoveModuleDTO;
-      await productsStore.removeModule(payload);
+      } as IBlogRemoveModuleDTO;
+      await blogsStore.removeModule(payload);
       showSuccessMessage('Modül Kaldırıldı');
     }
-    await productsStore.find(route.params.id?.toString());
+    await blogsStore.find(route.params.id?.toString());
   } catch (error: any) {
     showErrorMessage(error?.response?.data?.message as any);
   }
 };
 
-const filterProducts = async () => {
+const filterBlogs = async () => {
   try {
-    const payload = {} as IProductFilterDTO;
+    const payload = {} as IBlogFilterDTO;
     if (typedName.value) {
       payload.name = typedName.value;
     }
     if (selectedFilter.value.value) {
       payload.category = selectedFilter.value.value;
     }
-    await productsStore.filter(payload);
+    await blogsStore.filter(payload);
   } catch (error: any) {
     showErrorMessage(error?.response?.data?.message as any);
   }
 };
 
-watch([selectedFilter, typedName], filterProducts, { immediate: true });
+watch([selectedFilter, typedName], filterBlogs, { immediate: true });
 
 onMounted(async () => {
   await categoriesStore.fetch();

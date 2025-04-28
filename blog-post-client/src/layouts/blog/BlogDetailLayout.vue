@@ -7,9 +7,7 @@
     <div class="col-span-2">
       <slot name="details" />
     </div>
-    <div
-      class="col-span-2 lg:col-span-1  sm:w-auto"
-    >
+    <div class="col-span-2 lg:col-span-1 sm:w-auto">
       <slot name="basket" />
     </div>
   </div>

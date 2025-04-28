@@ -4,7 +4,7 @@
   >
     <div
       class="absolute inset-0 bg-cover bg-center blur-sm"
-      style="background-image: url('/banner-img.jpg')"
+      style="background-image: url(&quot;/banner-img.jpg&quot;)"
     ></div>
     <div class="relative z-10 flex flex-col gap-8 items-center">
       <div class="text-4xl">İLETİŞİM BİLGİLERİMİZ</div>

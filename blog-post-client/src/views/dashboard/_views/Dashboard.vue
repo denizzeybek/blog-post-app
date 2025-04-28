@@ -1,76 +1,51 @@
 <template>
-  <Carousel
-    :value="images"
-    :numVisible="2"
-    :numScroll="3"
-    :responsiveOptions="responsiveOptions"
-    :circular="true"
-  >
-    <template #item="slotProps">
-      <img
-        :src="slotProps.data"
-        alt="slotProps.data.name"
-        class="w-full rounded max-h-[420px]"
-      />
-    </template>
-  </Carousel>
-  <div
-    class="bg-neutral-300 left-0 right-0 -mx-2 lg:-mx-9 relative rounded-md flex-1 py-10"
-  >
-    <Carousel
-      :value="textList"
-      :numVisible="1"
-      :numScroll="1"
-      :responsiveOptions="responsiveOptions"
-      :circular="true"
-    >
-      <template #item="slotProps">
-        <div class="flex justify-center w-full">
-          <div class="w-1/2 text-center text-2xl">
-            {{ slotProps.data }}
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+    <div class="col-span-2">
+      <div class="grid grid-cols-1 gap-4 md:gap-12">
+        <FText
+          :innerText="t('pages.about.banner.title')"
+          as="span"
+          className="text-6xl flex items-center w-full"
+        />
+        <FText as="info" className="flex items-center !text-2xl text-start">
+          {{ t("pages.about.banner.description") }}
+        </FText>
+        <FText as="info" className="flex items-center !text-2xl text-start">
+          {{ t("pages.about.banner.description_2") }}
+        </FText>
+        <div class="mt-8 md:mt-12">
+          <div class="grid grid-cols-1 gap-8 md:gap-24">
+            <div
+              class="flex flex-col items-start md:flex-row"
+              v-for="item in resumeList"
+              :key="item.title"
+            >
+              <FText
+                :innerText="item.title"
+                as="ps"
+                className="!text-xl flex mr-4 underline items-center min-w-[250px]"
+              />
+              <ul class="list-inside list-disc">
+                <li v-for="li in item.items" :key="li" class="flex">
+                  <FText :innerText="li" as="info" className="!text-xl" />
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </template>
-    </Carousel>
+      </div>
+    </div>
+    <div class="col-span-1 flex items-center">
+      <img src="/images/banner2.jpeg" class="rounded-lg" alt="Banner" />
+    </div>
   </div>
   <Footer />
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import Footer from '@/views/about/_components/footer/Footer.vue';
+import { ref } from "vue";
+import Footer from "@/views/about/_components/footer/Footer.vue";
+import { useI18n } from "vue-i18n";
 
-const images = ref([
-  '/carousel/banyo.jpg',
-  '/carousel/mutfak.jpg',
-  '/carousel/tv.jpg',
-]);
-
-const textList = [
-  'Fikirleri teknolojiyle birleştirir, tasarımları henüz üretime girmeden 3 boyutlu çizimlerle sizlerle paylaşırız. Bu sayede üretim sürecini kolaylaştırır ve hata payını asgari düzeye indiririz.',
-  'Herhangi bir mobilya ihtiyacınızda, Ümit Mobilya"ya gelerek isteklerinizi paylaşırsınız. Beraber hayal kurar, beraber tasarlarız. Sizin hayalleriniz, bizim teknik bilgimizle birleşir.',
-  'Uygun hacimler, konforlu detaylar, kullanışlı çözümler sunarız. Yaşam alanlarınızda size özel farklılıkları hisseder, eşsiz fikirlerin tadını çıkarırsınız.',
-];
-const responsiveOptions = ref([
-  {
-    breakpoint: '1400px',
-    numVisible: 2,
-    numScroll: 1,
-  },
-  {
-    breakpoint: '1199px',
-    numVisible: 3,
-    numScroll: 1,
-  },
-  {
-    breakpoint: '767px',
-    numVisible: 2,
-    numScroll: 1,
-  },
-  {
-    breakpoint: '575px',
-    numVisible: 1,
-    numScroll: 1,
-  },
-]);
+const { t } = useI18n();
 </script>

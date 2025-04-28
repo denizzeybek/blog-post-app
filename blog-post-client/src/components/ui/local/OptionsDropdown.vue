@@ -17,7 +17,9 @@
           <a
             v-ripple
             class="flex items-center gap-3 px-4 py-2"
-            @click.stop.prevent="item.disabled ? null : handleOptionClick(item?.value)"
+            @click.stop.prevent="
+              item.disabled ? null : handleOptionClick(item?.value)
+            "
           >
             <span :class="item.icon" />
             <FText as="p"> {{ item.label }}</FText>
@@ -30,9 +32,9 @@
 </template>
 
 <script setup lang="ts">
-import type { EOptionsDropdown } from '@/enums/optionsDropdown.enum';
-import { ref } from 'vue';
-import Menu from 'primevue/menu';
+import type { EOptionsDropdown } from "@/enums/optionsDropdown.enum";
+import { ref } from "vue";
+import Menu from "primevue/menu";
 
 interface IOption {
   label: string;
@@ -50,7 +52,7 @@ interface IProps {
 defineProps<IProps>();
 
 interface IEmits {
-  (event: 'optionClick', option: EOptionsDropdown): void;
+  (event: "optionClick", option: EOptionsDropdown): void;
 }
 
 const emit = defineEmits<IEmits>();
@@ -62,7 +64,7 @@ const toggle = (event) => {
 };
 
 const handleOptionClick = (value: EOptionsDropdown) => {
-  emit('optionClick', value);
+  emit("optionClick", value);
 };
 </script>
 

@@ -28,12 +28,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
-import { useForm } from 'vee-validate';
-import { string, object } from 'yup';
-import { useFToast } from '@/composables/useFToast';
-import { useCategoriesStore } from '@/stores/categories';
-import type { ICategoryDTO } from '@/interfaces/category/category.interface';
+import { computed, onMounted } from "vue";
+import { useForm } from "vee-validate";
+import { string, object } from "yup";
+import { useFToast } from "@/composables/useFToast";
+import { useCategoriesStore } from "@/stores/categories";
+import type { ICategoryDTO } from "@/interfaces/category/category.interface";
 
 interface IProps {
   data?: any;
@@ -41,19 +41,19 @@ interface IProps {
 const props = defineProps<IProps>();
 
 interface IEmits {
-  (event: 'fetchCategories'): void;
+  (event: "fetchCategories"): void;
 }
 const emit = defineEmits<IEmits>();
 
 const { showSuccessMessage, showErrorMessage } = useFToast();
 const categoriesStore = useCategoriesStore();
 
-const open = defineModel<boolean>('open');
+const open = defineModel<boolean>("open");
 
 const isEditing = computed(() => !!props.data);
 
 const validationSchema = object({
-  name: string().required().label('Kategori Adı'),
+  name: string().required().label("Kategori Adı"),
 });
 
 const { handleSubmit, isSubmitting, resetForm } = useForm({
@@ -71,14 +71,14 @@ const submitHandler = handleSubmit(async (values) => {
       name: values.name,
     } as ICategoryDTO;
     if (isEditing.value) {
-      // await categoriesStore.update(productsStore.currentProduct._id ,payload);
-      showSuccessMessage('Ürün güncellendi!');
+      // await categoriesStore.update(blogsStore.currentBlog._id ,payload);
+      showSuccessMessage("Makale güncellendi!");
     } else {
       await categoriesStore.create(payload);
-      showSuccessMessage('Ürün Eklendi!');
+      showSuccessMessage("Makale Eklendi!");
     }
 
-    emit('fetchCategories');
+    emit("fetchCategories");
     handleClose();
   } catch (error: any) {
     showErrorMessage(error as any);

@@ -55,14 +55,14 @@
     v-model:open="showCategoryModal"
     @fetchCategories="fetchCategories"
   />
-  <!-- :data="productsStore.currentProduct" -->
+  <!-- :data="blogsStore.currentBlog" -->
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
-import { useCategoriesStore } from '@/stores/categories';
-import CategoryModal from '../_components/_modals/CategoryModal.vue';
-import { FilterMatchMode } from '@primevue/core/api';
+import { computed, onMounted, ref } from "vue";
+import { useCategoriesStore } from "@/stores/categories";
+import CategoryModal from "../_components/_modals/CategoryModal.vue";
+import { FilterMatchMode } from "@primevue/core/api";
 
 interface IProps {
   isLoading: boolean;

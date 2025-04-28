@@ -51,10 +51,10 @@
 </template>
 
 <script lang="ts" setup>
-import type { IOption } from '@/common/interfaces/option.interface';
-import MultiSelect, { type MultiSelectProps } from 'primevue/multiselect';
-import Tag from 'primevue/tag';
-import { useField } from 'vee-validate';
+import type { IOption } from "@/common/interfaces/option.interface";
+import MultiSelect, { type MultiSelectProps } from "primevue/multiselect";
+import Tag from "primevue/tag";
+import { useField } from "vee-validate";
 
 export interface IProps {
   name: string;
@@ -76,15 +76,15 @@ export interface IProps {
 
 const props = withDefaults(defineProps<IProps>(), {
   disabled: false,
-  placeholder: 'Select an option',
-  customWidth: 'w-full',
+  placeholder: "Select an option",
+  customWidth: "w-full",
   chip: true,
 });
 
 interface IEmits {
-  (event: 'selected', value: any): void;
-  (event: 'addList'): void;
-  (event: 'update:modelValue', value: IOption[]): void;
+  (event: "selected", value: any): void;
+  (event: "addList"): void;
+  (event: "update:modelValue", value: IOption[]): void;
 }
 const emit = defineEmits<IEmits>();
 
@@ -103,6 +103,6 @@ const validationListeners = {
 };
 
 const onSelect = (e: any) => {
-  emit('selected', e);
+  emit("selected", e);
 };
 </script>

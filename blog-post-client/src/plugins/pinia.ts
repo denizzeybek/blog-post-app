@@ -1,9 +1,9 @@
-import { EStoreNames } from '@/stores/storeNames.enum'
-import { createPinia, getActivePinia, type Pinia, type Store } from 'pinia'
-import { type App } from 'vue'
+import { EStoreNames } from "@/stores/storeNames.enum";
+import { createPinia, getActivePinia, type Pinia, type Store } from "pinia";
+import { type App } from "vue";
 
 interface ExtendedPinia extends Pinia {
-  _s: Map<string, Store>
+  _s: Map<string, Store>;
 }
 
 const resetList = [
@@ -11,19 +11,19 @@ const resetList = [
   EStoreNames.PRODUCTS,
   EStoreNames.PROFILE,
   EStoreNames.COMMON_USERS,
-]
+];
 
 export const resetStores = () => {
-  const pinia = getActivePinia() as ExtendedPinia
+  const pinia = getActivePinia() as ExtendedPinia;
   pinia._s.forEach((store) => {
     if (resetList.includes(store.$id as EStoreNames)) {
-      store.$reset()
+      store.$reset();
     }
-  })
-}
+  });
+};
 
 export default {
   install(app: App) {
-    app.use(createPinia())
-  }
-}
+    app.use(createPinia());
+  },
+};

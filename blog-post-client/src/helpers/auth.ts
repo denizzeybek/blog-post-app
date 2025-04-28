@@ -1,7 +1,6 @@
-import { EStorageKeys } from "@/constants/storageKeys"
+import { EStorageKeys } from "@/constants/storageKeys";
 
 export const authHeader = () => {
-  let token = JSON.parse(localStorage.getItem(EStorageKeys.TOKEN)!)
-  return { Authorization: 'Bearer ' + token }
-}
-
+  let token = JSON.parse(localStorage.getItem(EStorageKeys.TOKEN)!);
+  return { Authorization: "Bearer " + token };
+};

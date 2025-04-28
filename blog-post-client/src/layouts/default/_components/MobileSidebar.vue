@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import Navbar from './Navbar.vue'
+import Navbar from "./Navbar.vue";
 
-const visible = defineModel<boolean>()
+const visible = defineModel<boolean>();
 </script>

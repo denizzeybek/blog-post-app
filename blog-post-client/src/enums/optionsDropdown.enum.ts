@@ -1,4 +1,4 @@
 export enum EOptionsDropdown {
-  Edit = 'Edit',
-  Delete = 'Delete',
+  Edit = "Edit",
+  Delete = "Delete",
 }

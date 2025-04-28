@@ -27,8 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import { useField } from 'vee-validate';
-import { computed } from 'vue';
+import { useField } from "vee-validate";
+import { computed } from "vue";
 
 export interface IProps {
   label?: string;

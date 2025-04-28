@@ -2,35 +2,32 @@ import { EStoreNames } from '@/stores/storeNames.enum';
 import axios from 'axios';
 import { defineStore } from 'pinia';
 import type {
-  IProductDeleteImageDTO,
-  IProductDTO,
-  IProductFilterDTO,
-  IProductModuleUpdateDTO,
-  IProductRemoveModuleDTO,
-  IProductUpdateModuleDTO,
-} from '@/interfaces/product/product.interface';
+  IBlogDeleteImageDTO,
+  IBlogDTO,
+  IBlogFilterDTO,
+  IBlogModuleUpdateDTO,
+  IBlogRemoveModuleDTO,
+  IBlogUpdateModuleDTO,
+} from '@/interfaces/blog/blog.interface';
 
-import type {
-  IProduct,
-  IProductModule,
-} from '@/interfaces/product/product.interface';
+import type { IBlog, IBlogModule } from '@/interfaces/blog/blog.interface';
 
 interface State {
-  list: IProduct[];
-  currentProduct: IProduct;
-  currentProductBasket: IProductModule[];
-  currentProductTotal: {
+  list: IBlog[];
+  currentBlog: IBlog;
+  currentBlogBasket: IBlogModule[];
+  currentBlogTotal: {
     price: number;
     currency: string;
   };
 }
 
-export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
+export const useBlogsStore = defineStore(EStoreNames.PRODUCTS, {
   state: (): State => ({
     list: [],
-    currentProduct: {} as IProduct,
-    currentProductBasket: [],
-    currentProductTotal: {
+    currentBlog: {} as IBlog,
+    currentBlogBasket: [],
+    currentBlogTotal: {
       price: 0,
       currency: '',
     },
@@ -39,9 +36,9 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
     async fetch() {
       return new Promise((resolve, reject) => {
         axios
-          .get('/products')
+          .get('/blogs')
           .then((response) => {
-            this.list = response as unknown as IProduct[];
+            this.list = response as unknown as IBlog[];
             resolve(response);
           })
           .catch((error) => {
@@ -49,12 +46,12 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
           });
       });
     },
-    async filter(payload: IProductFilterDTO) {
+    async filter(payload: IBlogFilterDTO) {
       return new Promise((resolve, reject) => {
         axios
-          .post('/products/filter', payload)
+          .post('/blogs/filter', payload)
           .then((response) => {
-            this.list = response as unknown as IProduct[];
+            this.list = response as unknown as IBlog[];
             resolve(response);
           })
           .catch((error) => {
@@ -65,9 +62,9 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
     async find(id: string) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`/products/${id}`)
+          .get(`/blogs/${id}`)
           .then((response) => {
-            this.currentProduct = response as unknown as IProduct;
+            this.currentBlog = response as unknown as IBlog;
             resolve(response);
           })
           .catch((error) => {
@@ -75,23 +72,10 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
           });
       });
     },
-    async create(payload: IProductDTO) {
-      const { name, image, price, sizes, description, category } = payload;
+    async create(payload: IBlogDTO) {
       return new Promise((resolve, reject) => {
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('image', image);
-        formData.append('price', price.toString());
-        formData.append('sizes', sizes);
-        formData.append('description', description);
-        formData.append('category', category.toString());
-
         axios
-          .post('/products', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          })
+          .post(`/blogs`, payload)
           .then((response) => {
             resolve(response);
           })
@@ -111,7 +95,7 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
         }
 
         axios
-          .put(`/products/create-images/${payload.id}`, formData, {
+          .put(`/blogs/create-images/${payload.id}`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
@@ -127,7 +111,7 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
     async remove(id: string) {
       return new Promise((resolve, reject) => {
         axios
-          .delete(`/products/${id}`)
+          .delete(`/blogs/${id}`)
           .then((response) => {
             resolve(response);
           })
@@ -136,10 +120,10 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
           });
       });
     },
-    async update(id: string, payload: IProductDTO) {
+    async update(id: string, payload: IBlogDTO) {
       return new Promise((resolve, reject) => {
         axios
-          .put(`/products/${id}`, payload)
+          .put(`/blogs/${id}`, payload)
           .then((response) => {
             resolve(response);
           })
@@ -148,10 +132,10 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
           });
       });
     },
-    async updateModule(id: string, payload: IProductModuleUpdateDTO) {
+    async updateModule(id: string, payload: IBlogModuleUpdateDTO) {
       return new Promise((resolve, reject) => {
         axios
-          .put(`/products/update-modules/${id}`, payload)
+          .put(`/blogs/update-modules/${id}`, payload)
           .then((response) => {
             resolve(response);
           })
@@ -160,10 +144,10 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
           });
       });
     },
-    async addModule(payload: IProductUpdateModuleDTO) {
+    async addModule(payload: IBlogUpdateModuleDTO) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`/products/add-module`, payload)
+          .post(`/blogs/add-module`, payload)
           .then((response) => {
             resolve(response);
           })
@@ -172,11 +156,11 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
           });
       });
     },
-    async removeModule(payload: IProductRemoveModuleDTO) {
-      const { productId, moduleId } = payload;
+    async removeModule(payload: IBlogRemoveModuleDTO) {
+      const { blogId, moduleId } = payload;
       return new Promise((resolve, reject) => {
         axios
-          .delete(`/products/remove-module/${productId}/${moduleId}`)
+          .delete(`/blogs/remove-module/${blogId}/${moduleId}`)
           .then((response) => {
             resolve(response);
           })
@@ -185,23 +169,11 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
           });
       });
     },
-    async setCurrentProductBasket(modules: IProductModule[]) {
-      // update:{ productId: string, updateModule: IProductModuleUpdateDTO },
-      this.currentProductBasket = modules;
-      this.currentProductTotal = {
-        price: this.currentProductBasket.reduce(
-          (acc, module) => acc + Number(module.price) * Number(module.quantity),
-          0,
-        ),
-        currency: this.currentProductBasket[0].currency,
-      };
-      // await this.updateModule(update.productId, update.updateModule);
-    },
-    async deleteImage(payload: IProductDeleteImageDTO) {
+    async deleteImage(payload: IBlogDeleteImageDTO) {
       const { id, imageName } = payload;
       return new Promise((resolve, reject) => {
         axios
-          .post(`/products/delete-image/${id}`, { imageName })
+          .post(`/blogs/delete-image/${id}`, { imageName })
           .then((response) => {
             resolve(response);
           })
@@ -211,8 +183,8 @@ export const useProductsStore = defineStore(EStoreNames.PRODUCTS, {
       });
     },
     resetBasket() {
-      this.currentProductBasket = [];
-      this.currentProductTotal = {
+      this.currentBlogBasket = [];
+      this.currentBlogTotal = {
         price: 0,
         currency: '',
       };

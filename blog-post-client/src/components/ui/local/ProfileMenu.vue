@@ -30,10 +30,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import ProfileBadge from '@/components/ui/local/ProfileBadge.vue';
-import { ERouteNames } from '@/router/routeNames.enum';
-import { useRouter } from 'vue-router';
+import { ref } from "vue";
+import ProfileBadge from "@/components/ui/local/ProfileBadge.vue";
+import { ERouteNames } from "@/router/routeNames.enum";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 
@@ -45,8 +45,8 @@ const toggle = (event) => {
 
 const items = ref([
   {
-    label: 'Logout',
-    icon: 'pi pi-sign-out',
+    label: "Logout",
+    icon: "pi pi-sign-out",
   },
 ]);
 </script>

@@ -30,34 +30,34 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
-import { useFToast } from '@/composables/useFToast';
-import { useProductsStore } from '@/stores/products';
-import { useRoute } from 'vue-router';
-import type { IProductDeleteImageDTO } from '@/interfaces/product/product.interface';
+import { computed, onMounted } from "vue";
+import { useFToast } from "@/composables/useFToast";
+import { useBlogsStore } from "@/stores/blogs";
+import { useRoute } from "vue-router";
+import type { IBlogDeleteImageDTO } from "@/interfaces/blog/blog.interface";
 
-const productsStore = useProductsStore();
+const blogsStore = useBlogsStore();
 const route = useRoute();
 
-const open = defineModel<boolean>('open');
+const open = defineModel<boolean>("open");
 const { showSuccessMessage, showErrorMessage } = useFToast();
 
 const imagesList = computed(() => {
-  const currentProduct = productsStore.currentProduct;
+  const currentBlog = blogsStore.currentBlog;
 
   if (
-    !currentProduct ||
-    !currentProduct.imageUrlList?.length ||
-    !currentProduct.imageNameList?.length
+    !currentBlog ||
+    !currentBlog.imageUrlList?.length ||
+    !currentBlog.imageNameList?.length
   ) {
     return [];
   }
 
-  return currentProduct.imageNameList.map((name, idx) => {
-    const url = currentProduct.imageUrlList?.[idx];
+  return currentBlog.imageNameList.map((name, idx) => {
+    const url = currentBlog.imageUrlList?.[idx];
     return {
       name,
-      url: url ?? '',
+      url: url ?? "",
     };
   });
 });
@@ -67,12 +67,12 @@ const removeImage = async (imageName: string) => {
     const payload = {
       id: route.params.id,
       imageName,
-    } as IProductDeleteImageDTO;
-    await productsStore.deleteImage(payload);
-    await productsStore.find(route.params.id?.toString());
-    showSuccessMessage('Resim Galeriden Kaldırıldı');
+    } as IBlogDeleteImageDTO;
+    await blogsStore.deleteImage(payload);
+    await blogsStore.find(route.params.id?.toString());
+    showSuccessMessage("Resim Galeriden Kaldırıldı");
   } catch (error) {
-    showErrorMessage('Resmi silerken hata oluştu');
+    showErrorMessage("Resmi silerken hata oluştu");
   }
 };
 </script>

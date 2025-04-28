@@ -22,20 +22,20 @@
 </template>
 
 <script setup lang="ts">
-import { useForm } from 'vee-validate';
-import { string, object } from 'yup';
-import { useFToast } from '@/composables/useFToast';
-import { useAuthStore } from '@/stores/auth';
-import { useRouter } from 'vue-router';
-import { ERouteNames } from '@/router/routeNames.enum';
+import { useForm } from "vee-validate";
+import { string, object } from "yup";
+import { useFToast } from "@/composables/useFToast";
+import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
+import { ERouteNames } from "@/router/routeNames.enum";
 
 const { showSuccessMessage, showErrorMessage } = useFToast();
 const router = useRouter();
 const authStore = useAuthStore();
 
 const validationSchema = object({
-  email: string().email().required().label('Email'),
-  password: string().required().label('Password'),
+  email: string().email().required().label("Email"),
+  password: string().required().label("Password"),
 });
 
 const { handleSubmit, isSubmitting, resetForm, defineField } = useForm({
@@ -46,8 +46,8 @@ const submitHandler = handleSubmit(async (values) => {
   try {
     const payload = values as { email: string; password: string };
     await authStore.login(payload);
-    router.push({ name: ERouteNames.ProductsList });
-    showSuccessMessage('Logged in!');
+    router.push({ name: ERouteNames.BlogList });
+    showSuccessMessage("Logged in!");
   } catch (error: any) {
     showErrorMessage(error?.response?.data?.message as any);
   }

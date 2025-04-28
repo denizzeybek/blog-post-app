@@ -1,3 +1,1 @@
-export enum EIconNames {
-  
-}
+export enum EIconNames {}

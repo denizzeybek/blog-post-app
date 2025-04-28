@@ -11,12 +11,12 @@
             >
               <div class="img-box">
                 <img
-                  :src="currentProduct?.imageUrl"
+                  :src="currentBlog?.imageUrl"
                   alt="perfume bottle image"
                   class="w-full sm:w-80 rounded-md object-cover"
                 />
               </div>
-              <ProductItemContent :product="currentProduct" />
+              <BlogItemContent :blog="currentBlog" />
             </div>
           </div>
           <div
@@ -24,24 +24,20 @@
           >
             <template v-if="hasModules">
               <div
-                v-for="(product, idx) in products"
+                v-for="(blog, idx) in blogs"
                 :keey="idx"
                 class="flex items-center justify-between w-full mb-6"
               >
                 <p
                   class="uppercase w-[80px] font-normal text-xl leading-8 text-gray-400"
                 >
-                  {{ product.name }}
+                  {{ blog.name }}
                 </p>
                 <p class="font-normal text-xl leading-8 text-gray-400">
-                  {{
-                    `${product.quantity} x ${product.price} ${product.currency}`
-                  }}
+                  {{ `${blog.quantity} x ${blog.price} ${blog.currency}` }}
                 </p>
                 <h6 class="font-semibold text-xl leading-8 text-gray-900">
-                  {{
-                    `${product.price * product.quantity} ${product.currency}`
-                  }}
+                  {{ `${blog.price * blog.quantity} ${blog.currency}` }}
                 </h6>
               </div>
             </template>
@@ -57,7 +53,7 @@
                 {{
                   hasModules
                     ? total
-                    : `${currentProduct?.price} ${currentProduct?.currency}`
+                    : `${currentBlog?.price} ${currentBlog?.currency}`
                 }}
               </h6>
             </div>
@@ -72,9 +68,9 @@
 </template>
 
 <script setup lang="ts">
-import { useProductsStore } from '@/stores/products';
-import { computed } from 'vue';
-import ProductItemContent from './ProductItemContent.vue';
+import { useBlogsStore } from "@/stores/blogs";
+import { computed } from "vue";
+import BlogItemContent from "./BlogItemContent.vue";
 
 interface IProps {
   hasModules: boolean;
@@ -82,13 +78,13 @@ interface IProps {
 
 defineProps<IProps>();
 
-const productsStore = useProductsStore();
+const blogsStore = useBlogsStore();
 
-const currentProduct = computed(() => productsStore.currentProduct);
-const products = computed(() => productsStore.currentProductBasket);
+const currentBlog = computed(() => blogsStore.currentBlog);
+const blogs = computed(() => blogsStore.currentBlogBasket);
 const total = computed(
   () =>
-    `${productsStore.currentProductTotal?.price} ${productsStore.currentProductTotal?.currency}`,
+    `${blogsStore.currentBlogTotal?.price} ${blogsStore.currentBlogTotal?.currency}`,
 );
 </script>
 
