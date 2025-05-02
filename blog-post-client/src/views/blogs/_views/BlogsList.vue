@@ -3,19 +3,19 @@
     <div class="flex justify-end items-center gap-2">
       <FSelect
         name="filterCategory"
-        placeholder="Kategori Adı Seçin"
-        :options="categoryTypeOptions"
+        :placeholder="t('pages.blogs.blogType.placeholder')"
+        :options="blogTypeOptions"
         v-model="selectedFilter"
         class="!h-full"
       />
       <FInput
         name="filterName"
         v-model="typedName"
-        placeholder="Makale ismi girin"
+        :placeholder="t('pages.blogs.name')"
       />
       <Button
         v-if="usersStore.isAuthenticated"
-        label="Makale Ekle"
+        :label="t('pages.blogs.button_text')"
         @click="showBlogModal = true"
       />
     </div>
@@ -34,17 +34,16 @@
         "
         class="cursor-pointer"
       >
-        <template #header>
-        </template>
+        <template #header> </template>
         <template #content>
-          <BlogItemContent :blog="blog" />
+          <CardContent :name="blog.name" :tag="blog.category.name" />
         </template>
       </Card>
     </div>
     <div v-else class="flex justify-center items-center h-96">
       <Card class="flex items-center justify-center">
         <template #content>
-          <span class="text-2xl">No blogs found</span>
+          <span class="text-2xl">{{ t('pages.blogs.no_blog') }}</span>
         </template>
       </Card>
     </div>
@@ -57,17 +56,19 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, ref, watch } from "vue";
-import { useBlogsStore } from "@/stores/blogs";
-import { ERouteNames } from "@/router/routeNames.enum";
-import { useRouter } from "vue-router";
-import { useUsersStore } from "@/stores/users";
-import BlogModal from "@/views/blogs/_modals/BlogModal.vue";
-import BlogItemContent from "../_components/BlogItemContent.vue";
-import { useCategoriesStore } from "@/stores/categories";
-import { useFToast } from "@/composables/useFToast";
-import type { IBlogFilterDTO } from "@/interfaces/blog/blog.interface";
+import { onMounted, computed, ref, watch } from 'vue';
+import { useBlogsStore } from '@/stores/blogs';
+import { ERouteNames } from '@/router/routeNames.enum';
+import { useRouter } from 'vue-router';
+import { useUsersStore } from '@/stores/users';
+import BlogModal from '@/views/blogs/_modals/BlogModal.vue';
+import { useCategoriesStore } from '@/stores/categories';
+import { useFToast } from '@/composables/useFToast';
+import CardContent from '@/components/ui/local/CardContent.vue';
+import type { IBlogFilterDTO } from '@/interfaces/blog/blog.interface';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const usersStore = useUsersStore();
 const categoriesStore = useCategoriesStore();
 const blogsStore = useBlogsStore();
@@ -77,34 +78,22 @@ const { showErrorMessage } = useFToast();
 const isLoading = ref(false);
 const showBlogModal = ref(false);
 const selectedFilter = ref({
-  name: "Tüm Categoriler",
+  name: t('pages.blogs.all_categories'),
   value: null,
 });
 const typedName = ref();
-
-// Her ürün için yükleme durumlarını takip etmek için bir obje
-const imageLoadingStates = ref<Record<string, boolean>>({});
-
-// Resim yüklenirken skeleton gösterimi için
-const handleImageLoad = (id: string) => {
-  imageLoadingStates.value[id] = false; // Yükleme tamamlandı
-};
-
-const handleImageError = (id: string) => {
-  imageLoadingStates.value[id] = false; // Hata durumunda da skeleton kaldırılır
-};
 
 const productList = computed(() => {
   return blogsStore.list;
 });
 
-const categoryTypeOptions = computed(() => {
+const blogTypeOptions = computed(() => {
   const categoriesList = categoriesStore.list?.map((category) => ({
     name: category.name,
     value: category._id,
   }));
 
-  return [{ name: "Tüm Categoriler", value: null }, ...categoriesList];
+  return [{ name: t('pages.blogs.all_categories'), value: null }, ...categoriesList];
 });
 
 const filterBlogs = async () => {
@@ -119,11 +108,6 @@ const filterBlogs = async () => {
     }
     await blogsStore.filter(payload);
 
-    // Makale yüklendikten sonra tüm ürünler için yükleme durumunu true olarak ayarla
-    // blogsStore.list?.forEach((blog) => {
-    //   imageLoadingStates.value[blog._id!] = true;
-    // });
-
     isLoading.value = false;
   } catch (error: any) {
     showErrorMessage(error?.response?.data?.message as any);
@@ -134,8 +118,5 @@ watch([selectedFilter, typedName], filterBlogs, { immediate: true });
 
 onMounted(async () => {
   await categoriesStore.fetch();
-  blogsStore.list?.forEach((blog) => {
-    imageLoadingStates.value[blog._id!] = true;
-  });
 });
 </script>

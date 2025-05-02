@@ -2,7 +2,11 @@
   <Dialog
     v-model:visible="open"
     modal
-    :header="isEditing ? 'Makale Güncelle' : 'Makale Ekle'"
+    :header="
+      isEditing
+        ? t('pages.blogs.modal.title.update')
+        : t('pages.blogs.modal.title.create')
+    "
     class="!bg-f-secondary-purple lg:!w-[700px] !w-full"
     :style="{ width: '50rem' }"
   >
@@ -10,26 +14,42 @@
       <div class="flex gap-4 flex-1">
         <FInput
           class="grow"
-          label="Makale adı"
           name="name"
-          placeholder="Makale ismi girin"
+          :label="t('pages.blogs.modal.name.tr.label')"
+          :placeholder="t('pages.blogs.modal.name.tr.placeholder')"
+        />
+      </div>
+      <div class="flex gap-4 flex-1">
+        <FInput
+          class="grow"
+          :label="t('pages.blogs.modal.name.en.label')"
+          name="enName"
+          :placeholder="t('pages.blogs.modal.name.en.placeholder')"
         />
       </div>
       <div class="flex gap-4 flex-1">
         <FSelect
           class="grow"
-          label="Kategori"
+          :label="t('pages.blogs.modal.category.label')"
           name="category"
-          placeholder="Kategori Seçin"
+          :placeholder="t('pages.blogs.modal.category.placeholder')"
           :options="categoryTypeOptions"
         />
       </div>
       <div class="flex gap-4 flex-1">
         <FInput
           class="grow"
-          label="Makale"
+          :label="t('pages.blogs.modal.document.tr.label')"
           name="documentUrl"
-          placeholder="Açıklama girin"
+          :placeholder="t('pages.blogs.modal.document.tr.placeholder')"
+        />
+      </div>
+      <div class="flex gap-4 flex-1">
+        <FInput
+          class="grow"
+          :label="t('pages.blogs.modal.document.en.label')"
+          name="enDocumentUrl"
+          :placeholder="t('pages.blogs.modal.document.en.placeholder')"
         />
       </div>
       <div class="flex w-50 justify-center">
@@ -37,7 +57,7 @@
           :disabled="isSubmitting"
           :loading="isSubmitting"
           type="submit"
-          label="Kaydet"
+          :label="t('pages.blogs.modal.save_btn')"
         />
       </div>
     </form>
@@ -52,6 +72,9 @@ import { useFToast } from '@/composables/useFToast';
 import { useBlogsStore } from '@/stores/blogs';
 import { useCategoriesStore } from '@/stores/categories';
 import type { IBlogDTO } from '@/interfaces/blog/blog.interface';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 interface IProps {
   data?: any;
@@ -80,15 +103,21 @@ const categoryTypeOptions = computed(() => {
 });
 
 const validationSchema = object({
-  name: string().required().label('Makale adı'),
-  documentUrl: string().required().label('Açıklama'),
+  name: string().required().label(t('pages.blogs.modal.name.tr.label')),
+  enName: string().required().label(t('pages.blogs.modal.name.en.label')),
+  documentUrl: string()
+    .required()
+    .label(t('pages.blogs.modal.document.tr.label')),
+  enDocumentUrl: string()
+    .required()
+    .label(t('pages.blogs.modal.document.en.label')),
   category: object()
     .shape({
-      name: string().label('Kategori'),
-      value: string().label('Kategori').required(),
+      name: string().label(t('pages.blogs.modal.category.label')),
+      value: string().label(t('pages.blogs.modal.category.label')).required(),
     })
     .required()
-    .label('Kategori'),
+    .label(t('pages.blogs.modal.category.label')),
 });
 
 const { handleSubmit, isSubmitting, resetForm, defineField } = useForm({
@@ -104,15 +133,17 @@ const submitHandler = handleSubmit(async (values) => {
   try {
     const payload = {
       name: values.name,
+      enName: values.enName,
       documentUrl: values.documentUrl,
+      enDocumentUrl: values.enDocumentUrl,
       category: values.category.value,
     } as IBlogDTO;
     if (isEditing.value) {
       await blogsStore.update(blogsStore.currentBlog._id, payload);
-      showSuccessMessage('Makale Güncellendi!');
+      showSuccessMessage(t('pages.blogs.modal.update_success_msg'));
     } else {
       await blogsStore.create(payload);
-      showSuccessMessage('Makale eklendi!');
+      showSuccessMessage(t('pages.blogs.modal.create_success_msg'));
     }
 
     emit('fetchBlogs');
@@ -127,7 +158,9 @@ const getInitialFormData = computed(() => {
   return {
     ...(blog && {
       name: blog.name,
+      enName: blog.enName,
       documentUrl: blog.documentUrl,
+      enDocumentUrl: blog.enDocumentUrl,
       category: { name: blog.category?.name, value: blog.category?._id },
     }),
   };

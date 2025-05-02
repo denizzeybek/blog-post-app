@@ -2,13 +2,27 @@
   "description": "Oopsie, where am I?",
   "backHome": "Get me back on track",
   "pages": {
-    "home": {
-      "banner": {
-        "text": "Lawyer Nazlı Kaçar<br/>Law&Consulting",
-        "description": "Nazlı Kaçar Law and Consultancy was founded in 2023 by Lawyer Nazlı Kaçar. Our office, which provides services in Turkish, English and French, provides legal services and consultancy services to both local and foreign clients in more than 12 legal fields. In all types of litigation and dispute cases, at every stage of the trial process, service is provided in a solution-oriented manner with a client-first approach."
-      }
+    "logo": "NK Law ve Danışmanlık",
+    "header": {
+      "contact": "Contact",
+      "blogs": "Blogs",
+      "login": "Login",
+      "categories": "Categories",
+      "logout": "Logout"
     },
-    "about": {
+    "login": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter Email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter Password"
+      },
+      "button_text": "Sign in",
+      "success_msg": "Logged In!"
+    },
+    "dashboard": {
       "banner": {
         "title": "Lawyer Nazlı Kaçar<br/>Law&Consulting",
         "description": "Nazlı Kaçar graduated with high honors from Istanbul Beykent University in 2021. From 2021 to 2023, she practiced law under the Istanbul Bar Association in Istanbul. In 2023, she opened her own office in Kuşadası under the name NK Law and Consultancy, where she continues to provide legal services.",
@@ -35,38 +49,80 @@
         }
       }
     },
-    "services": {
-      "list": {
-        "business": "Business Law",
-        "insurance": "Insurance Law",
-        "real_estate": "Real Estate and Construction Law",
-        "trade": "Commercial and Corporate Law",
-        "arbitration": "Arbitration Law",
-        "international": "Private International Law",
-        "criminal": "Criminal Law",
-        "tax": "Administrative and Tax Law",
-        "family": "Family and Inheritance Law",
-        "personal": "Personal Data Protection Law",
-        "enforcement": "Enforcement and Insolvency Law",
-        "litigation": "Litigation and Dispute Resolution Methods"
-      }
-    }
-  },
-  "layout": {
-    "navbar": {
-      "list": {
-        "about": "About",
-        "services": "Services",
-        "contact": "Contact",
-        "documents": "Blog"
+    "contact": {
+      "title": "Kuşadası Office",
+      "address": "Aydin, Kusadasi, Türkmen Mah., İstiklal Cad., 2B",
+      "phone": "+90 531 760 60 55",
+      "banner": {
+        "title": "Contact Us"
       }
     },
+    "blogs": {
+      "blogType": {
+        "placeholder": "Select blog name"
+      },
+      "name": "Enter blog name",
+      "button_text": "Add Blog",
+      "no_blog": "No Blogs Found",
+      "all_categories": "All Categories",
+      "modal": {
+        "title": {
+          "update": "Update Blog",
+          "create": "Create Blog"
+        },
+        "name": {
+          "tr": {
+            "label": "Blog Name",
+            "placeholder": "Enter blog name"
+          },
+          "en": {
+            "label": "Blog Name EN",
+            "placeholder": "Enter en blog name"
+          }
+        },
+        "document": {
+          "tr": {
+            "label": "Document",
+            "placeholder": "Enter document"
+          },
+          "en": {
+            "label": "Document EN",
+            "placeholder": "Enter en document"
+          }
+        },
+        "category": {
+          "label": "Category Name",
+          "placeholder": "Enter category name"
+        },
+        "save_btn": "Save",
+        "update_success_msg": "Blog Updated",
+        "create_success_msg": "Blog Added"
+      }
+    },
+    "category": {
+      "button_text": "Add Category",
+      "no_category": "No Category Found",
+      "modal": {
+        "title": {
+          "update": "Update Category",
+          "create": "Create Category"
+        },
+        "save_btn": "Save",
+        "name": {
+          "label": "Category Name",
+          "placeholder": "Enter category name"
+        },
+        "key": {
+          "label": "Category Key",
+          "placeholder": "Enter category key"
+        },
+        "update_success_msg": "Category Updated",
+        "create_success_msg": "Category Added"
+      },
+      "keys": {}
+    },
     "footer": {
-      "title": "Contact us",
-      "address": "Address"
+      "title": "© 2025 NK Hukuk ve Danışmanlık"
     }
-  },
-  "common": {
-    "close": "Close"
   }
 }

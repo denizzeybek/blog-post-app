@@ -6,175 +6,77 @@
       style="border-radius: 3rem"
     >
       <template #start>
-        <RouterLink
-          :to="{ name: ERouteNames.Dashboard }"
-          class="!w-60 lg:mr-10"
-        >
-          <FText as="h1" innerText="NAZLI KACAR" />
+        <RouterLink :to="{ name: ERouteNames.Dashboard }" class="lg:mr-10">
+          <FText as="h1" :innerText="t('pages.logo')" />
         </RouterLink>
       </template>
       <template #item="{ item }">
-        <a
-          v-if="item.root"
-          class="flex items-center cursor-pointer px-4 py-2 overflow-hidden relative font-semibold text-lg uppercase"
-          style="border-radius: 2rem"
-        >
-          <span>{{ item.label }}</span>
-        </a>
-        <a
-          v-else-if="item?.method"
-          href="#"
-          @click="item.method"
-          class="flex items-center cursor-pointer px-4 py-2 overflow-hidden relative font-semibold text-lg uppercase"
+        <Button
+          severity="secondary"
+          :variant="item.isActive ? undefined : 'text'"
+          class="w-full lg:w-fit font-semibold text-lg uppercase"
+          @click="item.method ? item.method() : router.push(item.route)"
         >
           {{ item.label }}
-        </a>
-        <RouterLink
-          v-else-if="item?.route"
-          :to="item.route"
-          class="flex items-center cursor-pointer px-4 py-2 overflow-hidden relative font-semibold text-lg uppercase"
-        >
-          {{ item.label }}
-        </RouterLink>
-        <a
-          v-else-if="!item.image"
-          class="flex items-center p-4 cursor-pointer mb-2 gap-3"
-        >
-          <span
-            class="inline-flex items-center justify-center rounded-full bg-primary text-primary-contrast w-12 h-12"
-          >
-            <i :class="[item.icon, 'text-lg']"></i>
-          </span>
-          <span class="inline-flex flex-col gap-1">
-            <span class="font-bold text-lg">{{ item.label }}</span>
-            <span class="whitespace-nowrap">{{ item.subtext }}</span>
-          </span>
-        </a>
-        <div v-else class="flex flex-col items-start gap-4 p-2">
-          <img alt="megamenu-demo" :src="item.image" class="w-full" />
-          <span>{{ item.subtext }}</span>
-          <Button :label="item.label?.toString()" outlined />
-        </div>
+        </Button>
+      </template>
+      <template #end>
+        <FSelect
+          name="language"
+          :options="languageOptions"
+          v-model="language"
+          class="max-w-[140px] ms-auto"
+        />
       </template>
     </MegaMenu>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import MegaMenu from "primevue/megamenu";
-import { ERouteNames } from "@/router/routeNames.enum";
-import { useUsersStore } from "@/stores/users";
-import { useAuthStore } from "@/stores/auth";
+import { computed, ref, watch } from 'vue';
+import MegaMenu from 'primevue/megamenu';
+import { ERouteNames } from '@/router/routeNames.enum';
+import { useUsersStore } from '@/stores/users';
+import { useAuthStore } from '@/stores/auth';
+import { useRoute, useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import { languageOptions, type ILanguageOption } from '@/constants/languages';
+import { setI18nLanguage, type MessageSchema } from '@/plugins/i18n';
+
+const { locale } = useI18n()
+const i18n = useI18n<{ message: MessageSchema }>()
+const { t } = i18n
 
 const authStore = useAuthStore();
 const usersStore = useUsersStore();
+const route = useRoute();
+const router = useRouter();
 
 interface IEmits {
-  (event: "drawerChange", val: boolean): void;
+  (event: 'drawerChange', val: boolean): void;
 }
 
 defineEmits<IEmits>();
 
+const language = ref<ILanguageOption>(
+  languageOptions.find((option) => option.value === locale.value) ??
+    languageOptions[0],
+);
+
 const items = computed(() => {
   return [
-    // {
-    //   label: 'Company',
-    //   root: true,
-    //   items: [
-    //     [
-    //       {
-    //         items: [
-    //           {
-    //             label: 'Features',
-    //             icon: 'pi pi-list',
-    //             subtext: 'Subtext of item',
-    //           },
-    //           {
-    //             label: 'Customers',
-    //             icon: 'pi pi-users',
-    //             subtext: 'Subtext of item',
-    //           },
-    //           {
-    //             label: 'Case Studies',
-    //             icon: 'pi pi-file',
-    //             subtext: 'Subtext of item',
-    //           },
-    //         ],
-    //       },
-    //     ],
-    //     [
-    //       {
-    //         items: [
-    //           {
-    //             label: 'Solutions',
-    //             icon: 'pi pi-shield',
-    //             subtext: 'Subtext of item',
-    //           },
-    //           {
-    //             label: 'Faq',
-    //             icon: 'pi pi-question',
-    //             subtext: 'Subtext of item',
-    //           },
-    //           {
-    //             label: 'Library',
-    //             icon: 'pi pi-search',
-    //             subtext: 'Subtext of item',
-    //           },
-    //         ],
-    //       },
-    //     ],
-    //     [
-    //       {
-    //         items: [
-    //           {
-    //             label: 'Community',
-    //             icon: 'pi pi-comments',
-    //             subtext: 'Subtext of item',
-    //           },
-    //           {
-    //             label: 'Rewards',
-    //             icon: 'pi pi-star',
-    //             subtext: 'Subtext of item',
-    //           },
-    //           {
-    //             label: 'Investors',
-    //             icon: 'pi pi-globe',
-    //             subtext: 'Subtext of item',
-    //           },
-    //         ],
-    //       },
-    //     ],
-    //     [
-    //       {
-    //         items: [
-    //           {
-    //             image:
-    //               'https://primefaces.org/cdn/primevue/images/uikit/uikit-system.png',
-    //             label: 'GET STARTED',
-    //             subtext: 'Build spectacular apps in no time.',
-    //           },
-    //         ],
-    //       },
-    //     ],
-    //   ],
-    // },
     {
-      label: "Makaleler",
-      route: { name: ERouteNames.BlogList },
-    },
-    {
-      label: "Hakkımızda",
-      route: { name: ERouteNames.About },
-    },
-    {
-      label: "İletişim",
+      label: t('pages.header.contact'),
       route: { name: ERouteNames.Contact },
+    },
+    {
+      label: t('pages.header.blogs'),
+      route: { name: ERouteNames.BlogList },
     },
     ...(!usersStore.isAuthenticated
       ? [
           {
-            label: "Giriş Yap",
+            label: t('pages.header.login'),
             route: { name: ERouteNames.Login },
           },
         ]
@@ -182,11 +84,11 @@ const items = computed(() => {
     ...(usersStore.isAuthenticated
       ? [
           {
-            label: "Kategoriler",
+            label: t('pages.header.categories'),
             route: { name: ERouteNames.CategoriesList },
           },
           {
-            label: "Çıkış Yap",
+            label: t('pages.header.login'),
             route: { name: ERouteNames.Login },
             method: () => {
               authStore.logout();
@@ -194,6 +96,15 @@ const items = computed(() => {
           },
         ]
       : []),
-  ];
+  ].map((item) => {
+    return {
+      ...item,
+      isActive: route.name === item.route.name,
+    };
+  });
 });
+
+watch(language, (language) => {
+  setI18nLanguage(language?.value ?? 'en');
+}, {deep: true});
 </script>

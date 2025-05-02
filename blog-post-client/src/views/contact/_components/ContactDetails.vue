@@ -15,17 +15,14 @@
 
 <script setup lang="ts">
 import BannerText from "@/views/about/_components/banner/BannerText.vue";
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const itemList = [
   {
-    title: "Ahşap atölye",
-    text: "Kuşadası Sanayi Sitesi 10. Sk. No:209400 Kuşadası/Aydın",
-    subText: "0 549 676 21 08",
-  },
-  {
-    title: "Fabrika",
-    text: "Kirazlı yoluCd., Ağaç İşleri Sanayi Sitesi 09400 Kuşadası/Aydın",
-    subText: "0 552 152 21 08",
+    title: t('pages.contact.title'),
+    text: t('pages.contact.address'),
+    subText: t('pages.contact.phone'),
   },
 ];
 </script>

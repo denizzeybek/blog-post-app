@@ -1,0 +1,42 @@
+{
+    "workbench.colorCustomizations": {
+        "editor.background": "#000000", // Code panel background
+        "sideBar.background": "#000000" // Sidebar background
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.semanticHighlighting.enabled": true,
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "variable.other.enummember",
+                "settings": {
+                    "foreground": "#FFB86C"
+                }
+            },
+            {
+                "scope": "entity.name.type.enum",
+                "settings": {
+                    "foreground": "#77f600"
+                }
+            },
+            {
+              "scope": "support.constant.enum",
+              "settings": {
+                "foreground": "#FFD700"
+              }
+            }
+        ]
+    },
+    "editor.semanticTokenColorCustomizations": {
+    "rules": {
+      "enum": {
+        "foreground": "#77f600",
+        "bold": true
+      },
+      "enumMember": {
+        "foreground": "#FFB86C"
+      }
+    }
+  }
+}

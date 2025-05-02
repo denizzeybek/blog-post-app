@@ -5,9 +5,6 @@ import type {
   IBlogDeleteImageDTO,
   IBlogDTO,
   IBlogFilterDTO,
-  IBlogModuleUpdateDTO,
-  IBlogRemoveModuleDTO,
-  IBlogUpdateModuleDTO,
 } from '@/interfaces/blog/blog.interface';
 
 import type { IBlog, IBlogModule } from '@/interfaces/blog/blog.interface';
@@ -15,22 +12,12 @@ import type { IBlog, IBlogModule } from '@/interfaces/blog/blog.interface';
 interface State {
   list: IBlog[];
   currentBlog: IBlog;
-  currentBlogBasket: IBlogModule[];
-  currentBlogTotal: {
-    price: number;
-    currency: string;
-  };
 }
 
 export const useBlogsStore = defineStore(EStoreNames.PRODUCTS, {
   state: (): State => ({
     list: [],
     currentBlog: {} as IBlog,
-    currentBlogBasket: [],
-    currentBlogTotal: {
-      price: 0,
-      currency: '',
-    },
   }),
   actions: {
     async fetch() {
@@ -84,30 +71,6 @@ export const useBlogsStore = defineStore(EStoreNames.PRODUCTS, {
           });
       });
     },
-    async createImages(payload: any) {
-      return new Promise((resolve, reject) => {
-        const formData = new FormData();
-
-        if (payload.images) {
-          Array.from(payload.images).forEach((image: any) => {
-            formData.append('image', image); // Append each image
-          });
-        }
-
-        axios
-          .put(`/blogs/create-images/${payload.id}`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          })
-          .then((response) => {
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
-    },
     async remove(id: string) {
       return new Promise((resolve, reject) => {
         axios
@@ -131,63 +94,6 @@ export const useBlogsStore = defineStore(EStoreNames.PRODUCTS, {
             reject(error);
           });
       });
-    },
-    async updateModule(id: string, payload: IBlogModuleUpdateDTO) {
-      return new Promise((resolve, reject) => {
-        axios
-          .put(`/blogs/update-modules/${id}`, payload)
-          .then((response) => {
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
-    },
-    async addModule(payload: IBlogUpdateModuleDTO) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post(`/blogs/add-module`, payload)
-          .then((response) => {
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
-    },
-    async removeModule(payload: IBlogRemoveModuleDTO) {
-      const { blogId, moduleId } = payload;
-      return new Promise((resolve, reject) => {
-        axios
-          .delete(`/blogs/remove-module/${blogId}/${moduleId}`)
-          .then((response) => {
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
-    },
-    async deleteImage(payload: IBlogDeleteImageDTO) {
-      const { id, imageName } = payload;
-      return new Promise((resolve, reject) => {
-        axios
-          .post(`/blogs/delete-image/${id}`, { imageName })
-          .then((response) => {
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
-    },
-    resetBasket() {
-      this.currentBlogBasket = [];
-      this.currentBlogTotal = {
-        price: 0,
-        currency: '',
-      };
     },
   },
 });

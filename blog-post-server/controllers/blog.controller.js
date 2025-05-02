@@ -14,7 +14,6 @@ const getBlogs = async (payload) => {
       ...(name && { name: new RegExp(name, 'i') }),
       ...(category && { category }),
     };
-
     // Fetch blogs with necessary population
     const blogs = await Blog.find(query).populate('category');
 
@@ -57,7 +56,7 @@ exports.filterBlogs = async (req, res) => {
     const { name, category } = req.body;
 
     // Call getBlogs with the name filter
-    const blogs = await getBlogs({ name: name, category: category });
+    const blogs = await getBlogs({ name, category });
 
     res.status(200).json(blogs);
   } catch (error) {
@@ -68,7 +67,7 @@ exports.filterBlogs = async (req, res) => {
 // Yeni ürün ekleme
 exports.createBlog = async (req, res) => {
   try {
-    const { name, documentUrl, category } = req.body;
+    const { name, enName, documentUrl, enDocumentUrl, category } = req.body;
 
     // Validate category existence
     const categoryExists = await mongoose.model('Category').findById(category);
@@ -78,7 +77,9 @@ exports.createBlog = async (req, res) => {
 
     const blog = new Blog({
       name,
+      enName,
       documentUrl,
+      enDocumentUrl,
       category,
     });
     const newBlog = await blog.save();
@@ -91,7 +92,7 @@ exports.createBlog = async (req, res) => {
 // Ürün güncelleme
 exports.updateBlog = async (req, res) => {
   const { id } = req.params; // Get blog ID from the route parameter
-  const { name, documentUrl, category } = req.body;
+  const { name, enName, documentUrl, enDocumentUrl, category } = req.body;
 
   try {
     // Find the blog by ID
@@ -102,7 +103,9 @@ exports.updateBlog = async (req, res) => {
 
     // Update the blog fields
     blog.name = name ?? blog.name;
+    blog.enName = enName ?? blog.enName;
     blog.documentUrl = documentUrl ?? blog.documentUrl;
+    blog.enDocumentUrl = enDocumentUrl ?? blog.enDocumentUrl;
     blog.category = category ?? blog.category;
 
     // Save the updated blog

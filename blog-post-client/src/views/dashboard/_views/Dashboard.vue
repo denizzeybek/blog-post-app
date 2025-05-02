@@ -3,15 +3,15 @@
     <div class="col-span-2">
       <div class="grid grid-cols-1 gap-4 md:gap-12">
         <FText
-          :innerText="t('pages.about.banner.title')"
+          :innerText="t('pages.dashboard.banner.title')"
           as="span"
           className="text-6xl flex items-center w-full"
         />
         <FText as="info" className="flex items-center !text-2xl text-start">
-          {{ t("pages.about.banner.description") }}
+          {{ t('pages.dashboard.banner.description') }}
         </FText>
         <FText as="info" className="flex items-center !text-2xl text-start">
-          {{ t("pages.about.banner.description_2") }}
+          {{ t('pages.dashboard.banner.description_2') }}
         </FText>
         <div class="mt-8 md:mt-12">
           <div class="grid grid-cols-1 gap-8 md:gap-24">
@@ -43,9 +43,36 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import Footer from "@/views/about/_components/footer/Footer.vue";
-import { useI18n } from "vue-i18n";
+import Footer from '@/views/about/_components/footer/Footer.vue';
+import { useI18n } from 'vue-i18n';
+import { computed } from 'vue';
 
 const { t } = useI18n();
+
+const resumeList = computed(() => [
+  {
+    title: t('pages.dashboard.banner.list.school.title'),
+    items: [t('pages.dashboard.banner.list.school.description')],
+  },
+  {
+    title: t('pages.dashboard.banner.list.languages.title'),
+    items: [
+      t('pages.dashboard.banner.list.languages.turkish'),
+      t('pages.dashboard.banner.list.languages.english'),
+      t('pages.dashboard.banner.list.languages.french'),
+    ],
+  },
+  {
+    title: t('pages.dashboard.banner.list.working_areas.title'),
+    items: [
+      t('pages.dashboard.banner.list.working_areas.insurance'),
+      t('pages.dashboard.banner.list.working_areas.arbitration'),
+      t('pages.dashboard.banner.list.working_areas.private_international'),
+      t(
+        'pages.dashboard.banner.list.working_areas.commercial_and_corporate_law',
+      ),
+      t('pages.dashboard.banner.list.working_areas.informatics'),
+    ],
+  },
+]);
 </script>

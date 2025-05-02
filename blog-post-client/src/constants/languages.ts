@@ -1,16 +1,16 @@
 import type { Language } from "@/plugins/i18n";
 
 export interface ILanguageOption {
-  label: string;
+  name: string;
   value: Language;
 }
 export const languageOptions: ILanguageOption[] = [
   {
-    label: "English",
+    name: "English",
     value: "en",
   },
   {
-    label: "Türkçe",
+    name: "Türkçe",
     value: "tr",
   },
 ];

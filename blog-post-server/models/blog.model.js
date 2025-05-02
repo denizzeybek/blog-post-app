@@ -6,7 +6,14 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  enName: {
+    type: String,
+    required: true,
+  },
   documentUrl: {
+    type: String,
+  },
+  enDocumentUrl: {
     type: String,
   },
   category: {

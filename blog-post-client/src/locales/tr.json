@@ -1,72 +1,128 @@
 {
-  "description": "haydaa, neredeyim?",
-  "backHome": "Beni doğru yola koy",
+  "description": "Oopsie, where am I?",
+  "backHome": "Get me back on track",
   "pages": {
-    "home": {
-      "banner": {
-        "text": "Avukat Nazlı Kaçar<br/>Hukuk & Danışmanlık",
-        "description": "Nazlı Kaçar Hukuk ve Danışmanlık, Av.Nazlı Kaçar tarafından 2023 yılında kurulmuştur. Türkçe, İngilizce ve Fransızca dillerinde hizmet verilen büromuzda, 12’yi aşkın hukuk alanında, hem yerel hem yabancı müvekkillere avukatlık ve danışmanlık hizmeti sunulmaktadır. Her türden dava süreci ve uyuşmazlık hallerinde, yargılama sürecinin her aşamasında, müvekkil öncelikli bir yaklaşım ile çözüm odaklı şekilde hizmet verilmektedir."
-      }
+    "logo": "NK Hukuk ve Danışmanlık",
+    "header": {
+      "contact": "Contact",
+      "blogs": "Blogs",
+      "login": "Login",
+      "categories": "Categories",
+      "logout": "Logout"
     },
-    "about": {
+    "login": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter Email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter Password"
+      },
+      "button_text": "Sign in",
+      "success_msg": "Logged In!"
+    },
+    "dashboard": {
       "banner": {
-        "title": "Avukat Nazlı Kaçar<br/>Hukuk & Danışmanlık",
-        "description": "Nazlı Kaçar; İstanbul Beykent Üniversitesi’nden 2021 tarihinde yüksek onur derecesi ile mezun olmuştur. 2021 yılından 2023 yılına dek İstanbul Barosu bünyesinde avukatlık hizmetini İstanbul’da yapmıştır. 2023 yılında ise Kuşadası’nda kendi ofisini açarak NK Hukuk ve Danışmanlık adı altında hizmet vermeye başlamıştır.",
-        "description_2": "Nazlı Kaçar; Aydın Barosu’na kayıtlı avukatlık mesleğine devam etmektedir.",
+        "title": "Lawyer Nazlı Kaçar<br/>Law&Consulting",
+        "description": "Nazlı Kaçar graduated with high honors from Istanbul Beykent University in 2021. From 2021 to 2023, she practiced law under the Istanbul Bar Association in Istanbul. In 2023, she opened her own office in Kuşadası under the name NK Law and Consultancy, where she continues to provide legal services.",
+        "description_2": "Nazlı Kaçar is a registered lawyer at the Aydın Bar Association.",
         "list": {
           "school": {
-            "title": "Eğitim",
-            "description": "İstanbul Beykent Üniversitesi"
+            "title": "Education",
+            "description": "Istanbul Beykent University"
           },
           "languages": {
-            "title": "Diller",
-            "turkish": "Türkçe",
-            "english": "İngilizce",
-            "french": "Fransızca"
+            "title": "Languages",
+            "turkish": "Turkish",
+            "english": "English",
+            "french": "French"
           },
           "working_areas": {
-            "title": "Çalışma Alanları",
-            "insurance": "Sigorta Hukuku",
-            "arbitration": "Tahkim Hukuku",
-            "private_international": "Uluslararası Özel Hukuk",
-            "commercial_and_corporate_law": "Ticaret ve Şirketler Hukuku",
-            "informatics": "Bilişim Hukuku"
+            "title": "Working Areas",
+            "insurance": "Insurance Law",
+            "arbitration": "Arbitration Law",
+            "private_international": "Private International Law",
+            "commercial_and_corporate_law": "Commercial and Corporate Law",
+            "informatics": "Information Technology Law"
           }
         }
       }
     },
-    "services": {
-      "list": {
-        "business": "İş Hukuku",
-        "insurance": "Sigorta Hukuku",
-        "real_estate": "Gayrimenkul ve İnşaat Hukuku",
-        "trade": "Ticaret ve Şirketler Hukuku",
-        "arbitration": "Tahkim Hukuku",
-        "international": "Uluslararası Özel Hukuk",
-        "criminal": "Ceza Hukuku",
-        "tax": "İdare ve Vergi Hukuku",
-        "family": "Aile ve Miras Hukuku",
-        "personal": "Kişisel Verilerin Korunması Hukuku",
-        "enforcement": "İcra ve İflas Hukuku",
-        "litigation": "Dava ve Uyuşmazlık Çözüm Yöntemleri"
-      }
-    }
-  },
-  "layout": {
-    "navbar": {
-      "list": {
-        "about": "Hakkımda",
-        "services": "Hizmetlerimiz",
-        "contact": "İletişim",
-        "documents": "Makaleler"
+    "contact": {
+      "title": "Kuşadası Office",
+      "address": "Aydin, Kusadasi, Türkmen Mah., İstiklal Cad., 2B",
+      "phone": "+90 531 760 60 55",
+      "banner": {
+        "title": "Contact Us"
       }
     },
+    "blogs": {
+      "blogType": {
+        "placeholder": "Select blog name"
+      },
+      "name": "Enter blog name",
+      "button_text": "Add Blog",
+      "no_blog": "No Blogs Found",
+      "all_categories": "All Categories",
+      "modal": {
+        "title": {
+          "update": "Update Blog",
+          "create": "Create Blog"
+        },
+        "name": {
+          "tr": {
+            "label": "Blog Name",
+            "placeholder": "Enter blog name"
+          },
+          "en": {
+            "label": "Blog Name EN",
+            "placeholder": "Enter en blog name"
+          }
+        },
+        "document": {
+          "tr": {
+            "label": "Document",
+            "placeholder": "Enter document"
+          },
+          "en": {
+            "label": "Document EN",
+            "placeholder": "Enter en document"
+          }
+        },
+        "category": {
+          "label": "Category Name",
+          "placeholder": "Enter category name"
+        },
+        "save_btn": "Save",
+        "update_success_msg": "Blog Updated",
+        "create_success_msg": "Blog Added"
+      }
+    },
+    "category": {
+      "button_text": "Add Category",
+      "no_category": "No Category Found",
+      "modal": {
+        "title": {
+          "update": "Update Category",
+          "create": "Create Category"
+        },
+        "save_btn": "Save",
+        "name": {
+          "label": "Category Name",
+          "placeholder": "Enter category name"
+        },
+        "key": {
+          "label": "Category Key",
+          "placeholder": "Enter category key"
+        },
+        "update_success_msg": "Category Updated",
+        "create_success_msg": "Category Added"
+      },
+      "keys": {}
+    },
     "footer": {
-      "title": "Bizimle iletişime geçin",
-      "address": "Adres"
+      "title": "© 2025 NK Hukuk ve Danışmanlık"
     }
-  },
-  "common": {
-    "close": "Kapat"
   }
 }

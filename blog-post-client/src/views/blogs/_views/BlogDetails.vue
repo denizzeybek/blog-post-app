@@ -8,14 +8,6 @@
 import { useRoute } from 'vue-router';
 import { useBlogsStore } from '@/stores/blogs';
 import { computed, onMounted, ref, watch } from 'vue';
-import BlogDetailLayout from '@/layouts/blog/BlogDetailLayout.vue';
-import BlogBasket from '@/views/blogs/_components/BlogBasket.vue';
-import BlogGalleria from '@/views/blogs/_components/BlogGalleria.vue';
-import BlogHeader from '@/views/blogs/_components/BlogHeader.vue';
-import BlogModal from '@/views/blogs/_modals/BlogModal.vue';
-import BlogImagesModal from '@/views/blogs/_modals/BlogImagesModal.vue';
-import UpdateModulesModal from '@/views/blogs/_modals/UpdateModulesModal.vue';
-import BlogEditImagesModal from '@/views/blogs/_modals/BlogEditImagesModal.vue';
 
 const blogsStore = useBlogsStore();
 const route = useRoute();
@@ -27,6 +19,7 @@ const updateKey = ref(0);
 
 const cleanHtml = computed(() => {
   const { styleContent, bodyContent } = extractStyleAndBody(
+    // TODO: dili kontrol et ingilizce ise en olan olsun
     blogsStore.currentBlog.documentUrl,
   );
   return inlineStyles(bodyContent, styleContent);

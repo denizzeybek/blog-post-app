@@ -3,7 +3,14 @@
 </template>
 
 <script setup lang="ts">
-console.log("test fe 2");
+import { onMounted } from 'vue';
+import { EStorageKeys } from '@/constants/storageKeys';
+import { setI18nLanguage, type Language } from '@/plugins/i18n';
+
+onMounted(() => {
+  const lang = localStorage.getItem(EStorageKeys.LANG) ?? 'en';
+  setI18nLanguage(lang as Language);
+});
 </script>
 
 <style>

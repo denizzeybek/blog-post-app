@@ -31,9 +31,9 @@ exports.filterCategories = async (req, res) => {
 
 // Yeni kategori ekleme
 exports.createCategory = async (req, res) => {
-  const { name } = req.body;
+  const { name, categoryKey } = req.body;
   try {
-    const newCategory = new Category({ name });
+    const newCategory = new Category({ name, categoryKey });
     await newCategory.save();
     res.status(201).json(newCategory);
   } catch (error) {

@@ -1,5 +1,6 @@
 export enum EStorageKeys {
-  TOKEN = "token",
-  USER = "user",
-  AUTHENTICATION = "authentication",
+  TOKEN = 'token',
+  USER = 'user',
+  AUTHENTICATION = 'authentication',
+  LANG = 'lang',
 }

@@ -2,7 +2,11 @@
   <Dialog
     v-model:visible="open"
     modal
-    :header="isEditing ? 'Kategori Editle' : 'Kategori Ekle'"
+    :header="
+      isEditing
+        ? t('pages.category.modal.title.update')
+        : t('pages.category.modal.title.create')
+    "
     class="!bg-f-secondary-purple lg:!w-[700px] !w-full"
     :style="{ width: '50rem' }"
   >
@@ -10,9 +14,17 @@
       <div class="flex gap-4 flex-1">
         <FInput
           class="grow"
-          label="Categori Adı"
+          :label="t('pages.category.modal.name.label')"
           name="name"
-          placeholder="Kategori adı girin"
+          :placeholder="t('pages.category.modal.name.placeholder')"
+        />
+      </div>
+      <div class="flex gap-4 flex-1">
+        <FInput
+          class="grow"
+          :label="t('pages.category.modal.key.label')"
+          name="categoryKey"
+          :placeholder="t('pages.category.modal.key.placeholder')"
         />
       </div>
       <div class="flex w-50 justify-center">
@@ -20,7 +32,7 @@
           :disabled="isSubmitting"
           :loading="isSubmitting"
           type="submit"
-          label="Kaydet"
+          :label="t('pages.category.modal.save_btn')"
         />
       </div>
     </form>
@@ -28,32 +40,35 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
-import { useForm } from "vee-validate";
-import { string, object } from "yup";
-import { useFToast } from "@/composables/useFToast";
-import { useCategoriesStore } from "@/stores/categories";
-import type { ICategoryDTO } from "@/interfaces/category/category.interface";
+import { computed, onMounted } from 'vue';
+import { useForm } from 'vee-validate';
+import { string, object } from 'yup';
+import { useFToast } from '@/composables/useFToast';
+import { useCategoriesStore } from '@/stores/categories';
+import type { ICategoryDTO } from '@/interfaces/category/category.interface';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 interface IProps {
   data?: any;
 }
 const props = defineProps<IProps>();
 
 interface IEmits {
-  (event: "fetchCategories"): void;
+  (event: 'fetchCategories'): void;
 }
 const emit = defineEmits<IEmits>();
 
 const { showSuccessMessage, showErrorMessage } = useFToast();
 const categoriesStore = useCategoriesStore();
 
-const open = defineModel<boolean>("open");
+const open = defineModel<boolean>('open');
 
 const isEditing = computed(() => !!props.data);
 
 const validationSchema = object({
-  name: string().required().label("Kategori Adı"),
+  name: string().required().label(t('pages.category.modal.name.label')),
+  categoryKey: string().required().label(t('pages.category.modal.key.label')),
 });
 
 const { handleSubmit, isSubmitting, resetForm } = useForm({
@@ -69,16 +84,17 @@ const submitHandler = handleSubmit(async (values) => {
   try {
     const payload = {
       name: values.name,
+      categoryKey: values.categoryKey,
     } as ICategoryDTO;
     if (isEditing.value) {
       // await categoriesStore.update(blogsStore.currentBlog._id ,payload);
-      showSuccessMessage("Makale güncellendi!");
+      showSuccessMessage(t('pages.category.modal.update_success_msg'));
     } else {
       await categoriesStore.create(payload);
-      showSuccessMessage("Makale Eklendi!");
+      showSuccessMessage(t('pages.category.modal.create_success_msg'));
     }
 
-    emit("fetchCategories");
+    emit('fetchCategories');
     handleClose();
   } catch (error: any) {
     showErrorMessage(error as any);
@@ -90,6 +106,7 @@ const getInitialFormData = computed(() => {
   return {
     ...(category && {
       name: category.name,
+      categoryKey: category.categoryKey,
     }),
   };
 });

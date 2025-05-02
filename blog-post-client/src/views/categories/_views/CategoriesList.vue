@@ -1,68 +1,57 @@
 <template>
   <div class="flex flex-col gap-4">
-    <div class="flex justify-end">
-      <Button label="Kategori Ekle" @click="showCategoryModal = true" />
+    <div class="flex justify-end items-center gap-2">
+      <Button
+        v-if="usersStore.isAuthenticated"
+        :label="t('pages.category.button_text')"
+        @click="showCategoryModal = true"
+      />
     </div>
-
-    <Card>
-      <template #content>
-        <DataTable
-          tableStyle="min-width: 50rem"
-          :loading="isLoading"
-          :value="categories"
-          paginator
-          v-model:filters="filters"
-          :globalFilterFields="['name']"
-          :rows="20"
-          :rowsPerPageOptions="[5, 10, 20, 50]"
-        >
-          <template #header>
-            <div class="flex justify-end">
-              <IconField>
-                <InputIcon>
-                  <i class="pi pi-search" />
-                </InputIcon>
-                <InputText
-                  v-model="filters['global'].value"
-                  placeholder="Keyword Search"
-                />
-              </IconField>
-            </div>
-          </template>
-          <Column field="name" header="Kategori Adı"> </Column>
-          <!-- <Column field="createdAt" header="Created At"> </Column>
-          <Column header="Actions">
-            <template #body="slotProps">
-              <div class="flex gap-3">
-                <Button
-                  icon="pi pi-calendar"
-                  severity="warn"
-                />
-              </div>
-            </template>
-          </Column> -->
-
-          <template #footer>
-            In total there are
-            {{ categories ? categories.length : 0 }} categories.
-          </template>
-        </DataTable>
-      </template>
-    </Card>
+    <div
+      v-if="categoriesList?.length"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full"
+    >
+      <Card v-for="category in categoriesList" :key="category._id">
+        <template #header> </template>
+        <template #content>
+          <CardContent :name="category.name" />
+        </template>
+      </Card>
+    </div>
+    <div v-else class="flex justify-center items-center h-96">
+      <Card class="flex items-center justify-center">
+        <template #content>
+          <span class="text-2xl">{{ t('pages.category.no_category') }}</span>
+        </template>
+      </Card>
+    </div>
   </div>
+
   <CategoryModal
     v-if="showCategoryModal"
     v-model:open="showCategoryModal"
     @fetchCategories="fetchCategories"
   />
-  <!-- :data="blogsStore.currentBlog" -->
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { useCategoriesStore } from "@/stores/categories";
-import CategoryModal from "../_components/_modals/CategoryModal.vue";
-import { FilterMatchMode } from "@primevue/core/api";
+import { onMounted, computed, ref, watch } from 'vue';
+import { useBlogsStore } from '@/stores/blogs';
+import { ERouteNames } from '@/router/routeNames.enum';
+import { useRouter } from 'vue-router';
+import { useUsersStore } from '@/stores/users';
+import { useCategoriesStore } from '@/stores/categories';
+import { useFToast } from '@/composables/useFToast';
+import CardContent from '@/components/ui/local/CardContent.vue';
+import CategoryModal from '../_components/_modals/CategoryModal.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+const usersStore = useUsersStore();
+const categoriesStore = useCategoriesStore();
+const blogsStore = useBlogsStore();
+const router = useRouter();
+const { showErrorMessage } = useFToast();
 
 interface IProps {
   isLoading: boolean;
@@ -71,14 +60,8 @@ interface IProps {
 defineProps<IProps>();
 
 const showCategoryModal = ref(false);
-const filters = ref({
-  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-});
 
-const categoriesStore = useCategoriesStore();
-
-const categories = computed(() => categoriesStore.list);
+const categoriesList = computed(() => categoriesStore.list);
 
 const fetchCategories = async () => {
   await categoriesStore.fetch();
@@ -88,5 +71,3 @@ onMounted(async () => {
   await fetchCategories();
 });
 </script>
-
-<style scoped></style>

@@ -3,20 +3,26 @@ import type { ICategory } from '../category/category.interface';
 export interface IBlogModule {
   _id: string;
   name: string;
+  enName: string;
   documentUrl: string;
+  enDocumentUrl: string;
   category: ICategory;
 }
 
 export interface IBlog {
   _id: string;
   name: string;
+  enName: string;
   documentUrl: string;
+  enDocumentUrl: string;
   category: ICategory;
 }
 
 export interface IBlogDTO {
   name: string;
+  enName: string;
   documentUrl: string;
+  enDocumentUrl: string;
   category: ICategory;
 }
 
