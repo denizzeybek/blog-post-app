@@ -22,7 +22,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '18' # Kendi node sürümünüze göre ayarlayın
-          
 
       - name: Install dependencies
         working-directory: blog-post-client
