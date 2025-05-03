@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    environment: umit-mobilya-deployment  # Burada ortamı belirtmelisiniz
+    environment: nazlikacar-deployment  # Burada ortamı belirtmelisiniz
     runs-on: ubuntu-latest
 
     steps:
@@ -21,14 +21,14 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
 
     - name: Deploy backend code to EC2
-      working-directory: umit-mobilya-server
+      working-directory: blog-post-server
       run: |
         rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
         -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" \
         ./ ubuntu@${{ secrets.EC2_IP_ADDRESS }}:~/app
 
     - name: Restart Backend Service
-      working-directory: umit-mobilya-server
+      working-directory: blog-post-server
       run: |
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_IP_ADDRESS }} "sudo systemctl restart myapp.service"
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_IP_ADDRESS }} "sudo systemctl status myapp.service"

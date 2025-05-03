@@ -4,7 +4,7 @@ import ToastService from "primevue/toastservice";
 import "primeicons/primeicons.css";
 import Drawer from "primevue/drawer";
 import { flexyPreset } from "./flexytheme";
-// import Aura from '@primevue/themes/aura';
+import Aura from '@primevue/themes/aura';
 
 import StyleClass from "primevue/styleclass";
 import Ripple from "primevue/ripple";
@@ -58,8 +58,8 @@ export default {
   install(app: App) {
     app.use(PrimeVue, {
       theme: {
-        preset: flexyPreset,
-        // preset: Aura,
+        // preset: flexyPreset,
+        preset: Aura,
         options: {
           darkModeSelector: ".my-app-dark",
         },

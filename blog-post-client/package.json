@@ -12,7 +12,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "generate-icon-names": "node ./scripts/iconNameGenerator.js",
-    "sync": "aws s3 sync ./dist 's3://umit-mobilya-client.s3-website-us-east-1.amazonaws.com'"
+    "sync": "aws s3 sync ./dist 's3://nazlikacar.com.s3-website-us-north-1.amazonaws.com'"
   },
   "dependencies": {
     "@primevue/themes": "^4.2.0",
