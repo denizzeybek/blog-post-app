@@ -9,7 +9,6 @@ jobs:
   deploy:
     environment: nazlikacar-deployment  # Burada ortamı belirtmelisiniz
     runs-on: ubuntu-latest
-    
 
     steps:
     - name: Checkout the repository
