@@ -88,8 +88,8 @@ const items = computed(() => {
             route: { name: ERouteNames.CategoriesList },
           },
           {
-            label: t('pages.header.login'),
-            route: { name: ERouteNames.Login },
+            label: t('pages.header.logout'),
+            route: { name: ERouteNames.Logout },
             method: () => {
               authStore.logout();
             },

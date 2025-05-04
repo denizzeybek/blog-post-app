@@ -8,19 +8,25 @@
 import { useRoute } from 'vue-router';
 import { useBlogsStore } from '@/stores/blogs';
 import { computed, onMounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { locale } = useI18n();
 const blogsStore = useBlogsStore();
 const route = useRoute();
 
-const showBlogModal = ref(false);
-const showBlogImagesModal = ref(false);
 const showUpdateModal = ref(false);
 const updateKey = ref(0);
 
+const currentDocument = computed(() => {
+  if (locale.value === 'tr') {
+    return blogsStore.currentBlog.documentUrl;
+  }
+  return blogsStore.currentBlog.enDocumentUrl;
+});
+
 const cleanHtml = computed(() => {
   const { styleContent, bodyContent } = extractStyleAndBody(
-    // TODO: dili kontrol et ingilizce ise en olan olsun
-    blogsStore.currentBlog.documentUrl,
+    currentDocument.value,
   );
   return inlineStyles(bodyContent, styleContent);
 });

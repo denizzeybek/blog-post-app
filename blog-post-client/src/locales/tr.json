@@ -1,123 +1,123 @@
 {
-  "description": "Oopsie, where am I?",
-  "backHome": "Get me back on track",
+  "description": "Hoppa, neredeyim ben?",
+  "backHome": "Beni geri götür",
   "pages": {
     "logo": "NK Hukuk ve Danışmanlık",
     "header": {
-      "contact": "Contact",
-      "blogs": "Blogs",
-      "login": "Login",
-      "categories": "Categories",
-      "logout": "Logout"
+      "contact": "İletişim",
+      "blogs": "Bloglar",
+      "login": "Giriş Yap",
+      "categories": "Kategoriler",
+      "logout": "Çıkış Yap"
     },
     "login": {
       "email": {
-        "label": "Email",
-        "placeholder": "Enter Email"
+        "label": "E-posta",
+        "placeholder": "E-posta giriniz"
       },
       "password": {
-        "label": "Password",
-        "placeholder": "Enter Password"
+        "label": "Şifre",
+        "placeholder": "Şifre giriniz"
       },
-      "button_text": "Sign in",
-      "success_msg": "Logged In!"
+      "button_text": "Giriş Yap",
+      "success_msg": "Giriş Yapıldı!"
     },
     "dashboard": {
       "banner": {
-        "title": "Lawyer Nazlı Kaçar<br/>Law&Consulting",
-        "description": "Nazlı Kaçar graduated with high honors from Istanbul Beykent University in 2021. From 2021 to 2023, she practiced law under the Istanbul Bar Association in Istanbul. In 2023, she opened her own office in Kuşadası under the name NK Law and Consultancy, where she continues to provide legal services.",
-        "description_2": "Nazlı Kaçar is a registered lawyer at the Aydın Bar Association.",
+        "title": "Avukat Nazlı Kaçar<br/>Hukuk & Danışmanlık",
+        "description": "Nazlı Kaçar, 2021 yılında İstanbul Beykent Üniversitesi'nden yüksek onur derecesiyle mezun olmuştur. 2021-2023 yılları arasında İstanbul Barosu'na bağlı olarak İstanbul’da avukatlık yapmıştır. 2023 yılında Kuşadası'nda NK Hukuk ve Danışmanlık adında kendi ofisini açarak hukuki hizmet vermeye devam etmektedir.",
+        "description_2": "Nazlı Kaçar, Aydın Barosu’na kayıtlı bir avukattır.",
         "list": {
           "school": {
-            "title": "Education",
-            "description": "Istanbul Beykent University"
+            "title": "Eğitim",
+            "description": "İstanbul Beykent Üniversitesi"
           },
           "languages": {
-            "title": "Languages",
-            "turkish": "Turkish",
-            "english": "English",
-            "french": "French"
+            "title": "Diller",
+            "turkish": "Türkçe",
+            "english": "İngilizce",
+            "french": "Fransızca"
           },
           "working_areas": {
-            "title": "Working Areas",
-            "insurance": "Insurance Law",
-            "arbitration": "Arbitration Law",
-            "private_international": "Private International Law",
-            "commercial_and_corporate_law": "Commercial and Corporate Law",
-            "informatics": "Information Technology Law"
+            "title": "Çalışma Alanları",
+            "insurance": "Sigorta Hukuku",
+            "arbitration": "Tahkim Hukuku",
+            "private_international": "Milletlerarası Özel Hukuk",
+            "commercial_and_corporate_law": "Ticaret ve Şirketler Hukuku",
+            "informatics": "Bilişim Hukuku"
           }
         }
       }
     },
     "contact": {
-      "title": "Kuşadası Office",
-      "address": "Aydin, Kusadasi, Türkmen Mah., İstiklal Cad., 2B",
+      "title": "Kuşadası Ofisi",
+      "address": "Aydın, Kuşadası, Türkmen Mah., İstiklal Cad., 2B",
       "phone": "+90 531 760 60 55",
       "banner": {
-        "title": "Contact Us"
+        "title": "Bize Ulaşın"
       }
     },
     "blogs": {
       "blogType": {
-        "placeholder": "Select blog name"
+        "placeholder": "Blog adını seçiniz"
       },
-      "name": "Enter blog name",
-      "button_text": "Add Blog",
-      "no_blog": "No Blogs Found",
-      "all_categories": "All Categories",
+      "name": "Blog adını giriniz",
+      "button_text": "Blog Ekle",
+      "no_blog": "Blog Bulunamadı",
+      "all_categories": "Tüm Kategoriler",
       "modal": {
         "title": {
-          "update": "Update Blog",
-          "create": "Create Blog"
+          "update": "Blogu Güncelle",
+          "create": "Blog Oluştur"
         },
         "name": {
           "tr": {
-            "label": "Blog Name",
-            "placeholder": "Enter blog name"
+            "label": "Blog Adı",
+            "placeholder": "Blog adını giriniz"
           },
           "en": {
-            "label": "Blog Name EN",
-            "placeholder": "Enter en blog name"
+            "label": "Blog Adı (EN)",
+            "placeholder": "İngilizce blog adını giriniz"
           }
         },
         "document": {
           "tr": {
-            "label": "Document",
-            "placeholder": "Enter document"
+            "label": "Döküman",
+            "placeholder": "Döküman giriniz"
           },
           "en": {
-            "label": "Document EN",
-            "placeholder": "Enter en document"
+            "label": "Döküman (EN)",
+            "placeholder": "İngilizce döküman giriniz"
           }
         },
         "category": {
-          "label": "Category Name",
-          "placeholder": "Enter category name"
+          "label": "Kategori Adı",
+          "placeholder": "Kategori adını giriniz"
         },
-        "save_btn": "Save",
-        "update_success_msg": "Blog Updated",
-        "create_success_msg": "Blog Added"
+        "save_btn": "Kaydet",
+        "update_success_msg": "Blog Güncellendi",
+        "create_success_msg": "Blog Eklendi"
       }
     },
     "category": {
-      "button_text": "Add Category",
-      "no_category": "No Category Found",
+      "button_text": "Kategori Ekle",
+      "no_category": "Kategori Bulunamadı",
       "modal": {
         "title": {
-          "update": "Update Category",
-          "create": "Create Category"
+          "update": "Kategoriyi Güncelle",
+          "create": "Kategori Oluştur"
         },
-        "save_btn": "Save",
+        "save_btn": "Kaydet",
         "name": {
-          "label": "Category Name",
-          "placeholder": "Enter category name"
+          "label": "Kategori Adı",
+          "placeholder": "Kategori adını giriniz"
         },
         "key": {
-          "label": "Category Key",
-          "placeholder": "Enter category key"
+          "label": "Kategori Anahtarı",
+          "placeholder": "Kategori anahtarını giriniz"
         },
-        "update_success_msg": "Category Updated",
-        "create_success_msg": "Category Added"
+        "update_success_msg": "Kategori Güncellendi",
+        "create_success_msg": "Kategori Eklendi"
       },
       "keys": {}
     },

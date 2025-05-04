@@ -39,11 +39,9 @@
       <img src="/images/banner2.jpeg" class="rounded-lg" alt="Banner" />
     </div>
   </div>
-  <Footer />
 </template>
 
 <script setup>
-import Footer from '@/views/about/_components/footer/Footer.vue';
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 
