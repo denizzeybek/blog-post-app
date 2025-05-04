@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-8">
+  <div class="flex flex-col gap-12">
     <CategoryHeader
       v-if="usersStore.isAuthenticated"
       @handleUpdateCategory="showCategoryModal = true"
@@ -12,8 +12,12 @@
           <div class="flex justify-center">
             <FText as="h2" :innerText="title" />
           </div>
-          <div class="flex gap-12">
-            <IconWrapper :icon="icon" />
+          <div class="flex flex-col lg:flex-row gap-12">
+            <div
+              class="w-full lg:w-fit flex justify-center items-center lg:items-start"
+            >
+              <IconWrapper :icon="icon" />
+            </div>
             <div class="flex-1 my-auto">
               <div
                 v-html="cleanHtml"
@@ -25,7 +29,7 @@
       </template>
     </Card>
 
-    <div>
+    <div class="flex flex-col gap-8">
       <div class="flex justify-center">
         <FText as="h1" :innerText="t('pages.category.related_blogs')" />
       </div>

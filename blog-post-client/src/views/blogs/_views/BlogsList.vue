@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4 w-full">
+  <div class="flex flex-col gap-8 w-full">
     <template v-if="showFilters">
       <div class="flex justify-end items-center gap-2">
         <FSelect

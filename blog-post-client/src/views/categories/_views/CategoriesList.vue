@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-8">
-    <div class="flex justify-end items-center gap-2">
+    <div class="flex justify-end items-center">
       <Button
         v-if="usersStore.isAuthenticated"
         :label="t('pages.category.button_text')"
