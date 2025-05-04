@@ -19,6 +19,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
+        
 
     - name: Deploy backend code to EC2
       working-directory: blog-post-server
