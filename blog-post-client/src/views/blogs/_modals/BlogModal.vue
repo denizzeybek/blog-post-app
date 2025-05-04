@@ -58,6 +58,7 @@
           :loading="isSubmitting"
           type="submit"
           :label="t('pages.blogs.modal.save_btn')"
+          severity="info"
         />
       </div>
     </form>

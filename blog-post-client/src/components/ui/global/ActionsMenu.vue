@@ -6,6 +6,7 @@
       aria-haspopup="true"
       aria-controls="overlay_menu"
       label="Actions"
+      severity="info"
     >
     </Button>
 
@@ -28,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import type { MenuItem } from "primevue/menuitem";
+import { ref } from 'vue';
+import type { MenuItem } from 'primevue/menuitem';
 
 interface IProps {
   menuItems: MenuItem[];

@@ -27,6 +27,7 @@
         :label="t('pages.login.button_text')"
         icon="pi pi-user"
         class="w-full"
+        severity="info"
       />
     </form>
   </div>

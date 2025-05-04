@@ -11,7 +11,7 @@
     :style="{ width: '50rem' }"
   >
     <form class="flex flex-col gap-6" @submit="submitHandler">
-      <div class="flex gap-4 flex-1">
+      <div class="flex flex-col lg:flex-row gap-4 flex-1">
         <FInput
           class="grow"
           :label="t('pages.category.modal.categoryName.label')"
@@ -26,16 +26,7 @@
         />
       </div>
 
-      <div class="flex gap-4 flex-1">
-        <FInput
-          class="grow"
-          :label="t('pages.category.modal.categoryKey.label')"
-          name="categoryKey"
-          :placeholder="t('pages.category.modal.categoryKey.placeholder')"
-        />
-      </div>
-
-      <div class="flex gap-4 flex-1">
+      <div class="flex flex-col lg:flex-row gap-4 flex-1">
         <FInput
           class="grow"
           :label="t('pages.category.modal.categoryDetails.label')"
@@ -50,12 +41,28 @@
         />
       </div>
 
+      <div class="flex flex-col lg:flex-row gap-4 flex-1">
+        <FInput
+          class="grow"
+          :label="t('pages.category.modal.categoryKey.label')"
+          name="categoryKey"
+          :placeholder="t('pages.category.modal.categoryKey.placeholder')"
+        />
+        <FInput
+          class="grow"
+          :label="t('pages.category.modal.iconName.label')"
+          name="iconName"
+          :placeholder="t('pages.category.modal.iconName.placeholder')"
+        />
+      </div>
+
       <div class="flex w-50 justify-center">
         <Button
           :disabled="isSubmitting"
           :loading="isSubmitting"
           type="submit"
           :label="t('pages.category.modal.save_btn')"
+          severity="info"
         />
       </div>
     </form>
@@ -106,6 +113,7 @@ const validationSchema = object({
   enCategoryDetails: string().label(
     t('pages.category.modal.enCategoryDetails.label'),
   ),
+  iconName: string().label(t('pages.category.modal.iconName.label')),
 });
 
 const { handleSubmit, isSubmitting, resetForm } = useForm({
@@ -125,6 +133,7 @@ const submitHandler = handleSubmit(async (values) => {
       categoryKey: values.categoryKey,
       categoryDetails: values.categoryDetails,
       enCategoryDetails: values.enCategoryDetails,
+      iconName: values.iconName,
     };
 
     if (isEditing.value) {
@@ -150,6 +159,7 @@ const getInitialFormData = computed(() => {
     categoryKey: category?.categoryKey || '',
     categoryDetails: category?.categoryDetails || '',
     enCategoryDetails: category?.enCategoryDetails || '',
+    iconName: category?.iconName || '',
   };
 });
 

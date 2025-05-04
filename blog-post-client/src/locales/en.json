@@ -61,10 +61,11 @@
       "blogType": {
         "placeholder": "Select blog name"
       },
+      "title": "Blogs",
       "name": "Enter blog name",
       "button_text": "Add Blog",
       "no_blog": "No Blogs Found",
-      "all_categories": "All Categories",
+      "all_blogs": "All Categories",
       "modal": {
         "title": {
           "update": "Update Blog",
@@ -100,8 +101,10 @@
       }
     },
     "category": {
+      "title": "Our Services",
       "button_text": "Add Category",
       "no_category": "No Category Found",
+      "related_blogs": "Related Blogs",
       "modal": {
         "title": {
           "update": "Update Category",
@@ -127,6 +130,10 @@
         "enCategoryDetails": {
           "label": "English Category Details",
           "placeholder": "Enter English category details"
+        },
+        "iconName": {
+          "label": "Icon Name",
+          "placeholder": "Ex: pi pi-user"
         },
         "update_success_msg": "Category Updated",
         "create_success_msg": "Category Added"

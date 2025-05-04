@@ -5,7 +5,7 @@
       @click="toggle"
       outlined
       aria-haspopup="true"
-      severity="secondary"
+      severity="info"
       aria-controls="overlay_menu"
     >
       <span class="pi pi-ellipsis-v"></span>
@@ -32,9 +32,9 @@
 </template>
 
 <script setup lang="ts">
-import type { EOptionsDropdown } from "@/enums/optionsDropdown.enum";
-import { ref } from "vue";
-import Menu from "primevue/menu";
+import type { EOptionsDropdown } from '@/enums/optionsDropdown.enum';
+import { ref } from 'vue';
+import Menu from 'primevue/menu';
 
 interface IOption {
   label: string;
@@ -52,7 +52,7 @@ interface IProps {
 defineProps<IProps>();
 
 interface IEmits {
-  (event: "optionClick", option: EOptionsDropdown): void;
+  (event: 'optionClick', option: EOptionsDropdown): void;
 }
 
 const emit = defineEmits<IEmits>();
@@ -64,7 +64,7 @@ const toggle = (event) => {
 };
 
 const handleOptionClick = (value: EOptionsDropdown) => {
-  emit("optionClick", value);
+  emit('optionClick', value);
 };
 </script>
 

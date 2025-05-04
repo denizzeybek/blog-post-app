@@ -67,6 +67,7 @@ exports.createCategory = async (req, res) => {
     categoryKey,
     categoryDetails,
     enCategoryDetails,
+    iconName,
   } = req.body;
 
   try {
@@ -76,6 +77,7 @@ exports.createCategory = async (req, res) => {
       categoryKey,
       categoryDetails,
       enCategoryDetails,
+      iconName,
     });
 
     await newCategory.save();
@@ -90,12 +92,26 @@ exports.createCategory = async (req, res) => {
 // Kategori güncelleme
 exports.updateCategory = async (req, res) => {
   const { id } = req.params;
-  const { name } = req.body;
+  const {
+    categoryName,
+    enCategoryName,
+    categoryKey,
+    categoryDetails,
+    enCategoryDetails,
+    iconName, // ← burada eklendi
+  } = req.body;
 
   try {
     const updatedCategory = await Category.findByIdAndUpdate(
       id,
-      { name },
+      {
+        categoryName,
+        enCategoryName,
+        categoryKey,
+        categoryDetails,
+        enCategoryDetails,
+        iconName, // ← burada eklendi
+      },
       { new: true, runValidators: true },
     );
 
@@ -103,17 +119,18 @@ exports.updateCategory = async (req, res) => {
       return res.status(404).json({ message: 'Category not found.' });
     }
 
-    // Update related blogs' category name
+    // Bloglarla ilgili bir güncelleme varsa burada devam edebilir
     await Blog.updateMany(
       { category: id },
-      { $set: { 'category.name': updatedCategory.name } },
+      { $set: { 'category.categoryName': updatedCategory.categoryName } },
     );
 
     res.status(200).json(updatedCategory);
   } catch (error) {
-    res.status(400).json({ message: 'Error updating category.', error });
+    res.status(400).json({ message: 'Kategori güncellenirken hata oluştu.', error });
   }
 };
+
 
 // Kategori silme
 exports.deleteCategory = async (req, res) => {

@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, onMounted } from 'vue';
 import MegaMenu from 'primevue/megamenu';
 import { ERouteNames } from '@/router/routeNames.enum';
 import { useUsersStore } from '@/stores/users';
@@ -41,9 +41,13 @@ import { useAuthStore } from '@/stores/auth';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { languageOptions, type ILanguageOption } from '@/constants/languages';
-import { setI18nLanguage, type MessageSchema } from '@/plugins/i18n';
+import {
+  setI18nLanguage,
+  type MessageSchema,
+  type Language,
+} from '@/plugins/i18n';
+import { EStorageKeys } from '@/constants/storageKeys';
 
-const { locale } = useI18n();
 const i18n = useI18n<{ message: MessageSchema }>();
 const { t } = i18n;
 
@@ -59,8 +63,10 @@ interface IEmits {
 defineEmits<IEmits>();
 
 const language = ref<ILanguageOption>(
-  languageOptions.find((option) => option.value === locale.value) ??
-    languageOptions[0],
+  languageOptions.find(
+    (option) =>
+      option.value === (localStorage.getItem(EStorageKeys.LANG) ?? 'en'),
+  ) ?? languageOptions[0],
 );
 
 const items = computed(() => {
@@ -111,4 +117,9 @@ watch(
   },
   { deep: true },
 );
+
+onMounted(() => {
+  const lang = localStorage.getItem(EStorageKeys.LANG) ?? 'en';
+  setI18nLanguage(lang as Language);
+});
 </script>

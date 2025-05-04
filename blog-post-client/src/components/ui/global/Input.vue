@@ -36,7 +36,7 @@
         @click="adjustInput(1)"
         icon="pi pi-plus"
         outlined
-        severity="secondary"
+        severity="info"
         class="!min-w-[40px]"
       />
     </div>
@@ -64,6 +64,7 @@
           icon="pi pi-plus"
           class="flex-1"
           outlined
+          severity="info"
         />
       </div>
     </ul>
@@ -74,9 +75,9 @@
 </template>
 
 <script setup lang="ts">
-import type { InputTextProps } from "primevue/inputtext";
-import { ref, computed, type InputHTMLAttributes, onMounted } from "vue";
-import { useField } from "vee-validate";
+import type { InputTextProps } from 'primevue/inputtext';
+import { ref, computed, type InputHTMLAttributes, onMounted } from 'vue';
+import { useField } from 'vee-validate';
 
 interface IProps {
   id: string;
@@ -88,7 +89,7 @@ interface IProps {
   errorMessage?: string;
   customEvents?: Record<string, (e: Event) => any>;
   transformValue?: (value: InputEvent) => unknown;
-  list?: InputHTMLAttributes["list"];
+  list?: InputHTMLAttributes['list'];
   modelValue?: string;
   isValid?: boolean;
   disabled?: boolean;
@@ -99,16 +100,16 @@ interface IProps {
 }
 
 const props = withDefaults(defineProps<IProps>(), {
-  type: "text",
+  type: 'text',
   disabled: false,
-  placeholder: "",
+  placeholder: '',
   unstyled: false,
   showAdjustmentButtons: false,
   isReturnNumber: false,
 });
 
 interface IEmits {
-  (event: "updateList", value: string): void;
+  (event: 'updateList', value: string): void;
 }
 const emit = defineEmits<IEmits>();
 
@@ -144,7 +145,7 @@ const selectOption = (option: string) => {
 const addNewOption = () => {
   const option = value.value as string;
   filteredOptions.value.push(option);
-  emit("updateList", option);
+  emit('updateList', option);
   selectOption(option);
 };
 

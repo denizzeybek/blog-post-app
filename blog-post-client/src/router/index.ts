@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { ERouteNames } from "./routeNames.enum";
 import routes from "./routes";
 import axios from "axios";
+import { useAuthStore } from '@/stores/auth';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,6 +15,7 @@ const router = createRouter({
 // GUARD
 router.beforeEach(async (to, from, next) => {
   const usersStore = useUsersStore();
+  const authStore = useAuthStore();
 
   let token = localStorage.getItem(EStorageKeys.TOKEN);
   const { requiresAuth, requiresUnAuth, isPublic } = to.meta;
@@ -22,6 +24,7 @@ router.beforeEach(async (to, from, next) => {
     try {
       await usersStore.fetchUser(token);
     } catch (error: any) {
+      authStore.logout();
       console.error(error);
     }
   }

@@ -21,6 +21,10 @@ const categorySchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  iconName: {
+    type: String, // Örneğin: 'pi pi-home' veya 'fa fa-book'
+    default: 'pi pi-user',
+  },
   createdAt: {
     type: Date,
     default: Date.now,

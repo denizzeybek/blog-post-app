@@ -4,7 +4,7 @@
       <PageHeader @drawerChange="visible = $event" />
     </div>
     <div class="mt-[101px] flex flex-col flex-grow w-full 3xl:items-center">
-      <div class="w-full relative max-w-7xl flex-grow">
+      <div class="w-full relative flex-grow">
         <PageWrapper>
           <RouterView />
         </PageWrapper>

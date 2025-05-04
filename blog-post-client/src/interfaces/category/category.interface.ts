@@ -6,6 +6,7 @@ export interface ICategory {
   categoryDetails?: string;
   enCategoryDetails?: string;
   createdAt: string;
+  iconName: string;
 }
 
 export interface ICategoryDTO {
@@ -14,4 +15,5 @@ export interface ICategoryDTO {
   categoryKey: string;
   categoryDetails?: string;
   enCategoryDetails?: string;
+  iconName: string;
 }

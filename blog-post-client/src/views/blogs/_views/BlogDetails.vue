@@ -1,7 +1,18 @@
 <template>
-  <div class="m-auto">
-    <div v-html="cleanHtml"></div>
-  </div>
+  <Card>
+    <template #content>
+      <Skeleton v-if="isLoading" width="100%" height="12rem" />
+
+      <div v-else class="flex gap-12">
+        <div class="flex-1 my-auto">
+          <div
+            v-html="cleanHtml"
+            class="text-gray-800 leading-relaxed space-y-4"
+          ></div>
+        </div>
+      </div>
+    </template>
+  </Card>
 </template>
 
 <script setup lang="ts">
@@ -16,6 +27,7 @@ const route = useRoute();
 
 const showUpdateModal = ref(false);
 const updateKey = ref(0);
+const isLoading = ref(false);
 
 const currentDocument = computed(() => {
   if (locale.value === 'tr') {
@@ -91,7 +103,9 @@ const fetchBlog = async () => {
 };
 
 const fetchAll = async () => {
+  isLoading.value = true;
   await fetchBlog();
+  isLoading.value = false;
 };
 
 watch(

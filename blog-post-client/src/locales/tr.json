@@ -5,7 +5,7 @@
     "logo": "NK Hukuk ve Danışmanlık",
     "header": {
       "contact": "İletişim",
-      "blogs": "Bloglar",
+      "blogs": "Makaleler",
       "login": "Giriş Yap",
       "categories": "Kategoriler",
       "logout": "Çıkış Yap"
@@ -59,25 +59,26 @@
     },
     "blogs": {
       "blogType": {
-        "placeholder": "Blog adını seçiniz"
+        "placeholder": "Makale adını seçiniz"
       },
-      "name": "Blog adını giriniz",
-      "button_text": "Blog Ekle",
-      "no_blog": "Blog Bulunamadı",
-      "all_categories": "Tüm Kategoriler",
+      "title": "Makaleler",
+      "name": "Makale adını giriniz",
+      "button_text": "Makale Ekle",
+      "no_blog": "Makale Bulunamadı",
+      "all_blogs": "Tüm Makaleler",
       "modal": {
         "title": {
           "update": "Blogu Güncelle",
-          "create": "Blog Oluştur"
+          "create": "Makale Oluştur"
         },
         "name": {
           "tr": {
-            "label": "Blog Adı",
-            "placeholder": "Blog adını giriniz"
+            "label": "Makale Adı",
+            "placeholder": "Makale adını giriniz"
           },
           "en": {
-            "label": "Blog Adı (EN)",
-            "placeholder": "İngilizce blog adını giriniz"
+            "label": "Makale Adı (EN)",
+            "placeholder": "İngilizce makale adını giriniz"
           }
         },
         "document": {
@@ -95,13 +96,15 @@
           "placeholder": "Kategori adını giriniz"
         },
         "save_btn": "Kaydet",
-        "update_success_msg": "Blog Güncellendi",
-        "create_success_msg": "Blog Eklendi"
+        "update_success_msg": "Makale Güncellendi",
+        "create_success_msg": "Makale Eklendi"
       }
     },
     "category": {
+      "title": "Hizmetlerimiz",
       "button_text": "Kategori Ekle",
       "no_category": "Kategori Bulunamadı",
+      "related_blogs": "İlgili Makaleler",
       "modal": {
         "title": {
           "update": "Kategoriyi Güncelle",
@@ -127,6 +130,10 @@
         "enCategoryDetails": {
           "label": "İngilizce Kategori Detayları",
           "placeholder": "İngilizce kategori detaylarını girin"
+        },
+        "iconName": {
+          "label": "İcon adı",
+          "placeholder": "Örnek: pi pi-user"
         },
         "update_success_msg": "Kategori Güncellendi",
         "create_success_msg": "Kategori Eklendi"
