@@ -66,6 +66,14 @@
       "button_text": "Add Blog",
       "no_blog": "No Blogs Found",
       "all_blogs": "All Categories",
+      "breadcrumb": {
+        "blogs": "Blogs",
+        "blog_details": "Blog Details"
+      },
+      "menu_items": {
+        "update": "Update Blog",
+        "delete": "Delete Blog"
+      },
       "modal": {
         "title": {
           "update": "Update Blog",
@@ -106,12 +114,12 @@
       "no_category": "No Category Found",
       "related_blogs": "Related Blogs",
       "breadcrumb": {
-        "blogs": "Blogs",
-        "blog_details": "Blog Details"
+        "blogs": "Categories",
+        "blog_details": "Category Details"
       },
       "menu_items": {
-        "update": "Update Blog",
-        "delete": "Delete Blog"
+        "update": "Update Category",
+        "delete": "Delete Category"
       },
       "modal": {
         "title": {

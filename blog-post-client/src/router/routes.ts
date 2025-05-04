@@ -81,7 +81,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           requiresUnAuth: true,
           title: ERouteNames.BlogDetails,
-          name: ERouteNames.BlogDetails,
+          name: ERouteNames.BlogList,
         },
       },
       {
@@ -101,7 +101,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           requiresUnAuth: true,
           title: ERouteNames.CategoryDetails,
-          name: ERouteNames.CategoryDetails,
+          name: ERouteNames.CategoriesList,
         },
       },
     ],

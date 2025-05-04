@@ -1,16 +1,25 @@
 <template>
-  <div class="flex flex-col gap-20">
+  <div class="flex flex-col gap-8">
+    <CategoryHeader
+      v-if="usersStore.isAuthenticated"
+      @handleUpdateCategory="showCategoryModal = true"
+    />
     <Card>
       <template #content>
         <Skeleton v-if="isLoading" width="100%" height="12rem" />
 
-        <div v-else class="flex gap-12">
-          <IconWrapper :icon="icon" />
-          <div class="flex-1 my-auto">
-            <div
-              v-html="cleanHtml"
-              class="text-gray-800 leading-relaxed space-y-4"
-            ></div>
+        <div v-else class="flex flex-col gap-12">
+          <div class="flex justify-center">
+            <FText as="h2" :innerText="title" />
+          </div>
+          <div class="flex gap-12">
+            <IconWrapper :icon="icon" />
+            <div class="flex-1 my-auto">
+              <div
+                v-html="cleanHtml"
+                class="text-gray-800 leading-relaxed space-y-4"
+              ></div>
+            </div>
           </div>
         </div>
       </template>
@@ -30,6 +39,12 @@
       </Card>
     </div>
   </div>
+  <CategoryModal
+    v-if="showCategoryModal"
+    v-model:open="showCategoryModal"
+    :data="categoriesStore.currentCategory"
+    @fetchCategories="fetchAll"
+  />
 </template>
 
 <script setup lang="ts">
@@ -42,18 +57,27 @@ import { useBlogsStore } from '@/stores/blogs';
 import type { IBlogFilterDTO } from '@/interfaces/blog/blog.interface';
 import { useFToast } from '@/composables/useFToast';
 import BlogsList from '@/views/blogs/_views/BlogsList.vue';
+import CategoryHeader from '../_components/CategoryHeader.vue';
+import { useUsersStore } from '@/stores/users';
+import CategoryModal from '../_components/_modals/CategoryModal.vue';
 
 const { locale, t } = useI18n();
-const categoriesStore = useCategoriesStore();
-const route = useRoute();
-const blogsStore = useBlogsStore();
 const { showErrorMessage } = useFToast();
+const route = useRoute();
+const usersStore = useUsersStore();
+const categoriesStore = useCategoriesStore();
+const blogsStore = useBlogsStore();
 
-const showUpdateModal = ref(false);
-const updateKey = ref(0);
 const isLoading = ref(false);
+const showCategoryModal = ref(false);
 
 const icon = computed(() => categoriesStore.currentCategory.iconName);
+const title = computed(() => {
+  if (locale.value === 'tr') {
+    return categoriesStore.currentCategory.categoryName;
+  }
+  return categoriesStore.currentCategory.enCategoryName;
+});
 
 const currentDocument = computed(() => {
   if (locale.value === 'tr') {
@@ -126,7 +150,6 @@ const extractStyleAndBody = (htmlString) => {
 const fetchCategory = async () => {
   try {
     await categoriesStore.find(route.params.id?.toString());
-    updateKey.value++;
   } catch (error: any) {
     showErrorMessage(error);
   }
@@ -149,16 +172,6 @@ const fetchAll = async () => {
   await fetchRelatedBlogs();
   isLoading.value = false;
 };
-
-watch(
-  showUpdateModal,
-  (newVal, oldVal) => {
-    if (oldVal === true && newVal === false) {
-      fetchCategory();
-    }
-  },
-  { immediate: true },
-);
 
 onMounted(() => {
   fetchAll();

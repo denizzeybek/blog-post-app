@@ -137,7 +137,7 @@ const submitHandler = handleSubmit(async (values) => {
     };
 
     if (isEditing.value) {
-      // await categoriesStore.update(props.data._id, payload);
+      await categoriesStore.update(props.data._id, payload);
       showSuccessMessage(t('pages.category.modal.update_success_msg'));
     } else {
       await categoriesStore.create(payload);

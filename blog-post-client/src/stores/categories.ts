@@ -55,29 +55,29 @@ export const useCategoriesStore = defineStore(EStoreNames.CATEGORIES, {
           });
       });
     },
-    // async remove(id: string) {
-    //   return new Promise((resolve, reject) => {
-    //     axios
-    //       .delete(`/categories/${id}`)
-    //       .then((response) => {
-    //         resolve(response);
-    //       })
-    //       .catch((error) => {
-    //         reject(error);
-    //       });
-    //   });
-    // },
-    // async update(id: string, payload: ICategoryDTO) {
-    //   return new Promise((resolve, reject) => {
-    //     axios
-    //       .put(`/categories/${id}`, payload)
-    //       .then((response) => {
-    //         resolve(response);
-    //       })
-    //       .catch((error) => {
-    //         reject(error);
-    //       });
-    //   });
-    // },
+    async remove(id: string) {
+      return new Promise((resolve, reject) => {
+        axios
+          .delete(`/categories/${id}`)
+          .then((response) => {
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+    async update(id: string, payload: ICategoryDTO) {
+      return new Promise((resolve, reject) => {
+        axios
+          .put(`/categories/${id}`, payload)
+          .then((response) => {
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
   },
 });

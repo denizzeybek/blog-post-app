@@ -8,12 +8,17 @@
       <template #content>
         <Skeleton v-if="isLoading" width="100%" height="12rem" />
 
-        <div v-else class="flex gap-12">
-          <div class="flex-1 my-auto">
-            <div
-              v-html="cleanHtml"
-              class="text-gray-800 leading-relaxed space-y-4"
-            ></div>
+        <div v-else class="flex flex-col gap-12">
+          <div class="flex justify-center">
+            <FText as="h2" :innerText="title" />
+          </div>
+          <div class="flex gap-12">
+            <div class="flex-1 my-auto">
+              <div
+                v-html="cleanHtml"
+                class="text-gray-800 leading-relaxed space-y-4"
+              ></div>
+            </div>
           </div>
         </div>
       </template>
@@ -46,6 +51,13 @@ const { showErrorMessage } = useFToast();
 const showUpdateModal = ref(false);
 const isLoading = ref(false);
 const showBlogModal = ref(false);
+
+const title = computed(() => {
+  if (locale.value === 'tr') {
+    return blogsStore.currentBlog.name;
+  }
+  return blogsStore.currentBlog.enName;
+});
 
 const currentDocument = computed(() => {
   if (locale.value === 'tr') {

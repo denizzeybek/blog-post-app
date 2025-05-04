@@ -105,7 +105,7 @@ const items = computed(() => {
   ].map((item) => {
     return {
       ...item,
-      isActive: route.name === item.route.name,
+      isActive: route.meta.name === item.route.name,
     };
   });
 });

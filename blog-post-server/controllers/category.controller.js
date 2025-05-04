@@ -98,7 +98,7 @@ exports.updateCategory = async (req, res) => {
     categoryKey,
     categoryDetails,
     enCategoryDetails,
-    iconName, // ← burada eklendi
+    iconName,
   } = req.body;
 
   try {
@@ -110,7 +110,7 @@ exports.updateCategory = async (req, res) => {
         categoryKey,
         categoryDetails,
         enCategoryDetails,
-        iconName, // ← burada eklendi
+        iconName,
       },
       { new: true, runValidators: true },
     );
@@ -119,15 +119,12 @@ exports.updateCategory = async (req, res) => {
       return res.status(404).json({ message: 'Category not found.' });
     }
 
-    // Bloglarla ilgili bir güncelleme varsa burada devam edebilir
-    await Blog.updateMany(
-      { category: id },
-      { $set: { 'category.categoryName': updatedCategory.categoryName } },
-    );
-
-    res.status(200).json(updatedCategory);
+    return res.status(200).json(updatedCategory);
   } catch (error) {
-    res.status(400).json({ message: 'Kategori güncellenirken hata oluştu.', error });
+    console.error("Kategori güncelleme hatası:", error);
+    return res
+      .status(400)
+      .json({ message: 'Kategori güncellenirken hata oluştu.', error: error.message });
   }
 };
 

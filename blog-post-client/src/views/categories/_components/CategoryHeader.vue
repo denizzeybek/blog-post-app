@@ -13,21 +13,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useUsersStore } from '@/stores/users';
 import { useBlogsStore } from '@/stores/blogs';
+import { useCategoriesStore } from '@/stores/categories';
 import { useI18n } from 'vue-i18n';
 import { ERouteNames } from '@/router/routeNames.enum';
 
 const { t } = useI18n();
 interface IEmits {
-  (event: 'handleUpdateBlog'): void;
+  (event: 'handleUpdateCategory'): void;
 }
 const emit = defineEmits<IEmits>();
 
 const usersStore = useUsersStore();
 const blogsStore = useBlogsStore();
+const categoriesStore = useCategoriesStore();
 const router = useRouter();
 const route = useRoute();
 
@@ -36,18 +38,20 @@ const menuItems = computed(() => [
     label: 'Items',
     items: [
       {
-        label: t('pages.blogs.menu_items.update'),
+        label: t('pages.category.menu_items.update'),
         icon: 'pi pi-cog',
         method: () => {
-          emit('handleUpdateBlog');
+          emit('handleUpdateCategory');
         },
       },
       {
-        label: t('pages.blogs.menu_items.delete'),
+        label: t('pages.category.menu_items.delete'),
         icon: 'pi pi-trash',
         method: async () => {
-          await blogsStore.remove(route.params.id.toString());
-          router.push({name: ERouteNames.BlogList});
+          await categoriesStore.remove(route.params.id.toString());
+          router.push({
+            name: ERouteNames.CategoriesList
+          });
         },
       },
     ],
@@ -62,8 +66,8 @@ const home = computed(() => {
 
 const items = computed(() => {
   return [
-    { label: t('pages.blogs.breadcrumb.blogs') },
-    { label: t('pages.blogs.breadcrumb.blog_details') },
+    { label: t('pages.category.breadcrumb.blogs') },
+    { label: t('pages.category.breadcrumb.blog_details') },
   ];
 });
 </script>
