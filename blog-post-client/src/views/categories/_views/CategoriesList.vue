@@ -54,6 +54,7 @@ import CategoryModal from '../_components/_modals/CategoryModal.vue';
 import { useI18n } from 'vue-i18n';
 import type { ICategory } from '@/interfaces/category/category.interface';
 import { ERouteNames } from '@/router/routeNames.enum';
+import { useName } from '@/composables/useName';
 
 const categoriesStore = useCategoriesStore();
 const usersStore = useUsersStore();
@@ -61,6 +62,7 @@ const router = useRouter();
 const { locale } = useI18n();
 const { t } = useI18n();
 const { showErrorMessage } = useFToast();
+const { getCategoryName } = useName();
 
 interface IProps {
   isLoading: boolean;
@@ -70,12 +72,6 @@ defineProps<IProps>();
 
 const showCategoryModal = ref(false);
 
-const getCategoryName = (category: ICategory) => {
-  if (locale.value === 'tr') {
-    return category.categoryName;
-  }
-  return category.enCategoryName;
-};
 const categoriesList = computed(() => categoriesStore.list);
 
 const fetchCategories = async () => {

@@ -9,7 +9,7 @@
     class="cursor-pointer"
   >
     <template #content>
-      <CardContent :name="blog?.name" :tag="blog?.category?.name" />
+      <CardContent :name="blog?.name" :tag="getCategoryName(blog?.category)" />
     </template>
   </Card>
 </template>
@@ -19,6 +19,7 @@ import { ERouteNames } from '@/router/routeNames.enum';
 import { useRouter } from 'vue-router';
 import { type IBlog } from '@/interfaces/blog/blog.interface';
 import CardContent from '@/components/ui/local/CardContent.vue';
+import { useName } from '@/composables/useName';
 
 interface IProps {
   blog: IBlog;
@@ -27,4 +28,6 @@ interface IProps {
 defineProps<IProps>();
 
 const router = useRouter();
+const { getCategoryName } = useName();
+
 </script>

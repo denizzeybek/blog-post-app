@@ -2,7 +2,7 @@
   "description": "Oopsie, where am I?",
   "backHome": "Get me back on track",
   "pages": {
-    "logo": "NK Law ve Danışmanlık",
+    "logo": "NK Law and Consulting",
     "header": {
       "contact": "Contact",
       "blogs": "Blogs",
@@ -134,7 +134,7 @@
       "keys": {}
     },
     "footer": {
-      "title": "© 2025 NK Hukuk ve Danışmanlık"
+      "title": "© 2025 NK Law and Consulting"
     }
   }
 }

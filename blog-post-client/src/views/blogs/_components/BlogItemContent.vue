@@ -6,19 +6,21 @@
       {{ blog?.name }}
     </div>
     <Tag>
-      <span class="uppercase">{{ blog?.category?.name }}</span>
+      <span class="uppercase">{{ getCategoryName(blog?.category) }}</span>
     </Tag>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { IBlog, IBlogModule } from '@/interfaces/blog/blog.interface';
+import { useName } from '@/composables/useName';
 
 interface IProps {
   blog: IBlog | IBlogModule;
 }
 
 defineProps<IProps>();
+const { getCategoryName } = useName();
 </script>
 
 <style scoped></style>

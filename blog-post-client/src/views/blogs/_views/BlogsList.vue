@@ -36,7 +36,7 @@
       >
         <template #content>
           <CardContent
-            :name="getCBlogName(blog)"
+            :name="getBlogName(blog)"
             :tag="getCategoryName(blog.category)"
           />
         </template>
@@ -69,7 +69,7 @@ import { useFToast } from '@/composables/useFToast';
 import CardContent from '@/components/ui/local/CardContent.vue';
 import type { IBlog, IBlogFilterDTO } from '@/interfaces/blog/blog.interface';
 import { useI18n } from 'vue-i18n';
-import type { ICategory } from '@/interfaces/category/category.interface';
+import { useName } from '@/composables/useName';
 
 const { t, locale } = useI18n();
 const usersStore = useUsersStore();
@@ -77,6 +77,7 @@ const categoriesStore = useCategoriesStore();
 const blogsStore = useBlogsStore();
 const router = useRouter();
 const { showErrorMessage } = useFToast();
+const { getCategoryName, getBlogName } = useName();
 
 const isLoading = ref(false);
 const showBlogModal = ref(false);
@@ -102,20 +103,6 @@ const blogTypeOptions = computed(() => {
     ...categoriesList,
   ];
 });
-
-const getCBlogName = (blog: IBlog) => {
-  if (locale.value === 'tr') {
-    return blog.name;
-  }
-  return blog.enName;
-};
-
-const getCategoryName = (category: ICategory) => {
-  if (locale.value === 'tr') {
-    return category.categoryName;
-  }
-  return category.enCategoryName;
-};
 
 const filterBlogs = async () => {
   try {
