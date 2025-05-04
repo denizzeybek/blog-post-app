@@ -9,10 +9,6 @@ const categorySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  categoryKey: {
-    type: String,
-    required: true,
-  },
   categoryDetails: {
     type: String,
     default: '',

@@ -11,15 +11,13 @@
     :style="{ width: '50rem' }"
   >
     <form class="flex flex-col gap-6" @submit="submitHandler">
-      <div class="flex gap-4 flex-1">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <FInput
           class="grow"
           name="name"
           :label="t('pages.blogs.modal.name.tr.label')"
           :placeholder="t('pages.blogs.modal.name.tr.placeholder')"
         />
-      </div>
-      <div class="flex gap-4 flex-1">
         <FInput
           class="grow"
           :label="t('pages.blogs.modal.name.en.label')"
@@ -27,29 +25,27 @@
           :placeholder="t('pages.blogs.modal.name.en.placeholder')"
         />
       </div>
-      <div class="flex gap-4 flex-1">
-        <FSelect
-          class="grow"
-          :label="t('pages.blogs.modal.category.label')"
-          name="category"
-          :placeholder="t('pages.blogs.modal.category.placeholder')"
-          :options="categoryTypeOptions"
-        />
-      </div>
-      <div class="flex gap-4 flex-1">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <FInput
           class="grow"
           :label="t('pages.blogs.modal.document.tr.label')"
           name="documentUrl"
           :placeholder="t('pages.blogs.modal.document.tr.placeholder')"
         />
-      </div>
-      <div class="flex gap-4 flex-1">
         <FInput
           class="grow"
           :label="t('pages.blogs.modal.document.en.label')"
           name="enDocumentUrl"
           :placeholder="t('pages.blogs.modal.document.en.placeholder')"
+        />
+      </div>
+      <div class="grid grid-cols-1">
+        <FSelect
+          class="grow"
+          :label="t('pages.blogs.modal.category.label')"
+          name="category"
+          :placeholder="t('pages.blogs.modal.category.placeholder')"
+          :options="categoryTypeOptions"
         />
       </div>
       <div class="flex w-50 justify-center">

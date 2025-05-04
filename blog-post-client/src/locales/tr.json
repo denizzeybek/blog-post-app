@@ -1,23 +1,23 @@
 {
-  "description": "Hoppa, neredeyim ben?",
-  "backHome": "Beni geri götür",
+  "description": "Aman! Neredeyim ben?",
+  "backHome": "Beni ana sayfaya götür",
   "pages": {
     "logo": "NK Hukuk ve Danışmanlık",
     "header": {
       "contact": "İletişim",
       "blogs": "Makaleler",
       "login": "Giriş Yap",
-      "categories": "Kategoriler",
+      "categories": "Hizmet Alanlarımız",
       "logout": "Çıkış Yap"
     },
     "login": {
       "email": {
         "label": "E-posta",
-        "placeholder": "E-posta giriniz"
+        "placeholder": "E-posta girin"
       },
       "password": {
         "label": "Şifre",
-        "placeholder": "Şifre giriniz"
+        "placeholder": "Şifre girin"
       },
       "button_text": "Giriş Yap",
       "success_msg": "Giriş Yapıldı!"
@@ -25,8 +25,8 @@
     "dashboard": {
       "banner": {
         "title": "Avukat Nazlı Kaçar<br/>Hukuk & Danışmanlık",
-        "description": "Nazlı Kaçar, 2021 yılında İstanbul Beykent Üniversitesi'nden yüksek onur derecesiyle mezun olmuştur. 2021-2023 yılları arasında İstanbul Barosu'na bağlı olarak İstanbul’da avukatlık yapmıştır. 2023 yılında Kuşadası'nda NK Hukuk ve Danışmanlık adında kendi ofisini açarak hukuki hizmet vermeye devam etmektedir.",
-        "description_2": "Nazlı Kaçar, Aydın Barosu’na kayıtlı bir avukattır.",
+        "description": "Nazlı Kaçar, 2021 yılında İstanbul Beykent Üniversitesi'nden yüksek onur derecesiyle mezun olmuştur. 2021 - 2023 yılları arasında İstanbul Barosu’na bağlı olarak İstanbul’da avukatlık yapmıştır. 2023 yılında Kuşadası’nda NK Hukuk ve Danışmanlık adını taşıyan kendi ofisini açmış ve burada hukuki hizmet vermeye devam etmektedir.",
+        "description_2": "Nazlı Kaçar, Aydın Barosu'na kayıtlı bir avukattır.",
         "list": {
           "school": {
             "title": "Eğitim",
@@ -51,7 +51,7 @@
     },
     "contact": {
       "title": "Kuşadası Ofisi",
-      "address": "Aydın, Kuşadası, Türkmen Mah., İstiklal Cad., 2B",
+      "address": "Türkmen Mah. İsmet İnönü BLV. Pancer Apt. <br/> No:3 Kat:2 Daire:4 <br/> Kuşadası/AYDIN",
       "phone": "+90 531 760 60 55",
       "banner": {
         "title": "Bize Ulaşın"
@@ -59,55 +59,16 @@
     },
     "blogs": {
       "blogType": {
-        "placeholder": "Makale adını seçiniz"
+        "placeholder": "Makale adı seçin"
       },
       "title": "Makaleler",
-      "name": "Makale adını giriniz",
+      "name": "Makale adını girin",
       "button_text": "Makale Ekle",
       "no_blog": "Makale Bulunamadı",
       "all_blogs": "Tüm Makaleler",
-      "modal": {
-        "title": {
-          "update": "Blogu Güncelle",
-          "create": "Makale Oluştur"
-        },
-        "name": {
-          "tr": {
-            "label": "Makale Adı",
-            "placeholder": "Makale adını giriniz"
-          },
-          "en": {
-            "label": "Makale Adı (EN)",
-            "placeholder": "İngilizce makale adını giriniz"
-          }
-        },
-        "document": {
-          "tr": {
-            "label": "Döküman",
-            "placeholder": "Döküman giriniz"
-          },
-          "en": {
-            "label": "Döküman (EN)",
-            "placeholder": "İngilizce döküman giriniz"
-          }
-        },
-        "category": {
-          "label": "Kategori Adı",
-          "placeholder": "Kategori adını giriniz"
-        },
-        "save_btn": "Kaydet",
-        "update_success_msg": "Makale Güncellendi",
-        "create_success_msg": "Makale Eklendi"
-      }
-    },
-    "category": {
-      "title": "Hizmetlerimiz",
-      "button_text": "Kategori Ekle",
-      "no_category": "Kategori Bulunamadı",
-      "related_blogs": "İlgili Makaleler",
       "breadcrumb": {
         "blogs": "Makaleler",
-        "blog_details": "Makale Detayı"
+        "blog_details": "Makale Detayları"
       },
       "menu_items": {
         "update": "Makaleyi Güncelle",
@@ -115,38 +76,80 @@
       },
       "modal": {
         "title": {
-          "update": "Kategoriyi Güncelle",
-          "create": "Kategori Oluştur"
+          "update": "Makaleyi Güncelle",
+          "create": "Makale Oluştur"
+        },
+        "name": {
+          "tr": {
+            "label": "Makale Adı",
+            "placeholder": "Makale adını girin"
+          },
+          "en": {
+            "label": "Makale Adı (İngilizce)",
+            "placeholder": "İngilizce makale adını girin"
+          }
+        },
+        "document": {
+          "tr": {
+            "label": "Belge",
+            "placeholder": "Belge girin"
+          },
+          "en": {
+            "label": "Belge (İngilizce)",
+            "placeholder": "İngilizce belge girin"
+          }
+        },
+        "category": {
+          "label": "Hizmet Alanı Adı",
+          "placeholder": "Hizmet alanı adını girin"
+        },
+        "save_btn": "Kaydet",
+        "update_success_msg": "Makale Güncellendi",
+        "create_success_msg": "Makale Eklendi"
+      }
+    },
+    "category": {
+      "title": "Hizmet Alanlarımız",
+      "button_text": "Hizmet Alanı Ekle",
+      "no_category": "Hizmet Alanı Bulunamadı",
+      "related_blogs": "İlgili Makaleler",
+      "breadcrumb": {
+        "blogs": "Hizmet Alanlarımız",
+        "blog_details": "Hizmet Alanı Detayları"
+      },
+      "menu_items": {
+        "update": "Hizmet Alanını Güncelle",
+        "delete": "Hizmet Alanını Sil"
+      },
+      "modal": {
+        "title": {
+          "update": "Hizmet Alanını Güncelle",
+          "create": "Hizmet Alanı Oluştur"
         },
         "save_btn": "Kaydet",
         "categoryName": {
-          "label": "Kategori Adı",
-          "placeholder": "Kategori adı girin"
+          "label": "Hizmet Alanı Adı",
+          "placeholder": "Hizmet alanı adını girin"
         },
         "enCategoryName": {
-          "label": "İngilizce Kategori Adı",
-          "placeholder": "İngilizce kategori adı girin"
-        },
-        "categoryKey": {
-          "label": "Kategori Anahtarı",
-          "placeholder": "Kategori anahtarı girin"
+          "label": "Hizmet Alanı Adı (İngilizce)",
+          "placeholder": "İngilizce hizmet alanı adını girin"
         },
         "categoryDetails": {
-          "label": "Kategori Detayları",
-          "placeholder": "Kategori detaylarını girin"
+          "label": "Hizmet Alanı Detayları",
+          "placeholder": "Hizmet alanı detaylarını girin"
         },
         "enCategoryDetails": {
-          "label": "İngilizce Kategori Detayları",
-          "placeholder": "İngilizce kategori detaylarını girin"
+          "label": "Hizmet Alanı Detayları (İngilizce)",
+          "placeholder": "İngilizce hizmet alanı detaylarını girin"
         },
         "iconName": {
-          "label": "İcon adı",
-          "placeholder": "Örnek: pi pi-user"
+          "label": "Simge Adı",
+          "placeholder": "Örn: pi pi-user"
         },
-        "update_success_msg": "Kategori Güncellendi",
-        "create_success_msg": "Kategori Eklendi"
-      },
-      "keys": {}
+        "update_success_msg": "Hizmet Alanı Güncellendi",
+        "create_success_msg": "Hizmet Alanı Eklendi"
+      }
     },
     "footer": {
       "title": "© 2025 NK Hukuk ve Danışmanlık"

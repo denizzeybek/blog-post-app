@@ -51,7 +51,7 @@
     },
     "contact": {
       "title": "Kuşadası Office",
-      "address": "Aydin, Kusadasi, Türkmen Mah., İstiklal Cad., 2B",
+      "address": "Türkmen Mah. İsmet İnönü BLV. Pancer Apt. <br/> No:3 Kat:2 Daire:4 <br/> Kuşadası/AYDIN",
       "phone": "+90 531 760 60 55",
       "banner": {
         "title": "Contact Us"
@@ -65,7 +65,7 @@
       "name": "Enter blog name",
       "button_text": "Add Blog",
       "no_blog": "No Blogs Found",
-      "all_blogs": "All Categories",
+      "all_blogs": "All Blogs",
       "breadcrumb": {
         "blogs": "Blogs",
         "blog_details": "Blog Details"
@@ -109,7 +109,7 @@
       }
     },
     "category": {
-      "title": "Our Services",
+      "title": "Categories",
       "button_text": "Add Category",
       "no_category": "No Category Found",
       "related_blogs": "Related Blogs",
@@ -134,10 +134,6 @@
         "enCategoryName": {
           "label": "English Category Name",
           "placeholder": "Enter English category name"
-        },
-        "categoryKey": {
-          "label": "Category Key",
-          "placeholder": "Enter category key"
         },
         "categoryDetails": {
           "label": "Category Details",

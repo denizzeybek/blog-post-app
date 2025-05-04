@@ -11,7 +11,7 @@
     :style="{ width: '50rem' }"
   >
     <form class="flex flex-col gap-6" @submit="submitHandler">
-      <div class="flex flex-col lg:flex-row gap-4 flex-1">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <FInput
           class="grow"
           :label="t('pages.category.modal.categoryName.label')"
@@ -26,7 +26,7 @@
         />
       </div>
 
-      <div class="flex flex-col lg:flex-row gap-4 flex-1">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <FInput
           class="grow"
           :label="t('pages.category.modal.categoryDetails.label')"
@@ -41,13 +41,7 @@
         />
       </div>
 
-      <div class="flex flex-col lg:flex-row gap-4 flex-1">
-        <FInput
-          class="grow"
-          :label="t('pages.category.modal.categoryKey.label')"
-          name="categoryKey"
-          :placeholder="t('pages.category.modal.categoryKey.placeholder')"
-        />
+      <div class="grid grid-cols-1 gap-4">
         <FInput
           class="grow"
           :label="t('pages.category.modal.iconName.label')"
@@ -104,9 +98,6 @@ const validationSchema = object({
   enCategoryName: string()
     .required()
     .label(t('pages.category.modal.enCategoryName.label')),
-  categoryKey: string()
-    .required()
-    .label(t('pages.category.modal.categoryKey.label')),
   categoryDetails: string().label(
     t('pages.category.modal.categoryDetails.label'),
   ),
@@ -130,7 +121,6 @@ const submitHandler = handleSubmit(async (values) => {
     const payload: ICategoryDTO = {
       categoryName: values.categoryName,
       enCategoryName: values.enCategoryName,
-      categoryKey: values.categoryKey,
       categoryDetails: values.categoryDetails,
       enCategoryDetails: values.enCategoryDetails,
       iconName: values.iconName,
@@ -156,7 +146,6 @@ const getInitialFormData = computed(() => {
   return {
     categoryName: category?.categoryName || '',
     enCategoryName: category?.enCategoryName || '',
-    categoryKey: category?.categoryKey || '',
     categoryDetails: category?.categoryDetails || '',
     enCategoryDetails: category?.enCategoryDetails || '',
     iconName: category?.iconName || '',

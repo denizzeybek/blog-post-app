@@ -64,7 +64,6 @@ exports.createCategory = async (req, res) => {
   const {
     categoryName,
     enCategoryName,
-    categoryKey,
     categoryDetails,
     enCategoryDetails,
     iconName,
@@ -74,7 +73,6 @@ exports.createCategory = async (req, res) => {
     const newCategory = new Category({
       categoryName,
       enCategoryName,
-      categoryKey,
       categoryDetails,
       enCategoryDetails,
       iconName,
@@ -95,7 +93,6 @@ exports.updateCategory = async (req, res) => {
   const {
     categoryName,
     enCategoryName,
-    categoryKey,
     categoryDetails,
     enCategoryDetails,
     iconName,
@@ -107,7 +104,6 @@ exports.updateCategory = async (req, res) => {
       {
         categoryName,
         enCategoryName,
-        categoryKey,
         categoryDetails,
         enCategoryDetails,
         iconName,
