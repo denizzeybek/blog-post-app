@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 flex flex-col gap-4">
+  <div class="flex flex-col justify-center gap-4 h-full">
     <div
       :class="center ? 'lg:text-center' : 'text-left'"
       class="text-3xl font-semibold"

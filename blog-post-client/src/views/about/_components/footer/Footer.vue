@@ -1,6 +1,5 @@
 <template>
-  <div class="w-full py-6 text-center text-sm text-gray-600">
-    <!-- <img src="/umit-mobilya-logo-beyaz.png" /> -->
+  <div class="w-full pt-18 text-center text-sm text-gray-600">
     <div class="text-md text-center">
       {{ t('pages.footer.title') }}
     </div>
@@ -12,5 +11,3 @@ import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 </script>
-
-<style scoped></style>

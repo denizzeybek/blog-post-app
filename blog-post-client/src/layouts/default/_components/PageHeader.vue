@@ -72,10 +72,6 @@ const language = ref<ILanguageOption>(
 const items = computed(() => {
   return [
     {
-      label: t('pages.header.contact'),
-      route: { name: ERouteNames.Contact },
-    },
-    {
       label: t('pages.header.blogs'),
       route: { name: ERouteNames.BlogList },
     },
@@ -90,6 +86,10 @@ const items = computed(() => {
     {
       label: t('pages.header.categories'),
       route: { name: ERouteNames.CategoriesList },
+    },
+    {
+      label: t('pages.header.contact'),
+      route: { name: ERouteNames.Contact },
     },
     ...(usersStore.isAuthenticated
       ? [
