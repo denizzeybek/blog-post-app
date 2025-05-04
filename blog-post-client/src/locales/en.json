@@ -105,6 +105,14 @@
       "button_text": "Add Category",
       "no_category": "No Category Found",
       "related_blogs": "Related Blogs",
+      "breadcrumb": {
+        "blogs": "Blogs",
+        "blog_details": "Blog Details"
+      },
+      "menu_items": {
+        "update": "Update Blog",
+        "delete": "Delete Blog"
+      },
       "modal": {
         "title": {
           "update": "Update Category",
@@ -137,8 +145,7 @@
         },
         "update_success_msg": "Category Updated",
         "create_success_msg": "Category Added"
-      },
-      "keys": {}
+      }
     },
     "footer": {
       "title": "© 2025 NK Law and Consulting"

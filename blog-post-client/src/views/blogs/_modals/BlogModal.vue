@@ -155,6 +155,12 @@ const submitHandler = handleSubmit(async (values) => {
   }
 });
 
+const selectedCategory = computed(() => {
+  return categoryTypeOptions.value.find(
+    (category) => category.value === props.data.category._id,
+  );
+});
+
 const getInitialFormData = computed(() => {
   const blog = props.data;
   return {
@@ -163,7 +169,7 @@ const getInitialFormData = computed(() => {
       enName: blog.enName,
       documentUrl: blog.documentUrl,
       enDocumentUrl: blog.enDocumentUrl,
-      category: { name: blog.category?.name, value: blog.category?._id },
+      category: selectedCategory.value,
     }),
   };
 });

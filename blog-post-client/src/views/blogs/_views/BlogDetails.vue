@@ -1,33 +1,51 @@
 <template>
-  <Card>
-    <template #content>
-      <Skeleton v-if="isLoading" width="100%" height="12rem" />
+  <div class="flex flex-col gap-8">
+    <BlogHeader
+      v-if="usersStore.isAuthenticated"
+      @handleUpdateBlog="showBlogModal = true"
+    />
+    <Card>
+      <template #content>
+        <Skeleton v-if="isLoading" width="100%" height="12rem" />
 
-      <div v-else class="flex gap-12">
-        <div class="flex-1 my-auto">
-          <div
-            v-html="cleanHtml"
-            class="text-gray-800 leading-relaxed space-y-4"
-          ></div>
+        <div v-else class="flex gap-12">
+          <div class="flex-1 my-auto">
+            <div
+              v-html="cleanHtml"
+              class="text-gray-800 leading-relaxed space-y-4"
+            ></div>
+          </div>
         </div>
-      </div>
-    </template>
-  </Card>
+      </template>
+    </Card>
+  </div>
+  <BlogModal
+    v-if="showBlogModal"
+    v-model:open="showBlogModal"
+    :data="blogsStore.currentBlog"
+    @fetchBlogs="fetchBlog"
+  />
 </template>
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
+import { useUsersStore } from '@/stores/users';
 import { useBlogsStore } from '@/stores/blogs';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import BlogHeader from '../_components/BlogHeader.vue';
+import BlogModal from '@/views/blogs/_modals/BlogModal.vue';
+import { useFToast } from '@/composables/useFToast';
 
 const { locale } = useI18n();
+const usersStore = useUsersStore();
 const blogsStore = useBlogsStore();
 const route = useRoute();
+const { showErrorMessage } = useFToast();
 
 const showUpdateModal = ref(false);
-const updateKey = ref(0);
 const isLoading = ref(false);
+const showBlogModal = ref(false);
 
 const currentDocument = computed(() => {
   if (locale.value === 'tr') {
@@ -98,8 +116,11 @@ const extractStyleAndBody = (htmlString) => {
 };
 
 const fetchBlog = async () => {
-  await blogsStore.find(route.params.id?.toString());
-  updateKey.value++;
+  try {
+    await blogsStore.find(route.params.id?.toString());
+  } catch (error: any) {
+    showErrorMessage(error);
+  }
 };
 
 const fetchAll = async () => {

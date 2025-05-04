@@ -105,6 +105,14 @@
       "button_text": "Kategori Ekle",
       "no_category": "Kategori Bulunamadı",
       "related_blogs": "İlgili Makaleler",
+      "breadcrumb": {
+        "blogs": "Makaleler",
+        "blog_details": "Makale Detayı"
+      },
+      "menu_items": {
+        "update": "Makaleyi Güncelle",
+        "delete": "Makaleyi Sil"
+      },
       "modal": {
         "title": {
           "update": "Kategoriyi Güncelle",

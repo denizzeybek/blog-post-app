@@ -13,16 +13,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { useUsersStore } from "@/stores/users";
-import { useBlogsStore } from "@/stores/blogs";
+import { computed, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { useUsersStore } from '@/stores/users';
+import { useBlogsStore } from '@/stores/blogs';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 interface IEmits {
-  (event: "handleUpdateBlog"): void;
-  (event: "handleUpdateModal"): void;
-  (event: "handleImagesModal"): void;
-  (event: "handleEditImagesModal"): void;
+  (event: 'handleUpdateBlog'): void;
 }
 const emit = defineEmits<IEmits>();
 
@@ -31,45 +30,23 @@ const blogsStore = useBlogsStore();
 const router = useRouter();
 const route = useRoute();
 
-const menuItems = ref([
+const menuItems = computed(() => [
   {
-    label: "Items",
+    label: 'Items',
     items: [
       {
-        label: "Makaleyi Güncelle",
-        icon: "pi pi-cog",
+        label: t('pages.category.menu_items.update'),
+        icon: 'pi pi-cog',
         method: () => {
-          emit("handleUpdateBlog");
+          emit('handleUpdateBlog');
         },
       },
-      // {
-      //   label: "Modülleri Güncelle",
-      //   icon: "pi pi-pencil",
-      //   method: () => {
-      //     emit("handleUpdateModal");
-      //   },
-      // },
-      // {
-      //   label: "Galeriye Resim Ekle",
-      //   icon: "pi pi-plus",
-      //   method: () => {
-      //     emit("handleImagesModal");
-      //   },
-      // },
-
-      // {
-      //   label: "Galeriyi Düzenle",
-      //   icon: "pi pi-pencil",
-      //   method: () => {
-      //     emit("handleEditImagesModal");
-      //   },
-      // },
       {
-        label: "Makaleyi Sil",
-        icon: "pi pi-trash",
+        label: t('pages.category.menu_items.delete'),
+        icon: 'pi pi-trash',
         method: async () => {
           await blogsStore.remove(route.params.id.toString());
-          router.push("/blogs");
+          router.push('/blogs');
         },
       },
     ],
@@ -78,11 +55,14 @@ const menuItems = ref([
 
 const home = computed(() => {
   return {
-    icon: "pi pi-home",
+    icon: 'pi pi-home',
   };
 });
 
 const items = computed(() => {
-  return [{ label: "Makaleler" }, { label: "Makale Detayı" }];
+  return [
+    { label: t('pages.category.breadcrumb.blogs') },
+    { label: t('pages.category.breadcrumb.blog_details') },
+  ];
 });
 </script>
