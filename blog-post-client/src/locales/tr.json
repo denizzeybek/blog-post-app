@@ -108,13 +108,25 @@
           "create": "Kategori Oluştur"
         },
         "save_btn": "Kaydet",
-        "name": {
+        "categoryName": {
           "label": "Kategori Adı",
-          "placeholder": "Kategori adını giriniz"
+          "placeholder": "Kategori adı girin"
         },
-        "key": {
+        "enCategoryName": {
+          "label": "İngilizce Kategori Adı",
+          "placeholder": "İngilizce kategori adı girin"
+        },
+        "categoryKey": {
           "label": "Kategori Anahtarı",
-          "placeholder": "Kategori anahtarını giriniz"
+          "placeholder": "Kategori anahtarı girin"
+        },
+        "categoryDetails": {
+          "label": "Kategori Detayları",
+          "placeholder": "Kategori detaylarını girin"
+        },
+        "enCategoryDetails": {
+          "label": "İngilizce Kategori Detayları",
+          "placeholder": "İngilizce kategori detaylarını girin"
         },
         "update_success_msg": "Kategori Güncellendi",
         "create_success_msg": "Kategori Eklendi"

@@ -34,9 +34,11 @@
         "
         class="cursor-pointer"
       >
-        <template #header> </template>
         <template #content>
-          <CardContent :name="blog.name" :tag="blog.category.name" />
+          <CardContent
+            :name="getCBlogName(blog)"
+            :tag="getCategoryName(blog.category)"
+          />
         </template>
       </Card>
     </div>
@@ -65,10 +67,11 @@ import BlogModal from '@/views/blogs/_modals/BlogModal.vue';
 import { useCategoriesStore } from '@/stores/categories';
 import { useFToast } from '@/composables/useFToast';
 import CardContent from '@/components/ui/local/CardContent.vue';
-import type { IBlogFilterDTO } from '@/interfaces/blog/blog.interface';
+import type { IBlog, IBlogFilterDTO } from '@/interfaces/blog/blog.interface';
 import { useI18n } from 'vue-i18n';
+import type { ICategory } from '@/interfaces/category/category.interface';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const usersStore = useUsersStore();
 const categoriesStore = useCategoriesStore();
 const blogsStore = useBlogsStore();
@@ -89,12 +92,30 @@ const productList = computed(() => {
 
 const blogTypeOptions = computed(() => {
   const categoriesList = categoriesStore.list?.map((category) => ({
-    name: category.name,
+    name:
+      locale.value === 'tr' ? category.categoryName : category.enCategoryName,
     value: category._id,
   }));
 
-  return [{ name: t('pages.blogs.all_categories'), value: null }, ...categoriesList];
+  return [
+    { name: t('pages.blogs.all_categories'), value: null },
+    ...categoriesList,
+  ];
 });
+
+const getCBlogName = (blog: IBlog) => {
+  if (locale.value === 'tr') {
+    return blog.name;
+  }
+  return blog.enName;
+};
+
+const getCategoryName = (category: ICategory) => {
+  if (locale.value === 'tr') {
+    return category.categoryName;
+  }
+  return category.enCategoryName;
+};
 
 const filterBlogs = async () => {
   try {
@@ -115,6 +136,10 @@ const filterBlogs = async () => {
 };
 
 watch([selectedFilter, typedName], filterBlogs, { immediate: true });
+
+watch(locale, () => {
+  selectedFilter.value.name = t('pages.blogs.all_categories');
+});
 
 onMounted(async () => {
   await categoriesStore.fetch();

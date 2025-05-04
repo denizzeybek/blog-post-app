@@ -1,45 +1,113 @@
 <template>
-  <div class="flex flex-col gap-4">
-    <div
-      v-if="blogList?.length"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full"
-    >
-      <template v-for="blog in blogList" :key="blog._id">
-        <BlogCard :blog="blog" />
-      </template>
-    </div>
-    <div v-else class="flex justify-center items-center h-96">
-      <EmptyCard />
-    </div>
+  <div class="m-auto">
+    <div v-html="cleanHtml"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { computed, onMounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useCategoriesStore } from '@/stores/categories';
-import { useBlogsStore } from '@/stores/blogs';
-import EmptyCard from '@/components/ui/local/EmptyCard.vue';
-import { useBlogDetails } from '@/views/blogs/_composables/useBlogDetails';
-import {useRoute} from 'vue-router';
-import BlogCard from '@/views/blogs/_components/BlogCard.vue';
 
-interface IProps {
-  isLoading: boolean;
-}
 
-defineProps<IProps>();
-
+const { locale } = useI18n();
 const categoriesStore = useCategoriesStore();
-const blogsStore = useBlogsStore();
-const { filterBlogs } = useBlogDetails();
 const route = useRoute();
 
-const blogList = computed(() => {
-  return blogsStore.list;
+const showUpdateModal = ref(false);
+const updateKey = ref(0);
+
+const currentDocument = computed(() => {
+  if (locale.value === 'tr') {
+    return categoriesStore.currentCategory.categoryDetails;
+  }
+  return categoriesStore.currentCategory.enCategoryDetails;
 });
 
-onMounted(async () => {
-  // await fetchCategoryDetails();
-  filterBlogs(null, route.params.id);
+const cleanHtml = computed(() => {
+  const { styleContent, bodyContent } = extractStyleAndBody(
+    currentDocument.value,
+  );
+  return inlineStyles(bodyContent, styleContent);
+});
+
+const inlineStyles = (bodyHtml, styleCss) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(bodyHtml, 'text/html');
+
+  const styleMap = {};
+
+  // 1. Style içindeki classları parse et (.className { ... })
+  const regex = /\.([a-zA-Z0-9_-]+)\s*\{([^}]+)\}/g;
+  let match;
+  while ((match = regex.exec(styleCss)) !== null) {
+    const className = match[1];
+    const styles = match[2].trim();
+    styleMap[className] = styles;
+  }
+
+  // 2. Body içindeki elemanları bul
+  Object.keys(styleMap).forEach((className) => {
+    const elements = doc.querySelectorAll(`.${className}`);
+    elements.forEach((el) => {
+      // Var olan inline style varsa üstüne ekleyelim
+      const existingStyle = el.getAttribute('style') || '';
+      el.setAttribute(
+        'style',
+        `${existingStyle} ${styleMap[className]}`.trim(),
+      );
+
+      // İstersen eski class'ı silebilirsin, ya da bırakabilirsin
+      el.classList.remove(className);
+    });
+  });
+
+  return doc.body.innerHTML;
+};
+
+const extractStyleAndBody = (htmlString) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+
+  const styleTags = doc.querySelectorAll('style');
+  let styleContent = '';
+
+  styleTags.forEach((style) => {
+    styleContent += style.innerHTML + '\n';
+    style.remove(); // style tag'ı dokümandan çıkarıyoruz, body daha temiz olsun diye
+  });
+
+  const bodyContent = doc.body.innerHTML;
+
+  return {
+    styleContent,
+    bodyContent,
+  };
+};
+
+const fetchBlog = async () => {
+  await categoriesStore.find(route.params.id?.toString());
+  updateKey.value++;
+};
+
+const fetchAll = async () => {
+  await fetchBlog();
+};
+
+watch(
+  showUpdateModal,
+  (newVal, oldVal) => {
+    if (oldVal === true && newVal === false) {
+      fetchBlog();
+    }
+  },
+  { immediate: true },
+);
+
+onMounted(() => {
+  fetchAll();
 });
 </script>
+
+<style lang="scss" scoped></style>

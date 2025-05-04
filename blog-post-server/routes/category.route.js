@@ -2,18 +2,22 @@
 
 const express = require('express');
 const {
-  getCategories,
+  getAllCategories,
   filterCategories,
   createCategory,
   updateCategory,
   deleteCategory,
+  getCategoryById,
 } = require('../controllers/category.controller');
 const { requireAuth } = require('../middleware/auth.middleware');
 
 const router = express.Router();
 
 // Tüm ürünleri listeleme
-router.get('/', getCategories);
+router.get('/', getAllCategories);
+
+// ürün detayı
+router.get('/:id', getCategoryById);
 
 // Ürünleri adıyla filtreleme
 router.get('/filter', filterCategories);

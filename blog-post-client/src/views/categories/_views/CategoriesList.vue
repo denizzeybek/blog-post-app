@@ -11,10 +11,19 @@
       v-if="categoriesList?.length"
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full"
     >
-      <Card v-for="category in categoriesList" :key="category._id">
-        <template #header> </template>
+      <Card
+        v-for="category in categoriesList"
+        :key="category._id"
+        @click="
+          router.push({
+            name: ERouteNames.CategoryDetails,
+            params: { id: category._id! },
+          })
+        "
+        class="cursor-pointer"
+      >
         <template #content>
-          <CardContent :name="category.name" />
+          <CardContent :name="getCategoryName(category)" />
         </template>
       </Card>
     </div>
@@ -36,8 +45,6 @@
 
 <script setup lang="ts">
 import { onMounted, computed, ref, watch } from 'vue';
-import { useBlogsStore } from '@/stores/blogs';
-import { ERouteNames } from '@/router/routeNames.enum';
 import { useRouter } from 'vue-router';
 import { useUsersStore } from '@/stores/users';
 import { useCategoriesStore } from '@/stores/categories';
@@ -45,12 +52,14 @@ import { useFToast } from '@/composables/useFToast';
 import CardContent from '@/components/ui/local/CardContent.vue';
 import CategoryModal from '../_components/_modals/CategoryModal.vue';
 import { useI18n } from 'vue-i18n';
+import type { ICategory } from '@/interfaces/category/category.interface';
+import { ERouteNames } from '@/router/routeNames.enum';
 
-const { t } = useI18n();
-const usersStore = useUsersStore();
 const categoriesStore = useCategoriesStore();
-const blogsStore = useBlogsStore();
+const usersStore = useUsersStore();
 const router = useRouter();
+const { locale } = useI18n();
+const { t } = useI18n();
 const { showErrorMessage } = useFToast();
 
 interface IProps {
@@ -61,10 +70,20 @@ defineProps<IProps>();
 
 const showCategoryModal = ref(false);
 
+const getCategoryName = (category: ICategory) => {
+  if (locale.value === 'tr') {
+    return category.categoryName;
+  }
+  return category.enCategoryName;
+};
 const categoriesList = computed(() => categoriesStore.list);
 
 const fetchCategories = async () => {
-  await categoriesStore.fetch();
+  try {
+    await categoriesStore.fetch();
+  } catch (error: any) {
+    showErrorMessage(error);
+  }
 };
 
 onMounted(async () => {

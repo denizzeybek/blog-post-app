@@ -11,6 +11,7 @@ import Contact from "@/views/contact/_views/Contact.vue";
 
 import Login from "@/views/auth/Login.vue";
 import CategoriesList from "@/views/categories/_views/CategoriesList.vue";
+import CategoryDetails from "@/views/categories/_views/CategoryDetails.vue";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -74,16 +75,6 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/blog/:categoryId/:blogId",
-        name: ERouteNames.BlogDetails,
-        component: BlogDetails,
-        meta: {
-          requiresUnAuth: true,
-          title: ERouteNames.BlogDetails,
-          name: ERouteNames.BlogDetails,
-        },
-      },
-      {
         path: "/blog/:id",
         name: ERouteNames.BlogDetails,
         component: BlogDetails,
@@ -98,9 +89,19 @@ const routes: RouteRecordRaw[] = [
         name: ERouteNames.CategoriesList,
         component: CategoriesList,
         meta: {
-          requiresAuth: true,
+          requiresUnAuth: true,
           title: ERouteNames.CategoriesList,
           name: ERouteNames.CategoriesList,
+        },
+      },
+      {
+        path: "/category/:id",
+        name: ERouteNames.CategoryDetails,
+        component: CategoryDetails,
+        meta: {
+          requiresUnAuth: true,
+          title: ERouteNames.CategoryDetails,
+          name: ERouteNames.CategoryDetails,
         },
       },
     ],

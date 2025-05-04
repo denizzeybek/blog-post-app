@@ -1,9 +1,17 @@
 export interface ICategory {
   _id: string;
-  name: string;
+  categoryName: string;
+  enCategoryName: string;
+  categoryKey: string;
+  categoryDetails?: string;
+  enCategoryDetails?: string;
   createdAt: string;
 }
 
 export interface ICategoryDTO {
-  name: string;
+  categoryName: string;
+  enCategoryName: string;
+  categoryKey: string;
+  categoryDetails?: string;
+  enCategoryDetails?: string;
 }

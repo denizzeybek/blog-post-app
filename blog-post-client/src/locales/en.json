@@ -108,13 +108,25 @@
           "create": "Create Category"
         },
         "save_btn": "Save",
-        "name": {
+        "categoryName": {
           "label": "Category Name",
           "placeholder": "Enter category name"
         },
-        "key": {
+        "enCategoryName": {
+          "label": "English Category Name",
+          "placeholder": "Enter English category name"
+        },
+        "categoryKey": {
           "label": "Category Key",
           "placeholder": "Enter category key"
+        },
+        "categoryDetails": {
+          "label": "Category Details",
+          "placeholder": "Enter category details"
+        },
+        "enCategoryDetails": {
+          "label": "English Category Details",
+          "placeholder": "Enter English category details"
         },
         "update_success_msg": "Category Updated",
         "create_success_msg": "Category Added"

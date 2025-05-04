@@ -14,19 +14,42 @@
       <div class="flex gap-4 flex-1">
         <FInput
           class="grow"
-          :label="t('pages.category.modal.name.label')"
-          name="name"
-          :placeholder="t('pages.category.modal.name.placeholder')"
+          :label="t('pages.category.modal.categoryName.label')"
+          name="categoryName"
+          :placeholder="t('pages.category.modal.categoryName.placeholder')"
+        />
+        <FInput
+          class="grow"
+          :label="t('pages.category.modal.enCategoryName.label')"
+          name="enCategoryName"
+          :placeholder="t('pages.category.modal.enCategoryName.placeholder')"
         />
       </div>
+
       <div class="flex gap-4 flex-1">
         <FInput
           class="grow"
-          :label="t('pages.category.modal.key.label')"
+          :label="t('pages.category.modal.categoryKey.label')"
           name="categoryKey"
-          :placeholder="t('pages.category.modal.key.placeholder')"
+          :placeholder="t('pages.category.modal.categoryKey.placeholder')"
         />
       </div>
+
+      <div class="flex gap-4 flex-1">
+        <FInput
+          class="grow"
+          :label="t('pages.category.modal.categoryDetails.label')"
+          name="categoryDetails"
+          :placeholder="t('pages.category.modal.categoryDetails.placeholder')"
+        />
+        <FInput
+          class="grow"
+          :label="t('pages.category.modal.enCategoryDetails.label')"
+          name="enCategoryDetails"
+          :placeholder="t('pages.category.modal.enCategoryDetails.placeholder')"
+        />
+      </div>
+
       <div class="flex w-50 justify-center">
         <Button
           :disabled="isSubmitting"
@@ -49,6 +72,7 @@ import type { ICategoryDTO } from '@/interfaces/category/category.interface';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
+
 interface IProps {
   data?: any;
 }
@@ -67,8 +91,21 @@ const open = defineModel<boolean>('open');
 const isEditing = computed(() => !!props.data);
 
 const validationSchema = object({
-  name: string().required().label(t('pages.category.modal.name.label')),
-  categoryKey: string().required().label(t('pages.category.modal.key.label')),
+  categoryName: string()
+    .required()
+    .label(t('pages.category.modal.categoryName.label')),
+  enCategoryName: string()
+    .required()
+    .label(t('pages.category.modal.enCategoryName.label')),
+  categoryKey: string()
+    .required()
+    .label(t('pages.category.modal.categoryKey.label')),
+  categoryDetails: string().label(
+    t('pages.category.modal.categoryDetails.label'),
+  ),
+  enCategoryDetails: string().label(
+    t('pages.category.modal.enCategoryDetails.label'),
+  ),
 });
 
 const { handleSubmit, isSubmitting, resetForm } = useForm({
@@ -82,12 +119,16 @@ const handleClose = () => {
 
 const submitHandler = handleSubmit(async (values) => {
   try {
-    const payload = {
-      name: values.name,
+    const payload: ICategoryDTO = {
+      categoryName: values.categoryName,
+      enCategoryName: values.enCategoryName,
       categoryKey: values.categoryKey,
-    } as ICategoryDTO;
+      categoryDetails: values.categoryDetails,
+      enCategoryDetails: values.enCategoryDetails,
+    };
+
     if (isEditing.value) {
-      // await categoriesStore.update(blogsStore.currentBlog._id ,payload);
+      // await categoriesStore.update(props.data._id, payload);
       showSuccessMessage(t('pages.category.modal.update_success_msg'));
     } else {
       await categoriesStore.create(payload);
@@ -104,14 +145,15 @@ const submitHandler = handleSubmit(async (values) => {
 const getInitialFormData = computed(() => {
   const category = props.data;
   return {
-    ...(category && {
-      name: category.name,
-      categoryKey: category.categoryKey,
-    }),
+    categoryName: category?.categoryName || '',
+    enCategoryName: category?.enCategoryName || '',
+    categoryKey: category?.categoryKey || '',
+    categoryDetails: category?.categoryDetails || '',
+    enCategoryDetails: category?.enCategoryDetails || '',
   };
 });
 
-onMounted(async () => {
+onMounted(() => {
   resetForm({
     values: getInitialFormData.value,
   });

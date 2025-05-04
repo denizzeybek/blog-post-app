@@ -1,26 +1,56 @@
 const Category = require('../models/category.model');
 const Blog = require('../models/blog.model');
 
-// Tüm kategorileri listeleme
-exports.getCategories = async (req, res) => {
+const getCategories = async (payload) => {
   try {
-    const categories = await Category.find();
-    res.status(200).json(categories);
+    // Build query object from payload
+    const { id, categoryName, enCategoryName } = payload || {};
+    const query = {
+      ...(id && { _id: id }),
+      ...(categoryName && { categoryName: new RegExp(categoryName, 'i') }),
+      ...(enCategoryName && {
+        enCategoryName: new RegExp(enCategoryName, 'i'),
+      }),
+    };
+
+    return await Category.find(query);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: 'Kategori bilgileri alınırken hata oluştu.', error });
+    console.error('Error in getCategories:', error);
+    throw new Error('Failed to fetch categories');
+  }
+};
+
+// Tüm ürünleri listeleme
+exports.getAllCategories = async (req, res) => {
+  try {
+    const categories = await getCategories();
+    res.status(201).json(categories);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getCategoryById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const category = await getCategories({ id });
+    if (category?.length) {
+      res.status(201).json(category[0]);
+    } else {
+      res.status(404).json({ message: 'Kategori bulunamadı' });
+    }
+  } catch (error) {
+    console.error('Error fetching blog(s):', error);
+    throw new Error('Failed to fetch blog(s). Please try again.');
   }
 };
 
 // Kategorileri filtreleme
 exports.filterCategories = async (req, res) => {
-  const { name } = req.body; // Query parametreleri
+  const { categoryName, enCategoryName } = req.body;
   try {
-    const filter = {};
-    if (name) filter.name = new RegExp(name, 'i'); // Case insensitive regex
-
-    const categories = await Category.find(filter);
+    // Call getBlogs with the name filter
+    const categories = await getCategories({ categoryName, enCategoryName });
     res.status(200).json(categories);
   } catch (error) {
     res
@@ -31,9 +61,23 @@ exports.filterCategories = async (req, res) => {
 
 // Yeni kategori ekleme
 exports.createCategory = async (req, res) => {
-  const { name, categoryKey } = req.body;
+  const {
+    categoryName,
+    enCategoryName,
+    categoryKey,
+    categoryDetails,
+    enCategoryDetails,
+  } = req.body;
+
   try {
-    const newCategory = new Category({ name, categoryKey });
+    const newCategory = new Category({
+      categoryName,
+      enCategoryName,
+      categoryKey,
+      categoryDetails,
+      enCategoryDetails,
+    });
+
     await newCategory.save();
     res.status(201).json(newCategory);
   } catch (error) {
@@ -52,7 +96,7 @@ exports.updateCategory = async (req, res) => {
     const updatedCategory = await Category.findByIdAndUpdate(
       id,
       { name },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
 
     if (!updatedCategory) {
@@ -62,7 +106,7 @@ exports.updateCategory = async (req, res) => {
     // Update related blogs' category name
     await Blog.updateMany(
       { category: id },
-      { $set: { 'category.name': updatedCategory.name } }
+      { $set: { 'category.name': updatedCategory.name } },
     );
 
     res.status(200).json(updatedCategory);

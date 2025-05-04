@@ -43,9 +43,9 @@ import { useI18n } from 'vue-i18n';
 import { languageOptions, type ILanguageOption } from '@/constants/languages';
 import { setI18nLanguage, type MessageSchema } from '@/plugins/i18n';
 
-const { locale } = useI18n()
-const i18n = useI18n<{ message: MessageSchema }>()
-const { t } = i18n
+const { locale } = useI18n();
+const i18n = useI18n<{ message: MessageSchema }>();
+const { t } = i18n;
 
 const authStore = useAuthStore();
 const usersStore = useUsersStore();
@@ -81,12 +81,12 @@ const items = computed(() => {
           },
         ]
       : []),
+    {
+      label: t('pages.header.categories'),
+      route: { name: ERouteNames.CategoriesList },
+    },
     ...(usersStore.isAuthenticated
       ? [
-          {
-            label: t('pages.header.categories'),
-            route: { name: ERouteNames.CategoriesList },
-          },
           {
             label: t('pages.header.logout'),
             route: { name: ERouteNames.Logout },
@@ -104,7 +104,11 @@ const items = computed(() => {
   });
 });
 
-watch(language, (language) => {
-  setI18nLanguage(language?.value ?? 'en');
-}, {deep: true});
+watch(
+  language,
+  (language) => {
+    setI18nLanguage(language?.value ?? 'en');
+  },
+  { deep: true },
+);
 </script>

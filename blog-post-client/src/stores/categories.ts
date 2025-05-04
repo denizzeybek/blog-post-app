@@ -8,11 +8,13 @@ import type {
 
 interface State {
   list: ICategory[];
+  currentCategory: ICategory;
 }
 
 export const useCategoriesStore = defineStore(EStoreNames.CATEGORIES, {
   state: (): State => ({
     list: [],
+    currentCategory: {} as ICategory
   }),
   actions: {
     async fetch() {
@@ -21,6 +23,19 @@ export const useCategoriesStore = defineStore(EStoreNames.CATEGORIES, {
           .get("/categories")
           .then((response) => {
             this.list = response as unknown as ICategory[];
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+    async find(id: string) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`/categories/${id}`)
+          .then((response) => {
+            this.currentCategory = response as unknown as ICategory;
             resolve(response);
           })
           .catch((error) => {
