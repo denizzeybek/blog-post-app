@@ -22,7 +22,11 @@
       "Bash(curl:*)",
       "Bash(for i in {1..6})",
       "Bash(do curl -s -X POST http://localhost:3000/api/auth/login -H \"Content-Type: application/json\" -d '{\"\"\"\"email\"\"\"\":\"\"\"\"test\"\"\"\",\"\"\"\"password\"\"\"\":\"\"\"\"test\"\"\"\"}')",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(vercel:*)",
+      "mcp__render__list_workspaces",
+      "mcp__render__list_services",
+      "mcp__render__update_environment_variables"
     ],
     "deny": [],
     "ask": []

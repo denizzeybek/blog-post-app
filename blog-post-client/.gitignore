@@ -33,3 +33,4 @@ coverage
 storybook-static
 .yarn
 .yarnrc.yml
+.vercel
