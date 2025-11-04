@@ -52,28 +52,67 @@ module.exports.login_get = (req, res) => {
 
 module.exports.signup_post = async (req, res) => {
   const { email, password } = req.body;
+  const ipAddress = req.ip || req.connection.remoteAddress;
 
   try {
-    const user = await User.create({ email, password });
+    const user = await User.create({
+      email,
+      password,
+      lastLoginIP: ipAddress,
+      lastLogin: Date.now()
+    });
+
     const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(201).json({ user: user._id, token });
+    res.cookie('jwt', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: maxAge * 1000
+    });
+
+    console.log(`[SECURITY] New user registered: ${email} from IP: ${ipAddress}`);
+
+    res.status(201).json({
+      user: user._id,
+      token,
+      message: 'Account created successfully'
+    });
   } catch (err) {
     const errors = handleErrors(err);
+    console.warn(`[SECURITY] Signup failed for email: ${email} from IP: ${ipAddress}`, err.message);
     res.status(400).json({ errors });
   }
 };
 
 module.exports.login_post = async (req, res) => {
   const { email, password } = req.body;
+  const ipAddress = req.ip || req.connection.remoteAddress;
 
   try {
-    const user = await User.login(email, password);
+    const user = await User.login(email, password, ipAddress);
     const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(200).json({ user: user._id, token });
+    res.cookie('jwt', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+      sameSite: 'strict',
+      maxAge: maxAge * 1000
+    });
+    res.status(200).json({
+      user: user._id,
+      token,
+      message: 'Login successful'
+    });
   } catch (err) {
     const errors = handleErrors(err);
+
+    // Check if account is locked
+    if (err.message.includes('locked')) {
+      return res.status(423).json({
+        error: 'Account Locked',
+        message: err.message
+      });
+    }
+
     res.status(400).json({ errors });
   }
 };

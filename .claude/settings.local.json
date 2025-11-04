@@ -15,7 +15,14 @@
       "Bash(cat:*)",
       "Bash(npm run type-check:*)",
       "Bash(npm run dev:*)",
-      "Bash(yarn:*)"
+      "Bash(yarn:*)",
+      "Bash(npm audit fix:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "Bash(curl:*)",
+      "Bash(for i in {1..6})",
+      "Bash(do curl -s -X POST http://localhost:3000/api/auth/login -H \"Content-Type: application/json\" -d '{\"\"\"\"email\"\"\"\":\"\"\"\"test\"\"\"\",\"\"\"\"password\"\"\"\":\"\"\"\"test\"\"\"\"}')",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []
