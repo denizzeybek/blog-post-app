@@ -25,8 +25,9 @@
     "dashboard": {
       "banner": {
         "title": "Avukat Nazlı Kaçar<br/>Hukuk & Danışmanlık",
-        "description": "Nazlı Kaçar, 2021 yılında İstanbul Beykent Üniversitesi'nden yüksek onur derecesiyle mezun olmuştur. 2021 - 2023 yılları arasında İstanbul Barosu’na bağlı olarak İstanbul’da avukatlık yapmıştır. 2023 yılında Kuşadası’nda NK Hukuk ve Danışmanlık adını taşıyan kendi ofisini açmış ve burada hukuki hizmet vermeye devam etmektedir.",
+        "description": "Nazlı Kaçar, 2021 yılında İstanbul Beykent Üniversitesi'nden yüksek onur derecesiyle mezun olmuştur. 2021 - 2023 yılları arasında İstanbul Barosu'na bağlı olarak İstanbul'da avukatlık yapmıştır. 2023 yılında Kuşadası'nda NK Hukuk ve Danışmanlık adını taşıyan kendi ofisini açmış ve burada hukuki hizmet vermeye devam etmektedir.",
         "description_2": "Nazlı Kaçar, Aydın Barosu'na kayıtlı bir avukattır.",
+        "professional_profile": "Profesyonel Profil",
         "list": {
           "school": {
             "title": "Eğitim",

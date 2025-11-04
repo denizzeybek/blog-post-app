@@ -69,7 +69,7 @@
       <h2
         class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 bg-gradient-to-r from-primary-800 to-accent-700 bg-clip-text text-transparent animate-slide-in-up"
       >
-        Professional Profile
+        {{ t('pages.dashboard.banner.professional_profile') }}
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 p-4">
@@ -77,12 +77,8 @@
         <div
           v-for="(item, index) in resumeCards"
           :key="item.title"
-          ref="cardRefs"
-          :class="[
-            'resume-card group relative bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-primary-200 overflow-hidden',
-            cardVisibility[index] ? 'card-visible' : 'card-hidden'
-          ]"
-          :style="`transition-delay: ${index * 0.15}s`"
+          class="resume-card group relative bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-primary-200 overflow-hidden animate-slide-in-up"
+          :style="`animation-delay: ${index * 0.2}s`"
         >
           <!-- Background Gradient on Hover -->
           <div class="absolute inset-0 bg-gradient-to-br from-primary-50 to-accent-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
@@ -125,7 +121,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { computed, ref, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { ERouteNames } from '@/router/routeNames.enum';
 
@@ -166,37 +162,7 @@ const resumeCards = computed(() => [
       t('pages.dashboard.banner.list.working_areas.informatics'),
     ],
   },
-]);
-
-// Scroll-based animation with Intersection Observer
-const cardRefs = ref<HTMLElement[]>([]);
-const cardVisibility = ref<boolean[]>([false, false, false]);
-
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const index = cardRefs.value.indexOf(entry.target as HTMLElement);
-        if (index !== -1 && entry.isIntersecting) {
-          cardVisibility.value[index] = true;
-        }
-      });
-    },
-    {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px',
-    }
-  );
-
-  cardRefs.value.forEach((card) => {
-    if (card) observer.observe(card);
-  });
-
-  return () => {
-    observer.disconnect();
-  };
-});
-</script>
+]);</script>
 
 <style scoped>
 /* Fade In Animation */
@@ -237,18 +203,6 @@ onMounted(() => {
 
 .resume-card:hover {
   transform: translateY(-8px);
-}
-
-/* Scroll-based Animation Classes */
-.card-hidden {
-  opacity: 0;
-  transform: translateY(50px) scale(0.95);
-}
-
-.card-visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 /* Floating Animations */
