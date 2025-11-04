@@ -132,8 +132,11 @@ npm start               # Production start (node app.js)
 - Origin validation in CORS middleware
 
 **Database**:
-- MongoDB connection via `configs/database.js`
+- **Local MongoDB** (localhost:27017)
+- Database name: `blog-post`
+- Connection via `configs/database.js`
 - Mongoose for schema validation and queries
+- **Prerequisites**: MongoDB must be installed and running locally
 
 ## Environment Configuration
 
@@ -145,8 +148,8 @@ VITE_API_URL=http://localhost:5000
 
 ### Server `.env` (blog-post-server)
 ```
-PORT=5000
-MONGODB_URI=mongodb://...
+PORT=3000
+MONGO_URI=mongodb://localhost:27017/blog-post
 JWT_SECRET=your-secret-key
 AWS_ACCESS_KEY_ID=...
 AWS_SECRET_ACCESS_KEY=...

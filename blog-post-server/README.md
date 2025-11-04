@@ -17,19 +17,56 @@ npm start
 
 Server runs on port **5000** (configurable via `PORT` env var).
 
+## Prerequisites
+
+**Local MongoDB Installation:**
+
+The application uses local MongoDB. Install MongoDB Community Edition:
+
+**macOS (Homebrew):**
+```bash
+brew tap mongodb/brew
+brew install mongodb-community
+brew services start mongodb-community
+```
+
+**Linux (Ubuntu/Debian):**
+```bash
+wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo systemctl start mongod
+```
+
+**Windows:**
+Download and install from [MongoDB Download Center](https://www.mongodb.com/try/download/community)
+
+**Verify MongoDB is running:**
+```bash
+# Check if mongod is running
+pgrep -l mongod
+
+# Or connect with mongo shell
+mongo --eval "db.version()"
+```
+
 ## Environment Variables
 
 Create `.env` file:
 
 ```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/blog-post-db
+PORT=3000
+# Local MongoDB (default)
+MONGO_URI=mongodb://localhost:27017/blog-post
 JWT_SECRET=your-secret-key-here
 AWS_ACCESS_KEY_ID=your-aws-key
 AWS_SECRET_ACCESS_KEY=your-aws-secret
 AWS_REGION=eu-north-1
 AWS_BUCKET_NAME=your-bucket-name
 ```
+
+**Note:** The `.env` file already contains archived MongoDB Cloud credentials. The application now uses local MongoDB by default.
 
 ## Project Structure
 

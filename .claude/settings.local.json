@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mongo:*)",
+      "Bash(mongosh:*)",
+      "Bash(pgrep:*)",
+      "Bash(timeout 5 node:*)",
+      "Bash(node -e:*)",
+      "Bash(node migrations/seed-blog-data.js:*)",
+      "Bash(gh:*)",
+      "Bash(brew install:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

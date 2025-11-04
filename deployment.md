@@ -1,5 +1,20 @@
   En İyi Deployment Seçenekleri
 
+  **⚠️ ÖNEMLİ NOT - Local MongoDB Kullanımı:**
+
+  Proje artık local MongoDB kullanıyor (localhost:27017). Production deployment'a geçmeden önce:
+  1. MongoDB Atlas (cloud) veya production MongoDB instance'ı ayarlayın
+  2. `blog-post-server/.env` dosyasındaki `MONGO_URI`'ı production URI ile güncelleyin
+  3. Cloud MongoDB credential'ları `.env` dosyasında yorum satırında saklanmıştır
+
+  **Local Development:**
+  - Database: mongodb://localhost:27017/blog-post
+  - MongoDB'nin çalıştığından emin olun: `pgrep -l mongod`
+  - Backend port: 3000
+  - Frontend port: 3001
+
+  ---
+
   1. Railway (Önerilen - Fullstack için)
 
   Avantajlar:
