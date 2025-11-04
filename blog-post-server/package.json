@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "commit": "superclaude commit --interactive",
+    "release:prep": "superclaude changelog && superclaude readme",
+    "code:review": "superclaude review --verbose",
+    "docs:update": "superclaude docs"
   },
   "keywords": [],
   "author": "",
