@@ -8,7 +8,10 @@
       "Bash(node -e:*)",
       "Bash(node migrations/seed-blog-data.js:*)",
       "Bash(gh:*)",
-      "Bash(brew install:*)"
+      "Bash(brew install:*)",
+      "Bash(npm install:*)",
+      "Bash(node migrations/verify-content.js:*)",
+      "Bash(npm uninstall:*)"
     ],
     "deny": [],
     "ask": []

@@ -75,14 +75,14 @@ const items = computed(() => {
       label: t('pages.header.blogs'),
       route: { name: ERouteNames.BlogList },
     },
-    ...(!usersStore.isAuthenticated
-      ? [
-          {
-            label: t('pages.header.login'),
-            route: { name: ERouteNames.Login },
-          },
-        ]
-      : []),
+    // ...(!usersStore.isAuthenticated
+    //   ? [
+    //       {
+    //         label: t('pages.header.login'),
+    //         route: { name: ERouteNames.Login },
+    //       },
+    //     ]
+    //   : []),
     {
       label: t('pages.header.categories'),
       route: { name: ERouteNames.CategoriesList },

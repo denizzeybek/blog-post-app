@@ -35,5 +35,7 @@ declare module 'vue' {
     Switch: typeof import('./src/components/ui/global/Switch.vue')['default']
     Tag: typeof import('primevue/tag')['default']
     Text: typeof import('./src/components/ui/global/Text.vue')['default']
+    Textarea: typeof import('primevue/textarea')['default']
+    TextArea: typeof import('./src/components/ui/global/TextArea.vue')['default']
   }
 }

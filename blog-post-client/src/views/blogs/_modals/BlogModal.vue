@@ -26,17 +26,21 @@
         />
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <FInput
+        <FTextArea
           class="grow"
           :label="t('pages.blogs.modal.document.tr.label')"
           name="documentUrl"
           :placeholder="t('pages.blogs.modal.document.tr.placeholder')"
+          :rows="10"
+          :autoResize="true"
         />
-        <FInput
+        <FTextArea
           class="grow"
           :label="t('pages.blogs.modal.document.en.label')"
           name="enDocumentUrl"
           :placeholder="t('pages.blogs.modal.document.en.placeholder')"
+          :rows="10"
+          :autoResize="true"
         />
       </div>
       <div class="grid grid-cols-1">
@@ -64,7 +68,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { useForm } from 'vee-validate';
-import { string, object, number } from 'yup';
+import { string, object } from 'yup';
 import { useFToast } from '@/composables/useFToast';
 import { useBlogsStore } from '@/stores/blogs';
 import { useCategoriesStore } from '@/stores/categories';
@@ -88,7 +92,6 @@ const categoriesStore = useCategoriesStore();
 const { showSuccessMessage, showErrorMessage } = useFToast();
 
 const open = defineModel<boolean>('open');
-const selectedFile = ref<File | null>(null);
 
 const isEditing = computed(() => !!props.data);
 
@@ -118,7 +121,7 @@ const validationSchema = object({
     .label(t('pages.blogs.modal.category.label')),
 });
 
-const { handleSubmit, isSubmitting, resetForm, defineField } = useForm({
+const { handleSubmit, isSubmitting, resetForm } = useForm({
   validationSchema,
 });
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Ürün şeması
+// Blog şeması
 const blogSchema = new mongoose.Schema({
   name: {
     type: String,
