@@ -222,10 +222,10 @@ const blogTemplates = {
 
 // Seed additional users
 const additionalUsers = [
-  { email: 'editor@blog.com', password: 'editor123' },
-  { email: 'author1@blog.com', password: 'author123' },
-  { email: 'author2@blog.com', password: 'author123' },
-  { email: 'reviewer@blog.com', password: 'reviewer123' },
+  { email: 'editor@blog.com', password: 'Editor123' },
+  { email: 'author1@blog.com', password: 'Author123' },
+  { email: 'author2@blog.com', password: 'Author123' },
+  { email: 'reviewer@blog.com', password: 'Reviewer123' },
 ];
 
 async function seedDatabase() {
