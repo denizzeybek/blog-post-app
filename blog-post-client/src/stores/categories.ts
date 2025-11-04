@@ -14,7 +14,7 @@ interface State {
 export const useCategoriesStore = defineStore(EStoreNames.CATEGORIES, {
   state: (): State => ({
     list: [],
-    currentCategory: {} as ICategory
+    currentCategory: {} as ICategory,
   }),
   actions: {
     async fetch() {

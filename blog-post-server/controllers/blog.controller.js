@@ -14,8 +14,8 @@ const getBlogs = async (payload) => {
       ...(name && { name: new RegExp(name, 'i') }),
       ...(category && { category }),
     };
-    // Fetch blogs with necessary population
-    const blogs = await Blog.find(query).populate('category');
+    // Fetch blogs with necessary population, sorted by newest first
+    const blogs = await Blog.find(query).populate('category').sort({ createdAt: -1 });
 
     return blogs;
   } catch (error) {

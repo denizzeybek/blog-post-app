@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import type { IBlog, IBlogModule } from '@/interfaces/blog/blog.interface';
-import { useName } from '@/composables/useName';
+import type { IBlog, IBlogModule } from "@/interfaces/blog/blog.interface";
+import { useName } from "@/composables/useName";
 
 interface IProps {
   blog: IBlog | IBlogModule;

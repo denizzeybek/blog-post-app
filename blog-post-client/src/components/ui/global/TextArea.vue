@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-2 relative">
     <label :for="id">{{ label }}</label>
     <Textarea
-      :value="(value as string)"
+      :value="value as string"
       @update:value="(newValue) => ((value as any).value = newValue)"
       :id="id"
       :data-error="!!errorMessage"
@@ -26,9 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import type { TextareaProps } from 'primevue/textarea';
-import { ref, computed } from 'vue';
-import { useField } from 'vee-validate';
+import type { TextareaProps } from "primevue/textarea";
+import { ref, computed } from "vue";
+import { useField } from "vee-validate";
 
 interface IProps {
   id: string;
@@ -51,7 +51,7 @@ interface IProps {
 
 const props = withDefaults(defineProps<IProps>(), {
   disabled: false,
-  placeholder: '',
+  placeholder: "",
   unstyled: false,
   rows: 5,
   autoResize: false,

@@ -3,30 +3,37 @@
     <!-- Hero Section with Filters -->
     <template v-if="showFilters">
       <!-- Sticky Filter Bar -->
-      <div class="sticky top-0 z-10 bg-gradient-to-r from-slate-50 via-blue-50 to-slate-50 backdrop-blur-lg bg-opacity-95 -mx-8 px-8 py-6 shadow-md border-b-2 border-blue-900">
+      <div
+        class="sticky top-0 z-10 bg-gradient-to-r from-slate-50 via-blue-50 to-slate-50 backdrop-blur-lg bg-opacity-95 -mx-8 px-8 py-6 shadow-md border-b-2 border-blue-900"
+      >
         <div class="flex flex-col gap-4">
           <!-- Title Section -->
           <div class="flex justify-center mb-2">
             <div class="text-center">
               <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-2">
-                {{ t('pages.blogs.title') }}
+                {{ t("pages.blogs.title") }}
               </h1>
               <div class="flex items-center justify-center gap-2">
                 <div class="w-12 h-0.5 bg-accent-400"></div>
-                <p class="text-gray-600 text-sm font-medium">{{ productList?.length || 0 }} {{ t('pages.blogs.found_count') }}</p>
+                <p class="text-gray-600 text-sm font-medium">
+                  {{ productList?.length || 0 }}
+                  {{ t("pages.blogs.found_count") }}
+                </p>
                 <div class="w-12 h-0.5 bg-accent-400"></div>
               </div>
             </div>
           </div>
 
           <!-- Filter Controls -->
-          <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3">
+          <div
+            class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3"
+          >
             <div class="flex flex-col sm:flex-row gap-3 flex-1">
               <FInput
                 name="filterName"
                 v-model="typedName"
                 :placeholder="t('pages.blogs.name')"
-                class="flex-1 !shadow-md"
+                class="flex-1"
               >
                 <template #prefix>
                   <i class="pi pi-search text-gray-400"></i>
@@ -38,7 +45,7 @@
                 :placeholder="t('pages.blogs.blogType.placeholder')"
                 :options="blogTypeOptions"
                 v-model="selectedFilter"
-                class="!h-full flex-1 md:max-w-xs !shadow-md"
+                class="!h-full flex-1 md:max-w-xs"
               />
             </div>
 
@@ -46,7 +53,7 @@
               v-if="usersStore.isAuthenticated"
               :label="t('pages.blogs.button_text')"
               @click="showBlogModal = true"
-              class="!px-6 !py-3 !bg-primary-900 hover:!bg-primary-800 !border-primary-900 hover:!border-primary-800 !text-white !shadow-md hover:!shadow-lg transition-all duration-300"
+              class="!px-6 !py-2 !bg-primary-900 hover:!bg-primary-800 !border-primary-900 hover:!border-primary-800 !text-white !shadow-md hover:!shadow-lg transition-all duration-300"
             >
               <template #icon>
                 <i class="pi pi-plus mr-2"></i>
@@ -58,7 +65,10 @@
     </template>
 
     <!-- Loading State with Enhanced Skeletons -->
-    <div v-if="isLoading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
+    <div
+      v-if="isLoading"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full"
+    >
       <div v-for="i in 8" :key="i" class="animate-pulse">
         <div class="bg-white rounded-xl shadow-md p-6 space-y-4">
           <div class="h-4 bg-gray-200 rounded w-3/4"></div>
@@ -93,7 +103,9 @@
           <template #content>
             <div class="relative min-h-[250px]">
               <!-- Professional overlay on hover -->
-              <div class="absolute inset-0 bg-gradient-to-br from-primary-900/0 to-accent-500/0 group-hover:from-primary-900/5 group-hover:to-accent-500/5 transition-all duration-500 rounded-lg"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-primary-900/0 to-accent-500/0 group-hover:from-primary-900/5 group-hover:to-accent-500/5 transition-all duration-500 rounded-lg"
+              ></div>
 
               <CardContent
                 :name="getBlogName(blog)"
@@ -107,12 +119,20 @@
 
     <!-- Empty State -->
     <div v-else class="flex justify-center items-center min-h-[400px]">
-      <Card class="max-w-md w-full shadow-xl border-2 border-dashed border-gray-300">
+      <Card
+        class="max-w-md w-full shadow-xl border-2 border-dashed border-gray-300"
+      >
         <template #content>
-          <div class="flex flex-col items-center justify-center p-8 text-center">
+          <div
+            class="flex flex-col items-center justify-center p-8 text-center"
+          >
             <i class="pi pi-inbox text-6xl text-gray-300 mb-4"></i>
-            <h3 class="text-2xl font-bold text-gray-700 mb-2">{{ t('pages.blogs.no_blog') }}</h3>
-            <p class="text-gray-500 mb-6">{{ t('pages.blogs.empty_state.message') }}</p>
+            <h3 class="text-2xl font-bold text-gray-700 mb-2">
+              {{ t("pages.blogs.no_blog") }}
+            </h3>
+            <p class="text-gray-500 mb-6">
+              {{ t("pages.blogs.empty_state.message") }}
+            </p>
             <Button
               v-if="usersStore.isAuthenticated"
               :label="t('pages.blogs.empty_state.create_first')"
@@ -133,18 +153,18 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, ref, watch } from 'vue';
-import { useBlogsStore } from '@/stores/blogs';
-import { ERouteNames } from '@/router/routeNames.enum';
-import { useRouter } from 'vue-router';
-import { useUsersStore } from '@/stores/users';
-import BlogModal from '@/views/blogs/_modals/BlogModal.vue';
-import { useCategoriesStore } from '@/stores/categories';
-import { useFToast } from '@/composables/useFToast';
-import CardContent from '@/components/ui/local/CardContent.vue';
-import type { IBlogFilterDTO } from '@/interfaces/blog/blog.interface';
-import { useI18n } from 'vue-i18n';
-import { useName } from '@/composables/useName';
+import { onMounted, computed, ref, watch } from "vue";
+import { useBlogsStore } from "@/stores/blogs";
+import { ERouteNames } from "@/router/routeNames.enum";
+import { useRouter } from "vue-router";
+import { useUsersStore } from "@/stores/users";
+import BlogModal from "@/views/blogs/_modals/BlogModal.vue";
+import { useCategoriesStore } from "@/stores/categories";
+import { useFToast } from "@/composables/useFToast";
+import CardContent from "@/components/ui/local/CardContent.vue";
+import type { IBlogFilterDTO } from "@/interfaces/blog/blog.interface";
+import { useI18n } from "vue-i18n";
+import { useName } from "@/composables/useName";
 
 interface IProps {
   categoryId?: string;
@@ -166,7 +186,7 @@ const { getCategoryName, getBlogName } = useName();
 const isLoading = ref(false);
 const showBlogModal = ref(false);
 const selectedFilter = ref({
-  name: t('pages.blogs.all_blogs'),
+  name: t("pages.blogs.all_blogs"),
   value: null,
 });
 const typedName = ref();
@@ -178,11 +198,11 @@ const productList = computed(() => {
 const blogTypeOptions = computed(() => {
   const categoriesList = categoriesStore.list?.map((category) => ({
     name:
-      locale.value === 'tr' ? category.categoryName : category.enCategoryName,
+      locale.value === "tr" ? category.categoryName : category.enCategoryName,
     value: category._id,
   }));
 
-  return [{ name: t('pages.blogs.all_blogs'), value: null }, ...categoriesList];
+  return [{ name: t("pages.blogs.all_blogs"), value: null }, ...categoriesList];
 });
 
 const filterBlogs = async () => {
@@ -209,7 +229,7 @@ const filterBlogs = async () => {
 watch([selectedFilter, typedName], filterBlogs, { immediate: true });
 
 watch(locale, () => {
-  selectedFilter.value.name = t('pages.blogs.all_blogs');
+  selectedFilter.value.name = t("pages.blogs.all_blogs");
 });
 
 onMounted(async () => {

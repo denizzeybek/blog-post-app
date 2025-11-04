@@ -52,18 +52,18 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import { computed, onMounted, ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useCategoriesStore } from '@/stores/categories';
-import IconWrapper from '@/components/ui/local/IconWrapper.vue';
-import { useBlogsStore } from '@/stores/blogs';
-import type { IBlogFilterDTO } from '@/interfaces/blog/blog.interface';
-import { useFToast } from '@/composables/useFToast';
-import BlogsList from '@/views/blogs/_views/BlogsList.vue';
-import CategoryHeader from '../_components/CategoryHeader.vue';
-import { useUsersStore } from '@/stores/users';
-import CategoryModal from '../_components/_modals/CategoryModal.vue';
+import { useRoute } from "vue-router";
+import { computed, onMounted, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import { useCategoriesStore } from "@/stores/categories";
+import IconWrapper from "@/components/ui/local/IconWrapper.vue";
+import { useBlogsStore } from "@/stores/blogs";
+import type { IBlogFilterDTO } from "@/interfaces/blog/blog.interface";
+import { useFToast } from "@/composables/useFToast";
+import BlogsList from "@/views/blogs/_views/BlogsList.vue";
+import CategoryHeader from "../_components/CategoryHeader.vue";
+import { useUsersStore } from "@/stores/users";
+import CategoryModal from "../_components/_modals/CategoryModal.vue";
 
 const { locale, t } = useI18n();
 const { showErrorMessage } = useFToast();
@@ -77,14 +77,14 @@ const showCategoryModal = ref(false);
 
 const icon = computed(() => categoriesStore.currentCategory.iconName);
 const title = computed(() => {
-  if (locale.value === 'tr') {
+  if (locale.value === "tr") {
     return categoriesStore.currentCategory.categoryName;
   }
   return categoriesStore.currentCategory.enCategoryName;
 });
 
 const currentDocument = computed(() => {
-  if (locale.value === 'tr') {
+  if (locale.value === "tr") {
     return categoriesStore.currentCategory.categoryDetails;
   }
   return categoriesStore.currentCategory.enCategoryDetails;
@@ -99,7 +99,7 @@ const cleanHtml = computed(() => {
 
 const inlineStyles = (bodyHtml, styleCss) => {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(bodyHtml, 'text/html');
+  const doc = parser.parseFromString(bodyHtml, "text/html");
 
   const styleMap = {};
 
@@ -117,9 +117,9 @@ const inlineStyles = (bodyHtml, styleCss) => {
     const elements = doc.querySelectorAll(`.${className}`);
     elements.forEach((el) => {
       // Var olan inline style varsa üstüne ekleyelim
-      const existingStyle = el.getAttribute('style') || '';
+      const existingStyle = el.getAttribute("style") || "";
       el.setAttribute(
-        'style',
+        "style",
         `${existingStyle} ${styleMap[className]}`.trim(),
       );
 
@@ -133,13 +133,13 @@ const inlineStyles = (bodyHtml, styleCss) => {
 
 const extractStyleAndBody = (htmlString) => {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, 'text/html');
+  const doc = parser.parseFromString(htmlString, "text/html");
 
-  const styleTags = doc.querySelectorAll('style');
-  let styleContent = '';
+  const styleTags = doc.querySelectorAll("style");
+  let styleContent = "";
 
   styleTags.forEach((style) => {
-    styleContent += style.innerHTML + '\n';
+    styleContent += style.innerHTML + "\n";
     style.remove(); // style tag'ı dokümandan çıkarıyoruz, body daha temiz olsun diye
   });
 

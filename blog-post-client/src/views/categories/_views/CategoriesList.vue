@@ -38,7 +38,7 @@
     <div v-else class="flex justify-center items-center h-96">
       <Card class="flex items-center justify-center">
         <template #content>
-          <span class="text-2xl">{{ t('pages.category.no_category') }}</span>
+          <span class="text-2xl">{{ t("pages.category.no_category") }}</span>
         </template>
       </Card>
     </div>
@@ -52,16 +52,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
-import { useUsersStore } from '@/stores/users';
-import { useCategoriesStore } from '@/stores/categories';
-import { useFToast } from '@/composables/useFToast';
-import CardContent from '@/components/ui/local/CardContent.vue';
-import CategoryModal from '../_components/_modals/CategoryModal.vue';
-import { useI18n } from 'vue-i18n';
-import { ERouteNames } from '@/router/routeNames.enum';
-import { useName } from '@/composables/useName';
+import { onMounted, computed, ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import { useUsersStore } from "@/stores/users";
+import { useCategoriesStore } from "@/stores/categories";
+import { useFToast } from "@/composables/useFToast";
+import CardContent from "@/components/ui/local/CardContent.vue";
+import CategoryModal from "../_components/_modals/CategoryModal.vue";
+import { useI18n } from "vue-i18n";
+import { ERouteNames } from "@/router/routeNames.enum";
+import { useName } from "@/composables/useName";
 
 const categoriesStore = useCategoriesStore();
 const usersStore = useUsersStore();

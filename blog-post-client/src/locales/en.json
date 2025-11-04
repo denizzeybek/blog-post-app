@@ -63,7 +63,7 @@
         "placeholder": "Select blog name"
       },
       "title": "Blogs",
-      "name": "Enter blog name",
+      "name": "Search blog name",
       "button_text": "Add Blog",
       "no_blog": "No Blogs Found",
       "all_blogs": "All Blogs",

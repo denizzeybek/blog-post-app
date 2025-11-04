@@ -20,7 +20,9 @@
         <div v-else class="flex flex-col gap-8">
           <!-- Article Header -->
           <div class="text-center border-b-2 border-primary-900 pb-8">
-            <h1 class="text-4xl md:text-5xl font-bold text-primary-900 mb-4 leading-tight">
+            <h1
+              class="text-4xl md:text-5xl font-bold text-primary-900 mb-4 leading-tight"
+            >
               {{ title }}
             </h1>
             <div class="flex justify-center mb-4">
@@ -28,21 +30,32 @@
             </div>
 
             <!-- Article Meta -->
-            <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-700">
+            <div
+              class="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-700"
+            >
               <div class="flex items-center gap-2">
                 <i class="pi pi-calendar text-primary-900"></i>
-                <span class="font-medium">{{ formatDate(blogsStore.currentBlog.createdAt) }}</span>
+                <span class="font-medium">{{
+                  formatDate(blogsStore.currentBlog.createdAt)
+                }}</span>
               </div>
               <div class="w-px h-4 bg-gray-300"></div>
               <div class="flex items-center gap-2">
                 <i class="pi pi-clock text-accent-600"></i>
-                <span class="font-medium">{{ readingTime }} {{ t('pages.blogs.details.reading_time') }}</span>
+                <span class="font-medium"
+                  >{{ readingTime }}
+                  {{ t("pages.blogs.details.reading_time") }}</span
+                >
               </div>
               <div class="w-px h-4 bg-gray-300"></div>
               <div class="flex items-center gap-2">
                 <i class="pi pi-tag text-primary-900"></i>
-                <Tag class="!rounded-full !bg-primary-900 !text-white !px-4 !py-2">
-                  <span class="font-semibold">{{ getCategoryName(blogsStore.currentBlog.category) }}</span>
+                <Tag
+                  class="!rounded-full !bg-primary-900 !text-white !px-4 !py-2"
+                >
+                  <span class="font-semibold">{{
+                    getCategoryName(blogsStore.currentBlog.category)
+                  }}</span>
                 </Tag>
               </div>
             </div>
@@ -53,18 +66,17 @@
             <div
               v-html="cleanHtml"
               class="text-gray-800 leading-relaxed space-y-6 text-justify"
-              style="
-                font-size: 1.125rem;
-                line-height: 1.8;
-              "
+              style="font-size: 1.125rem; line-height: 1.8"
             ></div>
           </article>
 
           <!-- Article Footer with Share Buttons -->
           <div class="border-t border-gray-200 pt-8 mt-8">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div
+              class="flex flex-col sm:flex-row items-center justify-between gap-4"
+            >
               <div class="text-gray-600 font-medium">
-                {{ t('pages.blogs.details.share_text') }}
+                {{ t("pages.blogs.details.share_text") }}
               </div>
               <div class="flex gap-3">
                 <Button
@@ -127,16 +139,16 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router';
-import { useUsersStore } from '@/stores/users';
-import { useBlogsStore } from '@/stores/blogs';
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import BlogHeader from '../_components/BlogHeader.vue';
-import BlogModal from '@/views/blogs/_modals/BlogModal.vue';
-import { useFToast } from '@/composables/useFToast';
-import { ERouteNames } from '@/router/routeNames.enum';
-import { useName } from '@/composables/useName';
+import { useRoute, useRouter } from "vue-router";
+import { useUsersStore } from "@/stores/users";
+import { useBlogsStore } from "@/stores/blogs";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import BlogHeader from "../_components/BlogHeader.vue";
+import BlogModal from "@/views/blogs/_modals/BlogModal.vue";
+import { useFToast } from "@/composables/useFToast";
+import { ERouteNames } from "@/router/routeNames.enum";
+import { useName } from "@/composables/useName";
 
 const { locale, t } = useI18n();
 const usersStore = useUsersStore();
@@ -152,7 +164,7 @@ const showBlogModal = ref(false);
 const readingProgress = ref(0);
 
 const title = computed(() => {
-  if (locale.value === 'tr') {
+  if (locale.value === "tr") {
     return blogsStore.currentBlog.name;
   }
   return blogsStore.currentBlog.enName;
@@ -160,7 +172,7 @@ const title = computed(() => {
 
 // Calculate reading time (average 200 words per minute)
 const readingTime = computed(() => {
-  const text = currentDocument.value || '';
+  const text = currentDocument.value || "";
   const words = text.split(/\s+/).length;
   const minutes = Math.ceil(words / 200);
   return minutes;
@@ -168,12 +180,12 @@ const readingTime = computed(() => {
 
 // Format date
 const formatDate = (dateString: string) => {
-  if (!dateString) return '';
+  if (!dateString) return "";
   const date = new Date(dateString);
-  return date.toLocaleDateString('tr-TR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  return date.toLocaleDateString("tr-TR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 };
 
@@ -188,7 +200,7 @@ const updateReadingProgress = () => {
 };
 
 const currentDocument = computed(() => {
-  if (locale.value === 'tr') {
+  if (locale.value === "tr") {
     return blogsStore.currentBlog.documentUrl;
   }
   return blogsStore.currentBlog.enDocumentUrl;
@@ -203,7 +215,7 @@ const cleanHtml = computed(() => {
 
 const inlineStyles = (bodyHtml, styleCss) => {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(bodyHtml, 'text/html');
+  const doc = parser.parseFromString(bodyHtml, "text/html");
 
   const styleMap = {};
 
@@ -221,9 +233,9 @@ const inlineStyles = (bodyHtml, styleCss) => {
     const elements = doc.querySelectorAll(`.${className}`);
     elements.forEach((el) => {
       // Var olan inline style varsa üstüne ekleyelim
-      const existingStyle = el.getAttribute('style') || '';
+      const existingStyle = el.getAttribute("style") || "";
       el.setAttribute(
-        'style',
+        "style",
         `${existingStyle} ${styleMap[className]}`.trim(),
       );
 
@@ -237,13 +249,13 @@ const inlineStyles = (bodyHtml, styleCss) => {
 
 const extractStyleAndBody = (htmlString) => {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, 'text/html');
+  const doc = parser.parseFromString(htmlString, "text/html");
 
-  const styleTags = doc.querySelectorAll('style');
-  let styleContent = '';
+  const styleTags = doc.querySelectorAll("style");
+  let styleContent = "";
 
   styleTags.forEach((style) => {
-    styleContent += style.innerHTML + '\n';
+    styleContent += style.innerHTML + "\n";
     style.remove(); // style tag'ı dokümandan çıkarıyoruz, body daha temiz olsun diye
   });
 
@@ -285,7 +297,7 @@ const shareOnTwitter = () => {
   const text = title.value;
   window.open(
     `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-    '_blank'
+    "_blank",
   );
 };
 
@@ -293,7 +305,7 @@ const shareOnFacebook = () => {
   const url = window.location.href;
   window.open(
     `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-    '_blank'
+    "_blank",
   );
 };
 
@@ -301,27 +313,27 @@ const shareOnLinkedIn = () => {
   const url = window.location.href;
   window.open(
     `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-    '_blank'
+    "_blank",
   );
 };
 
 const copyLink = async () => {
   try {
     await navigator.clipboard.writeText(window.location.href);
-    showSuccessMessage(t('pages.blogs.details.toast.link_copied'));
+    showSuccessMessage(t("pages.blogs.details.toast.link_copied"));
   } catch (err) {
-    showErrorMessage(t('pages.blogs.details.toast.link_copy_failed'));
+    showErrorMessage(t("pages.blogs.details.toast.link_copy_failed"));
   }
 };
 
 onMounted(() => {
   fetchAll();
-  window.addEventListener('scroll', updateReadingProgress);
+  window.addEventListener("scroll", updateReadingProgress);
   updateReadingProgress();
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', updateReadingProgress);
+  window.removeEventListener("scroll", updateReadingProgress);
 });
 </script>
 

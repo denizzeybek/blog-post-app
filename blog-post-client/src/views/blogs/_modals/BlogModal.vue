@@ -14,11 +14,20 @@
     <!-- Header with Icon -->
     <template #header>
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-lg bg-primary-900 flex items-center justify-center shadow-md">
-          <i :class="isEditing ? 'pi pi-pencil' : 'pi pi-plus'" class="text-white text-lg"></i>
+        <div
+          class="w-12 h-12 rounded-lg bg-primary-900 flex items-center justify-center shadow-md"
+        >
+          <i
+            :class="isEditing ? 'pi pi-pencil' : 'pi pi-plus'"
+            class="text-white text-lg"
+          ></i>
         </div>
         <span class="text-2xl font-bold text-primary-900">
-          {{ isEditing ? t('pages.blogs.modal.title.update') : t('pages.blogs.modal.title.create') }}
+          {{
+            isEditing
+              ? t("pages.blogs.modal.title.update")
+              : t("pages.blogs.modal.title.create")
+          }}
         </span>
       </div>
     </template>
@@ -26,9 +35,11 @@
     <form class="flex flex-col gap-6 p-2" @submit="submitHandler">
       <!-- Turkish and English Names -->
       <div class="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200">
-        <h3 class="text-lg font-bold text-primary-900 mb-4 flex items-center gap-2 pb-2 border-b border-gray-200">
+        <h3
+          class="text-lg font-bold text-primary-900 mb-4 flex items-center gap-2 pb-2 border-b border-gray-200"
+        >
           <i class="pi pi-bookmark text-accent-600"></i>
-          {{ t('pages.blogs.modal.sections.titles') }}
+          {{ t("pages.blogs.modal.sections.titles") }}
         </h3>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <FInput
@@ -48,9 +59,11 @@
 
       <!-- Documents -->
       <div class="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200">
-        <h3 class="text-lg font-bold text-primary-900 mb-4 flex items-center gap-2 pb-2 border-b border-gray-200">
+        <h3
+          class="text-lg font-bold text-primary-900 mb-4 flex items-center gap-2 pb-2 border-b border-gray-200"
+        >
           <i class="pi pi-file-edit text-accent-600"></i>
-          {{ t('pages.blogs.modal.sections.content') }}
+          {{ t("pages.blogs.modal.sections.content") }}
         </h3>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <FTextArea
@@ -74,9 +87,11 @@
 
       <!-- Category -->
       <div class="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200">
-        <h3 class="text-lg font-bold text-primary-900 mb-4 flex items-center gap-2 pb-2 border-b border-gray-200">
+        <h3
+          class="text-lg font-bold text-primary-900 mb-4 flex items-center gap-2 pb-2 border-b border-gray-200"
+        >
           <i class="pi pi-tags text-accent-600"></i>
-          {{ t('pages.blogs.modal.sections.category') }}
+          {{ t("pages.blogs.modal.sections.category") }}
         </h3>
         <div class="grid grid-cols-1">
           <FSelect
@@ -115,14 +130,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
-import { useForm } from 'vee-validate';
-import { string, object } from 'yup';
-import { useFToast } from '@/composables/useFToast';
-import { useBlogsStore } from '@/stores/blogs';
-import { useCategoriesStore } from '@/stores/categories';
-import type { IBlogDTO } from '@/interfaces/blog/blog.interface';
-import { useI18n } from 'vue-i18n';
+import { computed, onMounted, ref } from "vue";
+import { useForm } from "vee-validate";
+import { string, object } from "yup";
+import { useFToast } from "@/composables/useFToast";
+import { useBlogsStore } from "@/stores/blogs";
+import { useCategoriesStore } from "@/stores/categories";
+import type { IBlogDTO } from "@/interfaces/blog/blog.interface";
+import { useI18n } from "vue-i18n";
 
 const { t, locale } = useI18n();
 
@@ -132,7 +147,7 @@ interface IProps {
 const props = defineProps<IProps>();
 
 interface IEmits {
-  (event: 'fetchBlogs'): void;
+  (event: "fetchBlogs"): void;
 }
 const emit = defineEmits<IEmits>();
 
@@ -140,34 +155,34 @@ const blogsStore = useBlogsStore();
 const categoriesStore = useCategoriesStore();
 const { showSuccessMessage, showErrorMessage } = useFToast();
 
-const open = defineModel<boolean>('open');
+const open = defineModel<boolean>("open");
 
 const isEditing = computed(() => !!props.data);
 
 const categoryTypeOptions = computed(() => {
   return categoriesStore.list?.map((category) => ({
     name:
-      locale.value === 'tr' ? category.categoryName : category.enCategoryName,
+      locale.value === "tr" ? category.categoryName : category.enCategoryName,
     value: category._id,
   }));
 });
 
 const validationSchema = object({
-  name: string().required().label(t('pages.blogs.modal.name.tr.label')),
-  enName: string().required().label(t('pages.blogs.modal.name.en.label')),
+  name: string().required().label(t("pages.blogs.modal.name.tr.label")),
+  enName: string().required().label(t("pages.blogs.modal.name.en.label")),
   documentUrl: string()
     .required()
-    .label(t('pages.blogs.modal.document.tr.label')),
+    .label(t("pages.blogs.modal.document.tr.label")),
   enDocumentUrl: string()
     .required()
-    .label(t('pages.blogs.modal.document.en.label')),
+    .label(t("pages.blogs.modal.document.en.label")),
   category: object()
     .shape({
-      name: string().label(t('pages.blogs.modal.category.label')),
-      value: string().label(t('pages.blogs.modal.category.label')).required(),
+      name: string().label(t("pages.blogs.modal.category.label")),
+      value: string().label(t("pages.blogs.modal.category.label")).required(),
     })
     .required()
-    .label(t('pages.blogs.modal.category.label')),
+    .label(t("pages.blogs.modal.category.label")),
 });
 
 const { handleSubmit, isSubmitting, resetForm } = useForm({
@@ -190,13 +205,13 @@ const submitHandler = handleSubmit(async (values) => {
     } as IBlogDTO;
     if (isEditing.value) {
       await blogsStore.update(blogsStore.currentBlog._id, payload);
-      showSuccessMessage(t('pages.blogs.modal.update_success_msg'));
+      showSuccessMessage(t("pages.blogs.modal.update_success_msg"));
     } else {
       await blogsStore.create(payload);
-      showSuccessMessage(t('pages.blogs.modal.create_success_msg'));
+      showSuccessMessage(t("pages.blogs.modal.create_success_msg"));
     }
 
-    emit('fetchBlogs');
+    emit("fetchBlogs");
     handleClose();
   } catch (error: any) {
     showErrorMessage(error as any);

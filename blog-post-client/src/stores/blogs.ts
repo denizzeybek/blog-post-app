@@ -1,13 +1,13 @@
-import { EStoreNames } from '@/stores/storeNames.enum';
-import axios from 'axios';
-import { defineStore } from 'pinia';
+import { EStoreNames } from "@/stores/storeNames.enum";
+import axios from "axios";
+import { defineStore } from "pinia";
 import type {
   IBlogDeleteImageDTO,
   IBlogDTO,
   IBlogFilterDTO,
-} from '@/interfaces/blog/blog.interface';
+} from "@/interfaces/blog/blog.interface";
 
-import type { IBlog, IBlogModule } from '@/interfaces/blog/blog.interface';
+import type { IBlog, IBlogModule } from "@/interfaces/blog/blog.interface";
 
 interface State {
   list: IBlog[];
@@ -23,7 +23,7 @@ export const useBlogsStore = defineStore(EStoreNames.PRODUCTS, {
     async fetch() {
       return new Promise((resolve, reject) => {
         axios
-          .get('/blogs')
+          .get("/blogs")
           .then((response) => {
             this.list = response as unknown as IBlog[];
             resolve(response);
@@ -36,7 +36,7 @@ export const useBlogsStore = defineStore(EStoreNames.PRODUCTS, {
     async filter(payload: IBlogFilterDTO) {
       return new Promise((resolve, reject) => {
         axios
-          .post('/blogs/filter', payload)
+          .post("/blogs/filter", payload)
           .then((response) => {
             this.list = response as unknown as IBlog[];
             resolve(response);

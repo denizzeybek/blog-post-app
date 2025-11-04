@@ -33,20 +33,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from 'vue';
-import MegaMenu from 'primevue/megamenu';
-import { ERouteNames } from '@/router/routeNames.enum';
-import { useUsersStore } from '@/stores/users';
-import { useAuthStore } from '@/stores/auth';
-import { useRoute, useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
-import { languageOptions, type ILanguageOption } from '@/constants/languages';
+import { computed, ref, watch, onMounted } from "vue";
+import MegaMenu from "primevue/megamenu";
+import { ERouteNames } from "@/router/routeNames.enum";
+import { useUsersStore } from "@/stores/users";
+import { useAuthStore } from "@/stores/auth";
+import { useRoute, useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+import { languageOptions, type ILanguageOption } from "@/constants/languages";
 import {
   setI18nLanguage,
   type MessageSchema,
   type Language,
-} from '@/plugins/i18n';
-import { EStorageKeys } from '@/constants/storageKeys';
+} from "@/plugins/i18n";
+import { EStorageKeys } from "@/constants/storageKeys";
 
 const i18n = useI18n<{ message: MessageSchema }>();
 const { t } = i18n;
@@ -57,7 +57,7 @@ const route = useRoute();
 const router = useRouter();
 
 interface IEmits {
-  (event: 'drawerChange', val: boolean): void;
+  (event: "drawerChange", val: boolean): void;
 }
 
 defineEmits<IEmits>();
@@ -65,14 +65,14 @@ defineEmits<IEmits>();
 const language = ref<ILanguageOption>(
   languageOptions.find(
     (option) =>
-      option.value === (localStorage.getItem(EStorageKeys.LANG) ?? 'en'),
+      option.value === (localStorage.getItem(EStorageKeys.LANG) ?? "en"),
   ) ?? languageOptions[0],
 );
 
 const items = computed(() => {
   return [
     {
-      label: t('pages.header.blogs'),
+      label: t("pages.header.blogs"),
       route: { name: ERouteNames.BlogList },
     },
     // ...(!usersStore.isAuthenticated
@@ -84,17 +84,17 @@ const items = computed(() => {
     //     ]
     //   : []),
     {
-      label: t('pages.header.categories'),
+      label: t("pages.header.categories"),
       route: { name: ERouteNames.CategoriesList },
     },
     {
-      label: t('pages.header.contact'),
+      label: t("pages.header.contact"),
       route: { name: ERouteNames.Contact },
     },
     ...(usersStore.isAuthenticated
       ? [
           {
-            label: t('pages.header.logout'),
+            label: t("pages.header.logout"),
             route: { name: ERouteNames.Logout },
             method: () => {
               authStore.logout();
@@ -113,13 +113,13 @@ const items = computed(() => {
 watch(
   language,
   (language) => {
-    setI18nLanguage(language?.value ?? 'en');
+    setI18nLanguage(language?.value ?? "en");
   },
   { deep: true },
 );
 
 onMounted(() => {
-  const lang = localStorage.getItem(EStorageKeys.LANG) ?? 'en';
+  const lang = localStorage.getItem(EStorageKeys.LANG) ?? "en";
   setI18nLanguage(lang as Language);
 });
 </script>

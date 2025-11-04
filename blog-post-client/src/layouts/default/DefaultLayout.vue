@@ -10,14 +10,14 @@
         </PageWrapper>
       </div>
     </div>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
 <script lang="ts" setup>
 import PageWrapper from "./_components/PageWrapper.vue";
 import { ref } from "vue";
-import Footer from '@/views/about/_components/footer/Footer.vue';
+import Footer from "@/views/about/_components/footer/Footer.vue";
 import PageHeader from "./_components/PageHeader.vue";
 
 const visible = ref(false);

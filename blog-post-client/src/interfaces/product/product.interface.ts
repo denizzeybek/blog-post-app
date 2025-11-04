@@ -1,4 +1,4 @@
-import type { ICategory } from '../category/category.interface';
+import type { ICategory } from "../category/category.interface";
 
 export interface IBlogModule {
   _id: string;

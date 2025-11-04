@@ -4,16 +4,16 @@
   >
     <div
       class="absolute inset-0 bg-cover bg-center blur-sm"
-      style="background-image: url('/images/banner2.jpeg')"
+      style="background-image: url(&quot;/images/banner2.jpeg&quot;)"
     ></div>
     <div class="relative z-10 flex flex-col gap-8 items-center">
-      <div class="text-4xl">{{t('pages.contact.banner.title')}}</div>
+      <div class="text-4xl">{{ t("pages.contact.banner.title") }}</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 </script>

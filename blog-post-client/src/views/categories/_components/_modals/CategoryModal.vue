@@ -64,13 +64,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
-import { useForm } from 'vee-validate';
-import { string, object } from 'yup';
-import { useFToast } from '@/composables/useFToast';
-import { useCategoriesStore } from '@/stores/categories';
-import type { ICategoryDTO } from '@/interfaces/category/category.interface';
-import { useI18n } from 'vue-i18n';
+import { computed, onMounted } from "vue";
+import { useForm } from "vee-validate";
+import { string, object } from "yup";
+import { useFToast } from "@/composables/useFToast";
+import { useCategoriesStore } from "@/stores/categories";
+import type { ICategoryDTO } from "@/interfaces/category/category.interface";
+import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
@@ -80,31 +80,31 @@ interface IProps {
 const props = defineProps<IProps>();
 
 interface IEmits {
-  (event: 'fetchCategories'): void;
+  (event: "fetchCategories"): void;
 }
 const emit = defineEmits<IEmits>();
 
 const { showSuccessMessage, showErrorMessage } = useFToast();
 const categoriesStore = useCategoriesStore();
 
-const open = defineModel<boolean>('open');
+const open = defineModel<boolean>("open");
 
 const isEditing = computed(() => !!props.data);
 
 const validationSchema = object({
   categoryName: string()
     .required()
-    .label(t('pages.category.modal.categoryName.label')),
+    .label(t("pages.category.modal.categoryName.label")),
   enCategoryName: string()
     .required()
-    .label(t('pages.category.modal.enCategoryName.label')),
+    .label(t("pages.category.modal.enCategoryName.label")),
   categoryDetails: string().label(
-    t('pages.category.modal.categoryDetails.label'),
+    t("pages.category.modal.categoryDetails.label"),
   ),
   enCategoryDetails: string().label(
-    t('pages.category.modal.enCategoryDetails.label'),
+    t("pages.category.modal.enCategoryDetails.label"),
   ),
-  iconName: string().label(t('pages.category.modal.iconName.label')),
+  iconName: string().label(t("pages.category.modal.iconName.label")),
 });
 
 const { handleSubmit, isSubmitting, resetForm } = useForm({
@@ -128,13 +128,13 @@ const submitHandler = handleSubmit(async (values) => {
 
     if (isEditing.value) {
       await categoriesStore.update(props.data._id, payload);
-      showSuccessMessage(t('pages.category.modal.update_success_msg'));
+      showSuccessMessage(t("pages.category.modal.update_success_msg"));
     } else {
       await categoriesStore.create(payload);
-      showSuccessMessage(t('pages.category.modal.create_success_msg'));
+      showSuccessMessage(t("pages.category.modal.create_success_msg"));
     }
 
-    emit('fetchCategories');
+    emit("fetchCategories");
     handleClose();
   } catch (error: any) {
     showErrorMessage(error as any);
@@ -144,11 +144,11 @@ const submitHandler = handleSubmit(async (values) => {
 const getInitialFormData = computed(() => {
   const category = props.data;
   return {
-    categoryName: category?.categoryName || '',
-    enCategoryName: category?.enCategoryName || '',
-    categoryDetails: category?.categoryDetails || '',
-    enCategoryDetails: category?.enCategoryDetails || '',
-    iconName: category?.iconName || '',
+    categoryName: category?.categoryName || "",
+    enCategoryName: category?.enCategoryName || "",
+    categoryDetails: category?.categoryDetails || "",
+    enCategoryDetails: category?.enCategoryDetails || "",
+    iconName: category?.iconName || "",
   };
 });
 

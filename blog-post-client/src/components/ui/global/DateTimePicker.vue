@@ -57,19 +57,19 @@
 </template>
 
 <script setup lang="ts">
-import dayjs from 'dayjs';
-import type { DatePickerProps } from 'primevue/datepicker';
-import { useField } from 'vee-validate';
-import { computed } from 'vue';
+import dayjs from "dayjs";
+import type { DatePickerProps } from "primevue/datepicker";
+import { useField } from "vee-validate";
+import { computed } from "vue";
 
 enum EHelperButton {
-  TODAY = 'today',
-  YESTERDAY = 'yesterday',
-  LAST_7_DAYS = 'last_7_days',
-  LAST_30_DAYS = 'last_30_days',
-  THIS_MONTH = 'this_month',
-  PREVIOUS_MONTH = 'previous_year',
-  THIS_YEAR = 'this_year',
+  TODAY = "today",
+  YESTERDAY = "yesterday",
+  LAST_7_DAYS = "last_7_days",
+  LAST_30_DAYS = "last_30_days",
+  THIS_MONTH = "this_month",
+  PREVIOUS_MONTH = "previous_year",
+  THIS_YEAR = "this_year",
 }
 
 enum EWeek {
@@ -98,41 +98,41 @@ interface IProps {
 
 const props = withDefaults(defineProps<IProps>(), {
   disabled: false,
-  placeholder: 'Enter date',
+  placeholder: "Enter date",
   numberOfMonths: 2,
   manualInput: true,
-  format: 'YY/MM/DDDD',
+  format: "YY/MM/DDDD",
   showPrevNextButtons: false,
 });
 
 const buttonProps = [
   {
     key: EHelperButton.TODAY,
-    label: 'Today',
+    label: "Today",
   },
   {
     key: EHelperButton.YESTERDAY,
-    label: 'Yesterday',
+    label: "Yesterday",
   },
   {
     key: EHelperButton.LAST_7_DAYS,
-    label: 'Last 7 days',
+    label: "Last 7 days",
   },
   {
     key: EHelperButton.LAST_30_DAYS,
-    label: 'Last 30 days',
+    label: "Last 30 days",
   },
   {
     key: EHelperButton.THIS_MONTH,
-    label: 'This month',
+    label: "This month",
   },
   {
     key: EHelperButton.PREVIOUS_MONTH,
-    label: 'Previous Month',
+    label: "Previous Month",
   },
   {
     key: EHelperButton.THIS_YEAR,
-    label: 'This year',
+    label: "This year",
   },
 ];
 
@@ -149,44 +149,44 @@ const handleChange = (btnType: EHelperButton) => {
   switch (btnType) {
     case EHelperButton.TODAY:
       value.value = [
-        dayjs().startOf('day').toDate(),
-        dayjs().endOf('day').toDate(),
+        dayjs().startOf("day").toDate(),
+        dayjs().endOf("day").toDate(),
       ];
       break;
     case EHelperButton.YESTERDAY:
       value.value = [
-        dayjs().subtract(1, 'day').startOf('day').toDate(),
-        dayjs().subtract(1, 'day').endOf('day').toDate(),
+        dayjs().subtract(1, "day").startOf("day").toDate(),
+        dayjs().subtract(1, "day").endOf("day").toDate(),
       ];
       break;
     case EHelperButton.LAST_7_DAYS:
       value.value = [
-        dayjs().subtract(7, 'day').startOf('day').toDate(),
-        dayjs().endOf('day').toDate(),
+        dayjs().subtract(7, "day").startOf("day").toDate(),
+        dayjs().endOf("day").toDate(),
       ];
       break;
     case EHelperButton.LAST_30_DAYS:
       value.value = [
-        dayjs().subtract(30, 'day').startOf('day').toDate(),
-        dayjs().endOf('day').toDate(),
+        dayjs().subtract(30, "day").startOf("day").toDate(),
+        dayjs().endOf("day").toDate(),
       ];
       break;
     case EHelperButton.THIS_MONTH:
       value.value = [
-        dayjs().startOf('month').toDate(),
-        dayjs().endOf('month').toDate(),
+        dayjs().startOf("month").toDate(),
+        dayjs().endOf("month").toDate(),
       ];
       break;
     case EHelperButton.PREVIOUS_MONTH:
       value.value = [
-        dayjs().subtract(1, 'month').startOf('month').toDate(),
-        dayjs().subtract(1, 'month').endOf('month').toDate(),
+        dayjs().subtract(1, "month").startOf("month").toDate(),
+        dayjs().subtract(1, "month").endOf("month").toDate(),
       ];
       break;
     case EHelperButton.THIS_YEAR:
       value.value = [
-        dayjs().startOf('year').toDate(),
-        dayjs().endOf('year').toDate(),
+        dayjs().startOf("year").toDate(),
+        dayjs().endOf("year").toDate(),
       ];
       break;
     default:
@@ -200,13 +200,13 @@ const handleWeek = (week: EWeek) => {
   const endDate = dayjs((value.value as string[])[1]);
   if (week === EWeek.PREV) {
     value.value = [
-      startDate.subtract(1, 'week').toDate(),
-      endDate.subtract(1, 'week').toDate(),
+      startDate.subtract(1, "week").toDate(),
+      endDate.subtract(1, "week").toDate(),
     ];
   } else {
     value.value = [
-      startDate.add(1, 'week').toDate(),
-      endDate.add(1, 'week').toDate(),
+      startDate.add(1, "week").toDate(),
+      endDate.add(1, "week").toDate(),
     ];
   }
 };

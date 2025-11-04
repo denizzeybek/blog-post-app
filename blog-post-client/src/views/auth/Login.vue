@@ -34,13 +34,13 @@
 </template>
 
 <script setup lang="ts">
-import { useForm } from 'vee-validate';
-import { string, object } from 'yup';
-import { useFToast } from '@/composables/useFToast';
-import { useAuthStore } from '@/stores/auth';
-import { useRouter } from 'vue-router';
-import { ERouteNames } from '@/router/routeNames.enum';
-import { useI18n } from 'vue-i18n';
+import { useForm } from "vee-validate";
+import { string, object } from "yup";
+import { useFToast } from "@/composables/useFToast";
+import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
+import { ERouteNames } from "@/router/routeNames.enum";
+import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 const { showSuccessMessage, showErrorMessage } = useFToast();
@@ -48,8 +48,8 @@ const router = useRouter();
 const authStore = useAuthStore();
 
 const validationSchema = object({
-  email: string().email().required().label(t('pages.login.email.label')),
-  password: string().required().label(t('pages.login.password.label')),
+  email: string().email().required().label(t("pages.login.email.label")),
+  password: string().required().label(t("pages.login.password.label")),
 });
 
 const { handleSubmit, isSubmitting } = useForm({
@@ -61,7 +61,7 @@ const submitHandler = handleSubmit(async (values) => {
     const payload = values as { email: string; password: string };
     await authStore.login(payload);
     router.push({ name: ERouteNames.BlogList });
-    showSuccessMessage(t('pages.login.button_text'));
+    showSuccessMessage(t("pages.login.button_text"));
   } catch (error: any) {
     showErrorMessage(error?.response?.data?.message as any);
   }

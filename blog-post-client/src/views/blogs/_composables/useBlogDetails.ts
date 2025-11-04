@@ -1,6 +1,6 @@
-import type { IBlogFilterDTO } from '@/interfaces/blog/blog.interface';
-import { useBlogsStore } from '@/stores/blogs';
-import { useFToast } from '@/composables/useFToast';
+import type { IBlogFilterDTO } from "@/interfaces/blog/blog.interface";
+import { useBlogsStore } from "@/stores/blogs";
+import { useFToast } from "@/composables/useFToast";
 
 export const useBlogDetails = () => {
   const blogsStore = useBlogsStore();
@@ -9,7 +9,7 @@ export const useBlogDetails = () => {
   const filterBlogs = async (typedName, selectedFilter) => {
     try {
       // isLoading.value = true;
-      console.log('filter');
+      console.log("filter");
       const payload = {} as IBlogFilterDTO;
       if (typedName) {
         payload.name = typedName;

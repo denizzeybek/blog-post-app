@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { GoogleMap, Marker } from 'vue3-google-map';
+import { GoogleMap, Marker } from "vue3-google-map";
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 const center = { lat: 37.86248, lng: 27.26119 };
 
@@ -15,8 +15,8 @@ interface IProps {
 
 withDefaults(defineProps<IProps>(), {
   style: () => ({
-    width: '100%',
-    height: '300px',
+    width: "100%",
+    height: "300px",
   }),
 });
 </script>

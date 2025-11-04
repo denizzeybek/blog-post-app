@@ -21,25 +21,32 @@
       v-if="tag"
       class="!px-4 !py-2 !rounded-full !bg-primary-900 !text-white shadow-sm group-hover:!bg-accent-700 transition-all duration-300"
     >
-      <span class="uppercase text-xs font-semibold tracking-wider">{{ tag }}</span>
+      <span class="uppercase text-xs font-semibold tracking-wider">{{
+        tag
+      }}</span>
     </Tag>
 
     <!-- Optional metadata section -->
-    <div v-if="description" class="text-sm text-gray-600 text-center line-clamp-2 mt-2">
+    <div
+      v-if="description"
+      class="text-sm text-gray-600 text-center line-clamp-2 mt-2"
+    >
       {{ description }}
     </div>
 
     <!-- Read more indicator -->
-    <div class="mt-auto pt-4 flex items-center gap-2 text-primary-900 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <span>{{ t('pages.blogs.read_more') }}</span>
+    <div
+      class="mt-auto pt-4 flex items-center gap-2 text-primary-900 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+      <span>{{ t("pages.blogs.read_more") }}</span>
       <i class="pi pi-arrow-right text-xs"></i>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import IconWrapper from '@/components/ui/local/IconWrapper.vue';
-import { useI18n } from 'vue-i18n';
+import IconWrapper from "@/components/ui/local/IconWrapper.vue";
+import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
