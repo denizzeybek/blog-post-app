@@ -1,7 +1,9 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "cd blog-post-client && npm run build",
   "outputDirectory": "blog-post-client/dist",
-  "installCommand": "npm install",
+  "installCommand": "cd blog-post-client && npm install",
+  "devCommand": "cd blog-post-client && npm run dev",
+  "framework": null,
   "routes": [
     {
       "handle": "filesystem"
