@@ -11,7 +11,9 @@
       "Bash(brew install:*)",
       "Bash(npm install:*)",
       "Bash(node migrations/verify-content.js:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(cat:*)",
+      "Bash(npm run type-check:*)"
     ],
     "deny": [],
     "ask": []

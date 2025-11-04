@@ -7,59 +7,108 @@
         ? t('pages.blogs.modal.title.update')
         : t('pages.blogs.modal.title.create')
     "
-    class="!bg-f-secondary-purple lg:!w-[700px] !w-full"
-    :style="{ width: '50rem' }"
+    class="!bg-slate-50 lg:!w-[900px] !w-full !rounded-xl !shadow-2xl"
+    :style="{ width: '60rem' }"
+    :dismissableMask="true"
   >
-    <form class="flex flex-col gap-6" @submit="submitHandler">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <FInput
-          class="grow"
-          name="name"
-          :label="t('pages.blogs.modal.name.tr.label')"
-          :placeholder="t('pages.blogs.modal.name.tr.placeholder')"
-        />
-        <FInput
-          class="grow"
-          :label="t('pages.blogs.modal.name.en.label')"
-          name="enName"
-          :placeholder="t('pages.blogs.modal.name.en.placeholder')"
-        />
+    <!-- Header with Icon -->
+    <template #header>
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-lg bg-primary-900 flex items-center justify-center shadow-md">
+          <i :class="isEditing ? 'pi pi-pencil' : 'pi pi-plus'" class="text-white text-lg"></i>
+        </div>
+        <span class="text-2xl font-bold text-primary-900">
+          {{ isEditing ? t('pages.blogs.modal.title.update') : t('pages.blogs.modal.title.create') }}
+        </span>
       </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <FTextArea
-          class="grow"
-          :label="t('pages.blogs.modal.document.tr.label')"
-          name="documentUrl"
-          :placeholder="t('pages.blogs.modal.document.tr.placeholder')"
-          :rows="10"
-          :autoResize="true"
-        />
-        <FTextArea
-          class="grow"
-          :label="t('pages.blogs.modal.document.en.label')"
-          name="enDocumentUrl"
-          :placeholder="t('pages.blogs.modal.document.en.placeholder')"
-          :rows="10"
-          :autoResize="true"
-        />
+    </template>
+
+    <form class="flex flex-col gap-6 p-2" @submit="submitHandler">
+      <!-- Turkish and English Names -->
+      <div class="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200">
+        <h3 class="text-lg font-bold text-primary-900 mb-4 flex items-center gap-2 pb-2 border-b border-gray-200">
+          <i class="pi pi-bookmark text-accent-600"></i>
+          {{ t('pages.blogs.modal.sections.titles') }}
+        </h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <FInput
+            class="grow"
+            name="name"
+            :label="t('pages.blogs.modal.name.tr.label')"
+            :placeholder="t('pages.blogs.modal.name.tr.placeholder')"
+          />
+          <FInput
+            class="grow"
+            :label="t('pages.blogs.modal.name.en.label')"
+            name="enName"
+            :placeholder="t('pages.blogs.modal.name.en.placeholder')"
+          />
+        </div>
       </div>
-      <div class="grid grid-cols-1">
-        <FSelect
-          class="grow"
-          :label="t('pages.blogs.modal.category.label')"
-          name="category"
-          :placeholder="t('pages.blogs.modal.category.placeholder')"
-          :options="categoryTypeOptions"
-        />
+
+      <!-- Documents -->
+      <div class="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200">
+        <h3 class="text-lg font-bold text-primary-900 mb-4 flex items-center gap-2 pb-2 border-b border-gray-200">
+          <i class="pi pi-file-edit text-accent-600"></i>
+          {{ t('pages.blogs.modal.sections.content') }}
+        </h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <FTextArea
+            class="grow"
+            :label="t('pages.blogs.modal.document.tr.label')"
+            name="documentUrl"
+            :placeholder="t('pages.blogs.modal.document.tr.placeholder')"
+            :rows="12"
+            :autoResize="true"
+          />
+          <FTextArea
+            class="grow"
+            :label="t('pages.blogs.modal.document.en.label')"
+            name="enDocumentUrl"
+            :placeholder="t('pages.blogs.modal.document.en.placeholder')"
+            :rows="12"
+            :autoResize="true"
+          />
+        </div>
       </div>
-      <div class="flex w-50 justify-center">
+
+      <!-- Category -->
+      <div class="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200">
+        <h3 class="text-lg font-bold text-primary-900 mb-4 flex items-center gap-2 pb-2 border-b border-gray-200">
+          <i class="pi pi-tags text-accent-600"></i>
+          {{ t('pages.blogs.modal.sections.category') }}
+        </h3>
+        <div class="grid grid-cols-1">
+          <FSelect
+            class="grow"
+            :label="t('pages.blogs.modal.category.label')"
+            name="category"
+            :placeholder="t('pages.blogs.modal.category.placeholder')"
+            :options="categoryTypeOptions"
+          />
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex gap-3 justify-end pt-6 border-t-2 border-gray-300">
+        <Button
+          type="button"
+          :label="t('pages.blogs.modal.cancel_btn')"
+          outlined
+          @click="handleClose"
+          class="!px-6 !py-3 !border-2 !border-gray-400 !text-gray-700 hover:!bg-gray-100"
+        />
         <Button
           :disabled="isSubmitting"
           :loading="isSubmitting"
           type="submit"
           :label="t('pages.blogs.modal.save_btn')"
-          severity="info"
-        />
+          class="!px-8 !py-3 !bg-primary-900 hover:!bg-primary-800 !border-primary-900 hover:!border-primary-800 !text-white !shadow-md hover:!shadow-lg transition-all"
+        >
+          <template #icon>
+            <i class="pi pi-check mr-2"></i>
+          </template>
+        </Button>
       </div>
     </form>
   </Dialog>

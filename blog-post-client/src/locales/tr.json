@@ -66,6 +66,12 @@
       "button_text": "Makale Ekle",
       "no_blog": "Makale Bulunamadı",
       "all_blogs": "Tüm Makaleler",
+      "read_more": "Devamını Oku",
+      "found_count": "yazı bulundu",
+      "empty_state": {
+        "message": "Henüz blog yazısı bulunmuyor",
+        "create_first": "İlk Yazıyı Oluştur"
+      },
       "breadcrumb": {
         "blogs": "Makaleler",
         "blog_details": "Makale Detayları"
@@ -74,10 +80,30 @@
         "update": "Makaleyi Güncelle",
         "delete": "Makaleyi Sil"
       },
+      "details": {
+        "reading_time": "dk okuma",
+        "share_text": "Bu yazıyı paylaş:",
+        "back_to_blogs": "Tüm Yazılara Dön",
+        "share": {
+          "twitter": "Twitter'da Paylaş",
+          "facebook": "Facebook'ta Paylaş",
+          "linkedin": "LinkedIn'de Paylaş",
+          "copy_link": "Linki Kopyala"
+        },
+        "toast": {
+          "link_copied": "Link panoya kopyalandı!",
+          "link_copy_failed": "Link kopyalanamadı"
+        }
+      },
       "modal": {
         "title": {
           "update": "Makaleyi Güncelle",
           "create": "Makale Oluştur"
+        },
+        "sections": {
+          "titles": "Başlıklar",
+          "content": "İçerik",
+          "category": "Kategori"
         },
         "name": {
           "tr": {
@@ -104,6 +130,7 @@
           "placeholder": "Hizmet alanı adını girin"
         },
         "save_btn": "Kaydet",
+        "cancel_btn": "İptal",
         "update_success_msg": "Makale Güncellendi",
         "create_success_msg": "Makale Eklendi"
       }

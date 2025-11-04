@@ -66,6 +66,12 @@
       "button_text": "Add Blog",
       "no_blog": "No Blogs Found",
       "all_blogs": "All Blogs",
+      "read_more": "Read More",
+      "found_count": "articles found",
+      "empty_state": {
+        "message": "No blog posts yet",
+        "create_first": "Create First Post"
+      },
       "breadcrumb": {
         "blogs": "Blogs",
         "blog_details": "Blog Details"
@@ -74,10 +80,30 @@
         "update": "Update Blog",
         "delete": "Delete Blog"
       },
+      "details": {
+        "reading_time": "min read",
+        "share_text": "Share this article:",
+        "back_to_blogs": "Back to All Articles",
+        "share": {
+          "twitter": "Share on Twitter",
+          "facebook": "Share on Facebook",
+          "linkedin": "Share on LinkedIn",
+          "copy_link": "Copy Link"
+        },
+        "toast": {
+          "link_copied": "Link copied to clipboard!",
+          "link_copy_failed": "Failed to copy link"
+        }
+      },
       "modal": {
         "title": {
           "update": "Update Blog",
           "create": "Create Blog"
+        },
+        "sections": {
+          "titles": "Titles",
+          "content": "Content",
+          "category": "Category"
         },
         "name": {
           "tr": {
@@ -104,6 +130,7 @@
           "placeholder": "Enter category name"
         },
         "save_btn": "Save",
+        "cancel_btn": "Cancel",
         "update_success_msg": "Blog Updated",
         "create_success_msg": "Blog Added"
       }

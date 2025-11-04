@@ -58,8 +58,8 @@ export default {
   install(app: App) {
     app.use(PrimeVue, {
       theme: {
-        // preset: flexyPreset,
-        preset: Aura,
+        preset: flexyPreset,
+        // preset: Aura,
         options: {
           darkModeSelector: ".my-app-dark",
         },

@@ -7,6 +7,7 @@ export interface IBlogModule {
   documentUrl: string;
   enDocumentUrl: string;
   category: ICategory;
+  createdAt: string;
 }
 
 export interface IBlog {
@@ -16,6 +17,7 @@ export interface IBlog {
   documentUrl: string;
   enDocumentUrl: string;
   category: ICategory;
+  createdAt: string;
 }
 
 export interface IBlogDTO {
