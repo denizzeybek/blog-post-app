@@ -36,10 +36,12 @@
 
     <!-- Read more indicator -->
     <div
-      class="mt-auto pt-4 flex items-center gap-2 text-primary-900 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      class="mt-auto pt-4 flex items-center justify-center gap-2 text-primary-900 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 min-h-[28px]"
     >
       <span>{{ t("pages.blogs.read_more") }}</span>
-      <i class="pi pi-arrow-right text-xs"></i>
+      <i
+        class="pi pi-arrow-right text-xs transition-transform group-hover:translate-x-1"
+      ></i>
     </div>
   </div>
 </template>

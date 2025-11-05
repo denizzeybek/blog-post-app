@@ -67,20 +67,20 @@
         </h3>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <FTextArea
-            class="grow"
+            class="grow max-h-96 overflow-y-auto"
             :label="t('pages.blogs.modal.document.tr.label')"
             name="documentUrl"
             :placeholder="t('pages.blogs.modal.document.tr.placeholder')"
-            :rows="12"
-            :autoResize="true"
+            :rows="10"
+            :autoResize="false"
           />
           <FTextArea
-            class="grow"
+            class="grow max-h-96 overflow-y-auto"
             :label="t('pages.blogs.modal.document.en.label')"
             name="enDocumentUrl"
             :placeholder="t('pages.blogs.modal.document.en.placeholder')"
-            :rows="12"
-            :autoResize="true"
+            :rows="10"
+            :autoResize="false"
           />
         </div>
       </div>
