@@ -26,7 +26,9 @@
       "Bash(vercel:*)",
       "mcp__render__list_workspaces",
       "mcp__render__list_services",
-      "mcp__render__update_environment_variables"
+      "mcp__render__update_environment_variables",
+      "WebFetch(domain:render.com)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []
