@@ -117,17 +117,13 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function(origin, callback) {
-    // Allow requests with no origin (like mobile apps, Postman) only in development
-    if (!origin && process.env.NODE_ENV === 'development') {
+    // Allow requests with no origin (like health checks, mobile apps, Postman)
+    if (!origin) {
       return callback(null, true);
     }
 
-    // Production: Reject requests without origin
-    if (!origin && process.env.NODE_ENV === 'production') {
-      return callback(new Error('CORS policy: Origin header required'));
-    }
-
-    if (allowedOrigins.includes(origin) || !origin) {
+    // Check if origin is in allowed list
+    if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     } else {
       console.warn(`[SECURITY] CORS blocked request from origin: ${origin}`);
