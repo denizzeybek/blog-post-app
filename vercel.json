@@ -1,11 +1,12 @@
 {
   "buildCommand": "cd blog-post-client && npm run build",
   "outputDirectory": "blog-post-client/dist",
-  "installCommand": "cd blog-post-client && npm install",
+  "installCommand": "cd blog-post-client && npm ci --legacy-peer-deps",
   "devCommand": "cd blog-post-client && npm run dev",
   "framework": null,
   "env": {
-    "NODE_VERSION": "20.x"
+    "NODE_VERSION": "20.x",
+    "NPM_CONFIG_LEGACY_PEER_DEPS": "true"
   },
   "routes": [
     {
