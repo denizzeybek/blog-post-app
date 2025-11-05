@@ -22,13 +22,11 @@ const validateBlog = [
   body('documentUrl')
     .optional()
     .trim()
-    .isURL()
-    .withMessage('Invalid document URL'),
+    .withMessage('Document URL is required'),
   body('enDocumentUrl')
     .optional()
     .trim()
-    .isURL()
-    .withMessage('Invalid English document URL'),
+    .withMessage('English document URL is required'),
   body('category')
     .isMongoId()
     .withMessage('Invalid category ID'),
@@ -50,13 +48,11 @@ const validateBlogUpdate = [
   body('documentUrl')
     .optional()
     .trim()
-    .isURL()
-    .withMessage('Invalid document URL'),
+    .withMessage('Document URL is required'),
   body('enDocumentUrl')
     .optional()
     .trim()
-    .isURL()
-    .withMessage('Invalid English document URL'),
+    .withMessage('English document URL is required'),
   body('category')
     .optional()
     .isMongoId()
