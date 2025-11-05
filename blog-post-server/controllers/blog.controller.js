@@ -21,12 +21,10 @@ const validateBlog = [
     .escape(),
   body('documentUrl')
     .optional()
-    .trim()
-    .withMessage('Document URL is required'),
+    .trim(),
   body('enDocumentUrl')
     .optional()
-    .trim()
-    .withMessage('English document URL is required'),
+    .trim(),
   body('category')
     .isMongoId()
     .withMessage('Invalid category ID'),
@@ -47,12 +45,10 @@ const validateBlogUpdate = [
     .escape(),
   body('documentUrl')
     .optional()
-    .trim()
-    .withMessage('Document URL is required'),
+    .trim(),
   body('enDocumentUrl')
     .optional()
-    .trim()
-    .withMessage('English document URL is required'),
+    .trim(),
   body('category')
     .optional()
     .isMongoId()
