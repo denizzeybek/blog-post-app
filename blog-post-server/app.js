@@ -109,10 +109,10 @@ const allowedOrigins = [
   process.env.NODE_ENV === 'development' && 'http://localhost:3001',
   process.env.NODE_ENV === 'development' && 'http://localhost:3000',
   'http://nazlikacar.com.s3-website.eu-north-1.amazonaws.com',
-  process.env.FRONTEND_URL, // Add your production frontend URL to .env
-  // Add your custom domain when you get it:
-  // 'https://yourdomain.com',
-  // 'https://www.yourdomain.com'
+  process.env.FRONTEND_URL, // Render frontend URL
+  // Custom domains
+  'https://avnazlikacar.com',
+  'https://www.avnazlikacar.com'
 ].filter(Boolean); // Remove falsy values
 
 app.use(cors({
