@@ -321,7 +321,7 @@ const copyLink = async () => {
   try {
     await navigator.clipboard.writeText(window.location.href);
     showSuccessMessage(t("pages.blogs.details.toast.link_copied"));
-  } catch (err) {
+  } catch {
     showErrorMessage(t("pages.blogs.details.toast.link_copy_failed"));
   }
 };

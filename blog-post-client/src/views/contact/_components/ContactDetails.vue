@@ -1,7 +1,8 @@
 <template>
   <div class="grid grid-cols-1 lg:grid-cols-3">
     <div
-      v-for="item in itemList"
+      v-for="(item, idx) in itemList"
+      :key="idx"
       class="col-span-1 flex items-center justify-center"
     >
       <BannerText

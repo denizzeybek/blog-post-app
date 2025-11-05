@@ -66,28 +66,6 @@ const errorMessage = computed(() =>
   props.errorMessage ? props.errorMessage : vError.value,
 );
 
-const listeners = {
-  ...props.customEvents,
-  blur: (e: InputEvent) => {
-    handleBlur(e, true);
-    props.customEvents?.blur?.(e);
-    isFocused.value = false;
-  },
-  change: (e: InputEvent) => {
-    handleChange(e);
-    props.customEvents?.change?.(e);
-  },
-  input: (e: InputEvent) => {
-    const value = props.transformValue ? props.transformValue(e) : e;
-    handleChange(value, !!errorMessage.value);
-    props.customEvents?.input?.(e);
-  },
-  focus: (e: InputEvent) => {
-    props.customEvents?.focus?.(e);
-    isFocused.value = true;
-  },
-};
-
 watch(
   () => passwordVal.value,
   (newValue) => {

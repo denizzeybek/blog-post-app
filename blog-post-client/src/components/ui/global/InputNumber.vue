@@ -65,7 +65,7 @@ const listeners = {
   change: (e: InputEvent) => {
     handleChange(e);
   },
-  input: (e: InputEvent) => {
+  input: () => {
     handleChange(value, !!errorMessage.value);
   },
 };

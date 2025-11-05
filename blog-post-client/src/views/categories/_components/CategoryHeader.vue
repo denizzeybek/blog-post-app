@@ -16,7 +16,6 @@
 import { computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useUsersStore } from "@/stores/users";
-import { useBlogsStore } from "@/stores/blogs";
 import { useCategoriesStore } from "@/stores/categories";
 import { useI18n } from "vue-i18n";
 import { ERouteNames } from "@/router/routeNames.enum";
@@ -28,7 +27,6 @@ interface IEmits {
 const emit = defineEmits<IEmits>();
 
 const usersStore = useUsersStore();
-const blogsStore = useBlogsStore();
 const categoriesStore = useCategoriesStore();
 const router = useRouter();
 const route = useRoute();

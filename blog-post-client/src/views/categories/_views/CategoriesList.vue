@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, ref, watch } from "vue";
+import { onMounted, computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useUsersStore } from "@/stores/users";
 import { useCategoriesStore } from "@/stores/categories";
@@ -69,12 +69,6 @@ const router = useRouter();
 const { t } = useI18n();
 const { showErrorMessage } = useFToast();
 const { getCategoryName } = useName();
-
-interface IProps {
-  isLoading: boolean;
-}
-
-defineProps<IProps>();
 
 const showCategoryModal = ref(false);
 const isLoading = ref(false);

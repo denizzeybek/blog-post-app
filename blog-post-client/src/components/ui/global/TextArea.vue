@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import type { TextareaProps } from "primevue/textarea";
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useField } from "vee-validate";
 
 interface IProps {

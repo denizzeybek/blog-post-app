@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useCategoriesStore } from "@/stores/categories";
 import IconWrapper from "@/components/ui/local/IconWrapper.vue";
